@@ -1,4 +1,3 @@
-import "../assets/Dashboard.css";
 import Male from "../assets/undraw_male_avatar_323b.svg";
 export default function () {
   return (

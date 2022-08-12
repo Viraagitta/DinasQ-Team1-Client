@@ -1,8 +1,8 @@
 import logo from "./logo.svg";
-import "./App.css";
-import "./assets//SideBar.css";
+import "./assets/Style.css";
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import Login from "./components/Login";
+import Employes from "./components/Employees";
 import Dashboard from "./components/Dashboard";
 function App() {
   const access = localStorage.getItem("access_token");
@@ -20,20 +20,20 @@ function App() {
               </a>
             </li>
             <li>
-              <a href="#">
+              <Link to="/">
                 <span class="icon">
                   <ion-icon name="home-outline"></ion-icon>
                 </span>
                 <span class="title">Dashboard</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">
+              <Link to="/employes">
                 <span class="icon">
                   <ion-icon name="people-outline"></ion-icon>
                 </span>
                 <span class="title">Employes</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#">
@@ -62,6 +62,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/employes" element={<Employes />} />
       </Routes>
     </>
   );
