@@ -35,7 +35,7 @@ export default function SideBar() {
                 <span className="icon">
                   <ion-icon name="documents-outline"></ion-icon>
                 </span>
-                <span className="title">Reimbursements</span>
+                <span className="title">All Reimbursement</span>
               </Link>
             </li>
             <li>

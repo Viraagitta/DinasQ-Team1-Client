@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import EmployeesTableRow from "../components/EmployeesTableRow";
 import { fetchEmployees } from "../store/action";
 export default function ListEmployees() {
   const dispatch = useDispatch();
@@ -41,20 +42,13 @@ export default function ListEmployees() {
           <th>Status :</th>
         </thead>
         <tbody>
-          {employees.map((e, i) => {
+          {employees.map((employee, i) => {
             return (
-              <tr className="data-employees">
-                <td className="employees-details">
-                  <input type="checkbox" name="checkUser" id="checkUser" />
-                </td>
-                <td className="employees-details">{i + 1}</td>
-                <td className="employees-details">{`${e.firstName} ${e.lastName}`}</td>
-                <td className="employees-details">{e.position}</td>
-                <td className="employees-details">IT</td>
-                <td className="employees-details">maguire@mail.com</td>
-                <td className="employees-details">1 year</td>
-                <td className="employees-details">Full-time</td>
-              </tr>
+              <EmployeesTableRow
+                key={(employee.id, i)}
+                employee={employee}
+                i={i}
+              />
             );
           })}
         </tbody>
