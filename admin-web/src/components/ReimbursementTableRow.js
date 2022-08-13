@@ -3,15 +3,19 @@ import "react-medium-image-zoom/dist/styles.css";
 import { Controlled as ControlledZoom } from "react-medium-image-zoom";
 import { useCallback } from "react";
 import { useState } from "react";
+// import Form from "react-bootstrap/Form";
+// import Select from "react-select";
 // import InnerImageZoom from "react-inner-image-zoom";
 export default function ReimbursementTableRow({ reimburse, i }) {
   const [isZoomed, setIsZoomed] = useState(false);
   const [isViewed, setViewed] = useState(false);
+  const [choice, setChoice] = useState();
 
   const handleZoomChange = useCallback((shouldZoom) => {
     setIsZoomed(shouldZoom);
   }, []);
 
+  const options = ["pending", "approved", "rejected"];
   return (
     <>
       <tr className="data-employees">
@@ -33,7 +37,20 @@ export default function ReimbursementTableRow({ reimburse, i }) {
             </button>
           )}
         </td>
-        <td className="employees-details">{reimburse.status}</td>
+        <td className="employees-details">
+          <select
+            as="select"
+            value={choice}
+            onChange={(e) => {
+              // console.log("e.target.value", e.target.value);
+              setChoice(e.target.value);
+            }}
+          >
+            <option value="pending">pending</option>
+            <option value="approved">approved</option>
+            <option value="rejected">rejected</option>
+          </select>
+        </td>
         <td className="employees-details">{reimburse.updatedBy}</td>
       </tr>
     </>
