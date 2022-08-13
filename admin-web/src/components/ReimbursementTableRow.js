@@ -1,4 +1,17 @@
+// import Zoom from "react-img-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+import { Controlled as ControlledZoom } from "react-medium-image-zoom";
+import { useCallback } from "react";
+import { useState } from "react";
+// import InnerImageZoom from "react-inner-image-zoom";
 export default function ReimbursementTableRow({ reimburse, i }) {
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [isViewed, setViewed] = useState(false);
+
+  const handleZoomChange = useCallback((shouldZoom) => {
+    setIsZoomed(shouldZoom);
+  }, []);
+
   return (
     <>
       <tr className="data-employees">
@@ -9,8 +22,16 @@ export default function ReimbursementTableRow({ reimburse, i }) {
         <td className="employees-details">{reimburse.description}</td>
         <td className="employees-details">{reimburse.category}</td>
         <td className="employees-details">{reimburse.cost}</td>
-        <td className="employees-details">
-          <img className="img-reimburse" src={reimburse.image} alt="" />
+        <td>
+          {isViewed ? (
+            <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoomChange}>
+              <img src={reimburse.image} alt="View Full Image" width="300" />
+            </ControlledZoom>
+          ) : (
+            <button className="btn-reimburse" onClick={() => setViewed(true)}>
+              View Image
+            </button>
+          )}
         </td>
         <td className="employees-details">{reimburse.status}</td>
         <td className="employees-details">{reimburse.updatedBy}</td>
