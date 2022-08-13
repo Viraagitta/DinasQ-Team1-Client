@@ -16,7 +16,7 @@ export default function Dashboard() {
           </div>
 
           <div class="user">
-            <img src="" alt="#" />
+            <img src="" alt="user" />
           </div>
         </div>
 
@@ -32,6 +32,7 @@ export default function Dashboard() {
             alt="img-finance2"
           />
         </div>
+
         <p class="title-list">List Official Letters</p>
         <div class="cardBox">
           <div class="card">

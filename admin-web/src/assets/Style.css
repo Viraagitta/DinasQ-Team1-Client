@@ -96,8 +96,30 @@
   width: calc(100% - 300px);
   left: 300px;
   min-height: 100vh;
-  background: var(--white);
+  background: var(--grey);
   transition: 0.5s;
+}
+.main .nav {
+  background-color: var(--white);
+  height: 5em;
+  padding: 2em;
+  font-size: 1em;
+}
+.main .list-employees {
+  margin-top: 4em;
+  margin-left: 2em;
+  width: 100em;
+  box-shadow: 0 7px 25px rgba(16, 14, 14, 0.08);
+  background-color: var(--white);
+}
+.main .list-employees .heading-table-employees {
+  height: 3em;
+}
+.main .list-employees .data-employees {
+  height: 2em;
+}
+.main .list-employees .data-employees .employees-details {
+  padding: 1em;
 }
 .main .title-list {
   margin-top: 20px;
@@ -121,6 +143,21 @@
   margin-left: 80px;
   height: 280px;
   margin-top: 50px;
+}
+.main .list-action {
+  display: flex;
+  margin-top: 1.5em;
+  margin-left: 1.5em;
+}
+.main .list-action .action {
+  display: flex;
+  margin-left: 5em;
+}
+.main .list-action .action .icon {
+  color: var(--green);
+}
+.main .list-action .action .title {
+  color: var(--black2);
 }
 
 .topbar {
@@ -168,7 +205,22 @@
   left: 10px;
   font-size: 1.2em;
 }
-
+.user {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+.user img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .cardBox {
   position: relative;
   width: 100%;
@@ -210,11 +262,3 @@
   font-size: 3.5em;
   color: var(--black2);
 }
-/* .cardBox .card:hover {
-  background: var(--blue);
-} */
-/* .cardBox .card:hover .numbers,
-.cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBox {
-  color: var(--white);
-} */
