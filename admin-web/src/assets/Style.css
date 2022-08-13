@@ -262,3 +262,10 @@
   font-size: 3.5em;
   color: var(--black2);
 }
+
+.img-reimburse {
+  align-items: center;
+  padding: 20px;
+  width: 150px;
+  height: 150px
+}
