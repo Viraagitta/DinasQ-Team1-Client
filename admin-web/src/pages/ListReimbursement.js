@@ -6,7 +6,7 @@ export default function ListReimbursement() {
   // const {loading} =
   const dispatch = useDispatch();
   const reimbursements = useSelector((state) => state.reimbursements);
-
+  console.log(reimbursements, "<<<");
   useEffect(() => {
     dispatch(fetchAllReimbursement());
   }, []);

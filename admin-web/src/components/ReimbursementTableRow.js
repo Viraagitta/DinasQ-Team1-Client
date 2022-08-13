@@ -28,7 +28,7 @@ export default function ReimbursementTableRow({ reimburse, i }) {
         <td>
           {isViewed ? (
             <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoomChange}>
-              <img src={reimburse.image} alt="View Full Image" width="300" />
+              <img src={reimburse.image} alt="View" width="300" />
             </ControlledZoom>
           ) : (
             <button className="btn-reimburse" onClick={() => setViewed(true)}>

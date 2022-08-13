@@ -11,8 +11,8 @@ function App() {
     <>
       <SideBar />
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/home" element={<Dashboard />} />
         <Route path="/employees" element={<ListEmployees />} />
         <Route path="/reimbursements" element={<ListReimbursement />} />
       </Routes>
