@@ -31,6 +31,14 @@ export default function SideBar() {
               </Link>
             </li>
             <li>
+              <Link to="/reimbursements">
+                <span class="icon">
+                  <ion-icon name="documents-outline"></ion-icon>
+                </span>
+                <span class="title">Reimbursements</span>
+              </Link>
+            </li>
+            <li>
               <a href="">
                 <span class="icon">
                   <ion-icon name="chatbubble-outline"></ion-icon>
