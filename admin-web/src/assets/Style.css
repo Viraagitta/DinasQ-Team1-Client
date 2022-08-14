@@ -2,7 +2,6 @@
   position: fixed;
   width: 300px;
   height: 100%;
-  background: var(--white);
   border-right: 4px solid var(--grey);
   transition: 0.5s;
   overflow: hidden;
@@ -120,6 +119,7 @@
 }
 .main .list-employees .data-employees .employees-details {
   padding: 1em;
+  border-bottom: 3px solid var(--grey);
 }
 .main .title-list {
   margin-top: 20px;
@@ -263,6 +263,101 @@
   color: var(--black2);
 }
 
+
+.pagesLogin {
+  /* margin: 15em; */
+  margin-top: 8em;
+  margin-left: 14em;
+  width: 100em;
+  height: 40em;
+  /* border: 4px solid var(--green); */
+  box-shadow: 20px 20px 25px rgba(36, 29, 29, 0.08);
+  display: flex;
+}
+.pagesLogin .image {
+  width: 50%;
+  background-color: #13a73b;
+}
+.pagesLogin .image img {
+  width: 35em;
+  /* background-color: #1bbf47; */
+  margin-left: 7em;
+  margin-top: 2.5em;
+}
+
+.pagesLogin .form {
+  width: 50%;
+  text-align: center;
+  margin-top: 10.5em;
+}
+.pagesLogin .form .notes {
+  color: var(--black2);
+  padding: 1.5em;
+  margin-top: 11rem;
+}
+
+.pagesLogin .form .input-login {
+  margin-top: 42px;
+}
+
+.pagesLogin .form .input-login input {
+  padding: 3px;
+  width: 20em;
+  height: 3em;
+  margin-top: 15px;
+  border-radius: 3px;
+  border: none;
+  /* border: 1px solid #727272; */
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+.pagesLogin .form .input-login .btn-submit-login {
+  background-color: #1bbf47;
+  width: 20em;
+  height: 2em;
+  color: var(--white);
+  border-color: var(--white);
+  margin-top: 15px;
+  border-radius: 3px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+=======
 .img-reimburse {
   padding: 20px;
   width: 500px;
@@ -283,3 +378,4 @@
   left: 50%;
   bottom: 15%;
 }
+
