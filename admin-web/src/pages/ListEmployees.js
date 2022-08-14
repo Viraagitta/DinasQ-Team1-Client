@@ -4,7 +4,7 @@ import EmployeesTableRow from "../components/EmployeesTableRow";
 import { fetchEmployees } from "../store/action";
 export default function ListEmployees() {
   const dispatch = useDispatch();
-  const employees = useSelector((state) => state.employees);
+  const employees = useSelector((state) => state.user.employees);
   console.log(employees, "<dari list");
   useEffect(() => {
     dispatch(fetchEmployees());

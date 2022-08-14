@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import EmployeesTableRow from "../components/EmployeesTableRow";
 import OfficialLetterCard from "../components/OfficialLetterCard";
-import { fetchAllofficialLetters, fetchEmployees } from "../store/action";
+import { fetchAllofficialLetters } from "../store/action";
 export default function ListOfficialLetter() {
   const dispatch = useDispatch();
-  const officialLetters = useSelector((state) => state.officialLetters);
+  const officialLetters = useSelector((state) => state.letter.officialLetters);
   console.log(officialLetters, "<dari list");
   useEffect(() => {
     dispatch(fetchAllofficialLetters());

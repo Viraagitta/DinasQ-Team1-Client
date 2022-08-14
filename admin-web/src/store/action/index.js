@@ -2,9 +2,16 @@ import {
   FETCH_LIST_EMPLOYEES,
   FETCH_LIST_OFFICIALLETTERS,
   FETCH_LIST_REIMBURSEMENT,
+  LOGIN_USER,
 } from "./actionType";
 import axios from "axios";
 const baseUrl = "http://localhost:3000";
+export const loginSuccess = (payload) => {
+  return {
+    type: LOGIN_USER,
+    payload,
+  };
+};
 
 export const loginAdmin = (credential, callback = () => {}) => {
   return async (dispatch, getState) => {

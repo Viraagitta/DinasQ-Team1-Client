@@ -7,16 +7,74 @@ import ListReimbursement from "./pages/ListReimbursement";
 import Dashboard from "./pages/Dashboard";
 import SideBar from "./components/SideBar";
 import ListOfficialLetter from "./pages/ListOfficialLetter";
+import AuthDash from "./components/AuthDash";
+import AuthUser from "./components/AuthUser";
+import AuthReimburse from "./components/AuthReimburse";
+import AuthLetter from "./components/AuthLetter";
 function App() {
   return (
     <>
       <SideBar />
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/home" element={<Dashboard />} />
-        <Route path="/employees" element={<ListEmployees />} />
-        <Route path="/reimbursements" element={<ListReimbursement />} />
-        <Route path="/officialletters" element={<ListOfficialLetter />} />
+        <Route
+          path="/"
+          element={
+            <AuthDash>
+              <LoginPage />
+            </AuthDash>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <AuthDash>
+              <Dashboard />
+            </AuthDash>
+          }
+          // >
+          //   <Route
+          //     path="/officialletters/:id"
+          //     element={
+          //       <AuthReimburse>
+          //         <ListOfficialLetter />
+          //       </AuthReimburse>
+          //     }
+        />
+        {/* </Route> */}
+
+        <Route
+          path="/employees"
+          element={
+            <AuthUser>
+              <ListEmployees />
+            </AuthUser>
+          }
+        />
+        <Route
+          path="/reimbursements"
+          element={
+            <AuthReimburse>
+              <ListReimbursement />
+            </AuthReimburse>
+          }
+        />
+        <Route
+          path="/officialletters"
+          element={
+            <AuthLetter>
+              <ListOfficialLetter />
+            </AuthLetter>
+          }
+        >
+          <Route
+            path="/officialletters/:id"
+            element={
+              <AuthReimburse>
+                <ListReimbursement />
+              </AuthReimburse>
+            }
+          />
+        </Route>
       </Routes>
     </>
   );

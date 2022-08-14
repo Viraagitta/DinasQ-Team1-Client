@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import ReimbursementTableRow from "../components/ReimbursementTableRow";
 import { fetchAllReimbursement } from "../store/action";
 export default function ListReimbursement({ officialLetterId }) {
   // const {loading} =
+  const { id } = useParams();
   console.log(officialLetterId, "<<id");
+  console.log(id, "<<<<id");
+
   const dispatch = useDispatch();
-  const reimbursements = useSelector((state) => state.reimbursements);
+  const reimbursements = useSelector((state) => state.reimburse.reimbursements);
   const [reimbursementLocal, setReimbursementLocal] = useState([]);
   console.log(reimbursements, "<<<");
   useEffect(() => {

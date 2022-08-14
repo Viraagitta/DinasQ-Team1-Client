@@ -1,57 +1,72 @@
+import LoginImage from "../assets/undraw_uploading_re_okvh.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginAdmin } from "../store/action";
-
 export default function LoginPage() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  // console.log(setToken, "<<set token login");
-  const [formLogin, setFormLogin] = useState({
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const changeInputLogin = (e) => {
+  const handleChange = (e) => {
     const { value, name } = e.target;
 
-    const loginForm = {
-      email: formLogin.email,
-      password: formLogin.password,
+    const getForm = {
+      email: form.email,
+      password: form.password,
     };
-    loginForm[name] = value;
-    // console.log(loginForm, "<<login");
-    setFormLogin(loginForm);
+    getForm[name] = value;
+    setForm(getForm);
   };
-
-  const handleSubmit = (e) => {
+  const submitForm = (e) => {
     // window.location.reload;
     e.preventDefault();
     dispatch(
-      loginAdmin(formLogin, () => {
+      loginAdmin(form, () => {
         navigate("/home");
       })
     );
   };
   return (
-    <div className="main">
-      <h2>ini login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          onChange={changeInputLogin}
-        />
-        <label>password</label>
-        <input
-          type="password"
-          placeholder="Enter password"
-          name="password"
-          onChange={changeInputLogin}
-        />
-        <button>SUBMIT</button>
-      </form>
+    <div className="pagesLogin">
+      <div className="image">
+        <img src={LoginImage} alt="#login" />
+      </div>
+      <div className="form">
+        <h2>Welcome to DinasQ</h2>
+        <form className="input-login" onSubmit={submitForm}>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            autoFocus
+            placeholder="Input email..."
+            onChange={handleChange}
+          />
+          <br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Input password..."
+            onChange={handleChange}
+          />
+          <br />
+          <button className="btn-submit-login" type="submit">
+            Submit
+          </button>
+        </form>
+        <div className="notes">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
+            facilis ratione cum eos quas, molestias distinctio ex doloremque ut
+            dolorum esse! Culpa, autem? Iusto quo enim commodi, mollitia hic
+            corporis.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

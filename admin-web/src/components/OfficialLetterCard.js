@@ -5,12 +5,12 @@ export default function OfficialLetterCard({ officialLetter }) {
   const navigate = useNavigate();
   const detailHandler = (id) => {
     // console.log(id);
-    navigate(`/reimbursements`);
+    navigate(`/officialletters/${id}`);
   };
   return (
     <>
       <div className="card">
-        <div onClick={() => detailHandler(officialLetter.OfficialLetterId)}>
+        <div onClick={() => detailHandler(officialLetter.id)}>
           <img src={Male} alt="img-official-letters" />
           <div className="cardName">{officialLetter.activityName}</div>
         </div>
