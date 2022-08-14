@@ -13,12 +13,21 @@ import AuthReimburse from "./components/AuthReimburse";
 import AuthLetter from "./components/AuthLetter";
 import ReimbursementByLetterId from "./pages/ReimbursementByLetterId";
 import AddUserPage from "./pages/AddUserPage";
+import AuthNewUser from "./components/AuthNewUser";
+import AuthLogin from "./components/AuthLogin";
 function App() {
   return (
     <>
       <SideBar />
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route
+          path="/"
+          element={
+            <AuthLogin>
+              <LoginPage />
+            </AuthLogin>
+          }
+        />
         <Route
           path="/home"
           element={
@@ -30,9 +39,9 @@ function App() {
         <Route
           path="/newUser"
           element={
-            // <AuthUser>
-            <AddUserPage />
-            // </AuthUser>
+            <AuthNewUser>
+              <AddUserPage />
+            </AuthNewUser>
           }
         />
         <Route
