@@ -1,5 +1,6 @@
 import {
   CREATE_USER,
+  EDIT_USER_DETAIL,
   FETCH_LIST_EMPLOYEES,
   FETCH_LIST_OFFICIALLETTERS,
   FETCH_LIST_REIMBURSEMENT,
@@ -103,6 +104,40 @@ export const getUserdetails = (id) => {
       });
       // console.log(data, "<<");
       dispatch(fetchUserdetailSuccess(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+export const updateUserSuccess = (payload) => {
+  return {
+    type: EDIT_USER_DETAIL,
+    payload,
+  };
+};
+export const updateUser = (id, update) => {
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios.put(
+        `${baseUrl}/users/${id}`,
+        {
+          firstName: update.firstName,
+          lastName: update.lastName,
+          role: update.role,
+          email: update.email,
+          password: update.password,
+          phoneNumber: update.phoneNumber,
+          address: update.address,
+          position: update.position,
+        },
+        {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        }
+      );
+      // console.log(data, "<<");
+      dispatch(fetchEmployees());
     } catch (err) {
       console.log(err);
     }
