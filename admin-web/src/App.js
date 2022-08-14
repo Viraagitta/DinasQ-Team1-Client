@@ -11,19 +11,13 @@ import AuthDash from "./components/AuthDash";
 import AuthUser from "./components/AuthUser";
 import AuthReimburse from "./components/AuthReimburse";
 import AuthLetter from "./components/AuthLetter";
+import ReimbursementByLetterId from "./pages/ReimbursementByLetterId";
 function App() {
   return (
     <>
       <SideBar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <AuthDash>
-              <LoginPage />
-            </AuthDash>
-          }
-        />
+        <Route path="/" element={<LoginPage />} />
         <Route
           path="/home"
           element={
@@ -31,16 +25,7 @@ function App() {
               <Dashboard />
             </AuthDash>
           }
-          // >
-          //   <Route
-          //     path="/officialletters/:id"
-          //     element={
-          //       <AuthReimburse>
-          //         <ListOfficialLetter />
-          //       </AuthReimburse>
-          //     }
         />
-        {/* </Route> */}
 
         <Route
           path="/employees"
@@ -65,16 +50,16 @@ function App() {
               <ListOfficialLetter />
             </AuthLetter>
           }
-        >
-          <Route
-            path="/officialletters/:id"
-            element={
-              <AuthReimburse>
-                <ListReimbursement />
-              </AuthReimburse>
-            }
-          />
-        </Route>
+        />
+
+        <Route
+          path="/officialletters/:id"
+          element={
+            // <AuthReimburse>
+            <ReimbursementByLetterId />
+            // </AuthReimburse>
+          }
+        />
       </Routes>
     </>
   );

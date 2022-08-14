@@ -2,6 +2,7 @@ import {
   FETCH_LIST_EMPLOYEES,
   FETCH_LIST_OFFICIALLETTERS,
   FETCH_LIST_REIMBURSEMENT,
+  FETCH_LIST_REIMBURSEMENT_BY_OFFICIALLETTERID,
   LOGIN_USER,
 } from "./actionType";
 import axios from "axios";
@@ -96,6 +97,29 @@ export const fetchAllofficialLetters = () => {
       dispatch(fetchListofficialLettersSuccess(data.response.rows));
     } catch (err) {
       console.error(err);
+    }
+  };
+};
+
+export const fetchListReimbursementByOfficialLetterIdSuccess = (payload) => {
+  return {
+    type: FETCH_LIST_REIMBURSEMENT_BY_OFFICIALLETTERID,
+    payload,
+  };
+};
+export const allReimbursementByOfficialLetterId = (id) => {
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios.get(`${baseUrl}/officialletters/${id}`, {
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+        params: { page: getState, size: 10 },
+      });
+      console.log(data, "<<");
+      dispatch(fetchListReimbursementByOfficialLetterIdSuccess(data));
+    } catch (err) {
+      console.log(err);
     }
   };
 };
