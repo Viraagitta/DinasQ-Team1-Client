@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import EmployeesTableRow from "../components/EmployeesTableRow";
 import { fetchEmployees } from "../store/action";
-// import "../assets/Script";
 export default function ListEmployees() {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.user.employees);
@@ -21,11 +20,6 @@ export default function ListEmployees() {
           <ion-icon name="search-outline"></ion-icon>
         </label>
       </div>
-      <div>
-        <p>add</p>
-      </div>
-      <div class="list-action">
-
       <div className="list-action">
         <div className="action">
           <ion-icon name="pencil-outline" className="icon"></ion-icon>
