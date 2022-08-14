@@ -6,6 +6,7 @@ import ListEmployees from "./pages/ListEmployees";
 import ListReimbursement from "./pages/ListReimbursement";
 import Dashboard from "./pages/Dashboard";
 import SideBar from "./components/SideBar";
+import ListOfficialLetter from "./pages/ListOfficialLetter";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/home" element={<Dashboard />} />
         <Route path="/employees" element={<ListEmployees />} />
         <Route path="/reimbursements" element={<ListReimbursement />} />
+        <Route path="/officialletters" element={<ListOfficialLetter />} />
       </Routes>
     </>
   );

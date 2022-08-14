@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Male from "../assets/undraw_male_avatar_323b.svg";
 export default function Dashboard() {
   return (
@@ -34,6 +35,7 @@ export default function Dashboard() {
         </div>
 
         <p className="title-list">List Official Letters</p>
+        <Link to="/officialletters">View All</Link>
         <div className="cardBox">
           <div className="card">
             <div>

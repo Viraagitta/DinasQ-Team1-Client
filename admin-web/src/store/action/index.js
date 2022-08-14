@@ -1,4 +1,8 @@
-import { FETCH_LIST_EMPLOYEES, FETCH_LIST_REIMBURSEMENT } from "./actionType";
+import {
+  FETCH_LIST_EMPLOYEES,
+  FETCH_LIST_OFFICIALLETTERS,
+  FETCH_LIST_REIMBURSEMENT,
+} from "./actionType";
 import axios from "axios";
 const baseUrl = "http://localhost:3000";
 
@@ -59,6 +63,30 @@ export const fetchAllReimbursement = () => {
       });
       // console.log(data, "<<");
       dispatch(fetchListReimbursementSuccess(data.response.rows));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+export const fetchListofficialLettersSuccess = (payload) => {
+  return {
+    type: FETCH_LIST_OFFICIALLETTERS,
+    payload,
+  };
+};
+
+export const fetchAllofficialLetters = () => {
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios.get(`${baseUrl}/officialletters`, {
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+        params: { page: getState, size: 10 },
+      });
+      // console.log(data, "<<");
+      dispatch(fetchListofficialLettersSuccess(data.response.rows));
     } catch (err) {
       console.error(err);
     }

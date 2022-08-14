@@ -22,7 +22,7 @@ export default function SideBar() {
               </a>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/home">
                 <span className="icon">
                   <ion-icon name="home-outline"></ion-icon>
                 </span>

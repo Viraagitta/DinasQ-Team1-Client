@@ -1,15 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReimbursementTableRow from "../components/ReimbursementTableRow";
 import { fetchAllReimbursement } from "../store/action";
-export default function ListReimbursement() {
+export default function ListReimbursement({ officialLetterId }) {
   // const {loading} =
+  console.log(officialLetterId, "<<id");
   const dispatch = useDispatch();
   const reimbursements = useSelector((state) => state.reimbursements);
+  const [reimbursementLocal, setReimbursementLocal] = useState([]);
   console.log(reimbursements, "<<<");
   useEffect(() => {
     dispatch(fetchAllReimbursement());
   }, []);
+  // const filtered = reimbursements.filter(
+  //   (reimburse) => reimburse.OfficialLetterId == officialLetterId
+  // );
+
+  useEffect(() => {
+    setReimbursementLocal(reimbursements);
+  }, [reimbursements]);
+
+  useEffect(() => {
+    if (officialLetterId) {
+      const filter = reimbursements.filter(
+        (reimburse) => reimburse.OfficialLetterId === officialLetterId
+      );
+      setReimbursementLocal(filter);
+    } else {
+      setReimbursementLocal(reimbursements);
+    }
+  }, [officialLetterId]);
   return (
     <div className="main">
       <div className="nav">
