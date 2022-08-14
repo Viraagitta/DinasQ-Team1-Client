@@ -1,4 +1,4 @@
-import { FETCH_LIST_EMPLOYEES, LOGIN_USER } from "./actionType";
+import { FETCH_LIST_EMPLOYEES, LOGIN_USER, CREATE_USER } from "./actionType";
 import axios from "axios";
 const baseUrl = "http://localhost:3000";
 export const fetchListEmpoleeySuccess = (payload) => {
@@ -10,6 +10,12 @@ export const fetchListEmpoleeySuccess = (payload) => {
 export const loginSuccess = (payload) => {
   return {
     type: LOGIN_USER,
+    payload,
+  };
+};
+export const createUserSuccess = (payload) => {
+  return {
+    type: CREATE_USER,
     payload,
   };
 };
@@ -37,6 +43,24 @@ export const loginUser = (input) => {
       .then(({ data }) =>
         localStorage.setItem("access_token", data.access_token)
       )
+      .catch((error) => console.log(error));
+  };
+};
+
+export const createUser = (data) => {
+  return (dispatch, getState) => {
+    axios
+      .post(`${baseUrl}/register`, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        role: data.role,
+        email: data.email,
+        password: data.password,
+        phoneNumber: data.phoneNumber,
+        address: data.address,
+        position: data.position,
+      })
+      .then(({ data }) => fetchEmployees())
       .catch((error) => console.log(error));
   };
 };

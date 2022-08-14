@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import ListEmployees from "./pages/ListEmployees";
 import Dashboard from "./pages/Dashboard";
 import SideBar from "./components/SideBar";
+import AddUserPage from "./pages/AddUserPage";
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/employees" element={<ListEmployees />} />
+        <Route path="/createUser" element={<AddUserPage />} />
       </Routes>
     </>
   );
