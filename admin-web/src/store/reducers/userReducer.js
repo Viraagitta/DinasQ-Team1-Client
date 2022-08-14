@@ -1,17 +1,17 @@
 import {
+  CREATE_USER,
   FETCH_LIST_EMPLOYEES,
   LOGIN_USER,
-  CREATE_USER,
 } from "../action/actionType";
 
 const initialState = { employees: [], users: [] };
 
-function rootReducer(state = initialState, action) {
+function userReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_LIST_EMPLOYEES:
-      return { ...state, employees: action.payload };
     case LOGIN_USER:
       return { ...state, users: action.payload };
+    case FETCH_LIST_EMPLOYEES:
+      return { ...state, employees: action.payload };
     case CREATE_USER:
       return { ...state, users: action.payload };
     default:
@@ -19,4 +19,4 @@ function rootReducer(state = initialState, action) {
   }
 }
 
-export default rootReducer;
+export default userReducer;

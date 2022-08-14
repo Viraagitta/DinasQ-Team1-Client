@@ -38,7 +38,7 @@ export default function AddUserPage() {
   const submitForm = (e) => {
     dispatch(createUser(form));
     e.preventDefault();
-    navigate("/");
+    navigate("/employees");
   };
   return (
     <div className="main">

@@ -1,50 +1,65 @@
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 export default function SideBar() {
+  const navigate = useNavigate();
+
+  const toLogout = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    navigate("/");
+  };
   return (
     <>
       {localStorage.getItem("access_token") ? (
-        <div class="navigation">
+        <div className="navigation">
           <ul>
             <li>
               <a href="">
-                <span class="icon">
+                <span className="icon">
                   <ion-icon name="car-outline"></ion-icon>
                 </span>
-                <span class="title">DinasQ</span>
+                <span className="title">DinasQ</span>
               </a>
             </li>
             <li>
-              <Link to="/">
-                <span class="icon">
+              <Link to="/home">
+                <span className="icon">
                   <ion-icon name="home-outline"></ion-icon>
                 </span>
-                <span class="title">Home</span>
+                <span className="title">Home</span>
               </Link>
             </li>
             <li>
               <Link to="/employees">
-                <span class="icon">
+                <span className="icon">
                   <ion-icon name="people-outline"></ion-icon>
                 </span>
-                <span class="title">Employees</span>
+                <span className="title">Employees</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/reimbursements">
+                <span className="icon">
+                  <ion-icon name="documents-outline"></ion-icon>
+                </span>
+                <span className="title">All Reimbursement</span>
               </Link>
             </li>
             <li>
               <a href="">
-                <span class="icon">
+                <span className="icon">
                   <ion-icon name="chatbubble-outline"></ion-icon>
                 </span>
-                <span class="title">Message</span>
+                <span className="title">Message</span>
               </a>
             </li>
             <li>
-              <a href="">
-                <span class="icon">
+              <Link to="/" onClick={(e) => toLogout(e)}>
+                <span className="icon">
                   <ion-icon name="log-out-outline"></ion-icon>
                 </span>
-                <span class="title">Sign Out</span>
-              </a>
+                <span className="title">Sign Out</span>
+              </Link>
             </li>
           </ul>
         </div>

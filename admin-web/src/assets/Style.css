@@ -152,6 +152,7 @@
 .main .list-action .action {
   display: flex;
   margin-left: 5em;
+  text-decoration: none
 }
 .main .list-action .action .icon {
   color: var(--green);
@@ -263,6 +264,7 @@
   color: var(--black2);
 }
 
+
 .pagesLogin {
   /* margin: 15em; */
   margin-top: 8em;
@@ -357,6 +359,17 @@
   cursor: pointer;
 }
 
+.img-reimburse {
+  padding: 20px;
+  width: 500px;
+  height: 150px
+}
+
+.btn-reimburse {
+  display: flex;
+  flex-direction: row;
+  padding: 10px
+}
 /* register */
 .pageRegister {
   /* margin: 15em; */

@@ -2,7 +2,7 @@ import LoginImage from "../assets/undraw_uploading_re_okvh.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../store/action";
+import { loginAdmin } from "../store/action";
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,11 +21,13 @@ export default function LoginPage() {
     setForm(getForm);
   };
   const submitForm = (e) => {
+    // window.location.reload;
     e.preventDefault();
-    setTimeout(() => {
-      dispatch(loginUser(form));
-      navigate("/");
-    }, 2000);
+    dispatch(
+      loginAdmin(form, () => {
+        navigate("/home");
+      })
+    );
   };
   return (
     <div className="pagesLogin">
