@@ -1,4 +1,8 @@
-import { FETCH_LIST_EMPLOYEES, LOGIN_USER } from "../action/actionType";
+import {
+  CREATE_USER,
+  FETCH_LIST_EMPLOYEES,
+  LOGIN_USER,
+} from "../action/actionType";
 
 const initialState = { employees: [], users: [] };
 
@@ -8,6 +12,8 @@ function userReducer(state = initialState, action) {
       return { ...state, users: action.payload };
     case FETCH_LIST_EMPLOYEES:
       return { ...state, employees: action.payload };
+    case CREATE_USER:
+      return { ...state, users: action.payload };
     default:
       return state;
   }

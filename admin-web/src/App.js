@@ -12,6 +12,7 @@ import AuthUser from "./components/AuthUser";
 import AuthReimburse from "./components/AuthReimburse";
 import AuthLetter from "./components/AuthLetter";
 import ReimbursementByLetterId from "./pages/ReimbursementByLetterId";
+import AddUserPage from "./pages/AddUserPage";
 function App() {
   return (
     <>
@@ -26,7 +27,14 @@ function App() {
             </AuthDash>
           }
         />
-
+        <Route
+          path="/newUser"
+          element={
+            // <AuthUser>
+            <AddUserPage />
+            // </AuthUser>
+          }
+        />
         <Route
           path="/employees"
           element={

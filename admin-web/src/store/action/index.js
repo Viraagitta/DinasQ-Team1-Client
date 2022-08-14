@@ -1,4 +1,5 @@
 import {
+  CREATE_USER,
   FETCH_LIST_EMPLOYEES,
   FETCH_LIST_OFFICIALLETTERS,
   FETCH_LIST_REIMBURSEMENT,
@@ -31,7 +32,38 @@ export const loginAdmin = (credential, callback = () => {}) => {
     }
   };
 };
-
+export const createUserSuccess = (payload) => {
+  return {
+    type: CREATE_USER,
+    payload,
+  };
+};
+export const createUser = (credential) => {
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios.post(
+        `${baseUrl}/register`,
+        {
+          firstName: credential.firstName,
+          lastName: credential.lastName,
+          role: credential.role,
+          email: credential.email,
+          password: credential.password,
+          phoneNumber: credential.phoneNumber,
+          address: credential.address,
+          position: credential.position,
+        },
+        {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 export const fetchListEmployeesSuccess = (payload) => {
   return {
     type: FETCH_LIST_EMPLOYEES,

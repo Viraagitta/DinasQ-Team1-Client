@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import EmployeesTableRow from "../components/EmployeesTableRow";
 import { fetchEmployees } from "../store/action";
 export default function ListEmployees() {
@@ -29,6 +30,10 @@ export default function ListEmployees() {
           <ion-icon name="trash-outline" className="icon"></ion-icon>
           <p className="title">Delete</p>
         </div>
+        <Link to="/newUser" className="action">
+          <ion-icon name="person-add-outline" class="icon"></ion-icon>
+          <p className="title">add</p>
+        </Link>
       </div>
       <table className="list-employees">
         <thead className="heading-table-employees">
