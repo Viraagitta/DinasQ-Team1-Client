@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchEmployees } from "../store/action";
+// import "../assets/Script";
 export default function ListEmployees() {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employees);
@@ -19,6 +20,9 @@ export default function ListEmployees() {
           <ion-icon name="search-outline"></ion-icon>
         </label>
       </div>
+      <div>
+        <p>add</p>
+      </div>
       <div class="list-action">
         <div className="action">
           <ion-icon name="pencil-outline" class="icon"></ion-icon>
@@ -27,6 +31,27 @@ export default function ListEmployees() {
         <div className="action">
           <ion-icon name="trash-outline" class="icon"></ion-icon>
           <p class="title">Delete</p>
+        </div>
+      </div>
+      <button id="myBtn">Open Modal</button>
+
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form>
+            <input
+              type="text"
+              name="firstName"
+              id="firstNameRegister"
+              placeholder="fisrtName"
+            />
+            <input
+              type="text"
+              name="lastName"
+              id="lastNameRegister"
+              placeholder="lastName"
+            />
+          </form>
         </div>
       </div>
       <table class="list-employees">
