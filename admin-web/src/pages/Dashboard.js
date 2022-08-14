@@ -1,5 +1,15 @@
-import Male from "../assets/undraw_male_avatar_323b.svg";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAllofficialLetters } from "../store/action";
+import OfficialLetterCard from "../components/OfficialLetterCard";
 export default function Dashboard() {
+  const dispatch = useDispatch();
+  const officialLetters = useSelector((state) => state.letter.officialLetters);
+  // console.log(officialLetters, "<dari list");
+  useEffect(() => {
+    dispatch(fetchAllofficialLetters());
+  }, []);
   return (
     <>
       <div className="main">
@@ -34,25 +44,16 @@ export default function Dashboard() {
         </div>
 
         <p className="title-list">List Official Letters</p>
+        <Link to="/officialletters">View All</Link>
         <div className="cardBox">
-          <div className="card">
-            <div>
-              <img src={Male} alt="img-official-letters" />
-              <div className="cardName">nama karyawan</div>
-            </div>
-          </div>
-          <div className="card">
-            <div>
-              <img src={Male} alt="img-official-letters" />
-              <div className="cardName">nama karyawan</div>
-            </div>
-          </div>
-          <div className="card">
-            <div>
-              <img src={Male} alt="img-official-letters" />
-              <div className="cardName">nama karyawan</div>
-            </div>
-          </div>
+          {officialLetters.map((officialLetter) => {
+            return (
+              <OfficialLetterCard
+                key={officialLetter.id}
+                officialLetter={officialLetter}
+              />
+            );
+          })}
         </div>
       </div>
     </>

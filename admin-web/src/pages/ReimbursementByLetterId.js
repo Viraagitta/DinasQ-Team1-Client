@@ -1,19 +1,25 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import ReimbursementTableRow from "../components/ReimbursementTableRow";
-import { fetchAllReimbursement } from "../store/action";
-export default function ListReimbursement() {
+import { allReimbursementByOfficialLetterId } from "../store/action";
+export default function ReimbursementByLetterId() {
+  // const {loading} =
+  const { id } = useParams();
+  // console.log(id, "<<<<id");
   const dispatch = useDispatch();
-  const reimbursements = useSelector((state) => state.reimburse.reimbursements);
-  // console.log(reimbursements, "<<<");
+  const reimbursementByOfficalLetterId = useSelector(
+    (state) => state.letter.reimbursementByOfficalLetterId
+  );
+  // console.log(reimbursementByOfficalLetterId, "<<<");
   useEffect(() => {
-    dispatch(fetchAllReimbursement());
+    dispatch(allReimbursementByOfficialLetterId(id));
   }, []);
 
   return (
     <div className="main">
       <div className="nav">
-        <h2>ALL REIMBURSEMENT</h2>
+        <h2>ALL REIMBURSEMENT BY ID</h2>
       </div>
       <div className="search">
         <label>
@@ -45,15 +51,17 @@ export default function ListReimbursement() {
           </tr>
         </thead>
         <tbody>
-          {reimbursements.map((reimburse, i) => {
-            return (
-              <ReimbursementTableRow
-                key={(reimburse.id, i)}
-                reimburse={reimburse}
-                i={i}
-              />
-            );
-          })}
+          {reimbursementByOfficalLetterId.Reimbursements?.map(
+            (reimburse, i) => {
+              return (
+                <ReimbursementTableRow
+                  key={(reimburse.id, i)}
+                  reimburse={reimburse}
+                  i={i}
+                />
+              );
+            }
+          )}
         </tbody>
       </table>
     </div>

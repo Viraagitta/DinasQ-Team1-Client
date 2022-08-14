@@ -5,8 +5,8 @@ import { fetchEmployees } from "../store/action";
 // import "../assets/Script";
 export default function ListEmployees() {
   const dispatch = useDispatch();
-  const employees = useSelector((state) => state.employees);
-
+  const employees = useSelector((state) => state.user.employees);
+  console.log(employees, "<dari list");
   useEffect(() => {
     dispatch(fetchEmployees());
   }, []);
@@ -38,14 +38,16 @@ export default function ListEmployees() {
       </div>
       <table className="list-employees">
         <thead className="heading-table-employees">
-          <th></th>
-          <th>ID :</th>
-          <th>Name :</th>
-          <th>Position :</th>
-          <th>Department :</th>
-          <th>Email :</th>
-          <th>Experience :</th>
-          <th>Status :</th>
+          <tr>
+            <th></th>
+            <th>ID :</th>
+            <th>Name :</th>
+            <th>Position :</th>
+            <th>Department :</th>
+            <th>Email :</th>
+            <th>Experience :</th>
+            <th>Status :</th>
+          </tr>
         </thead>
         <tbody>
           {employees.map((employee, i) => {

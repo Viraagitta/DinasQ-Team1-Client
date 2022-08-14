@@ -1,6 +1,13 @@
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 export default function SideBar() {
+  const navigate = useNavigate();
+
+  const toLogout = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    navigate("/");
+  };
   return (
     <>
       {localStorage.getItem("access_token") ? (
@@ -15,7 +22,7 @@ export default function SideBar() {
               </a>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/home">
                 <span className="icon">
                   <ion-icon name="home-outline"></ion-icon>
                 </span>
@@ -47,12 +54,12 @@ export default function SideBar() {
               </a>
             </li>
             <li>
-              <a href="">
+              <Link to="/" onClick={(e) => toLogout(e)}>
                 <span className="icon">
                   <ion-icon name="log-out-outline"></ion-icon>
                 </span>
                 <span className="title">Sign Out</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
