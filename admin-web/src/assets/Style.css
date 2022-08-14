@@ -263,6 +263,7 @@
   color: var(--black2);
 }
 
+
 .pagesLogin {
   /* margin: 15em; */
   margin-top: 8em;
@@ -356,3 +357,25 @@
   text-decoration: none;
   cursor: pointer;
 }
+=======
+.img-reimburse {
+  padding: 20px;
+  width: 500px;
+  height: 150px
+}
+
+.btn-reimburse {
+  display: flex;
+  flex-direction: row;
+  padding: 10px
+}
+.head-text {
+  position: relative;
+}
+.text-on-image {
+  position: absolute;
+  right: 50%;
+  left: 50%;
+  bottom: 15%;
+}
+

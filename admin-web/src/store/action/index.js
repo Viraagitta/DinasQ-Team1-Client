@@ -1,4 +1,5 @@
-import { FETCH_LIST_EMPLOYEES, LOGIN_USER } from "./actionType";
+
+import { FETCH_LIST_EMPLOYEES, LOGIN_USER, FETCH_LIST_REIMBURSEMENT } from "./actionType";
 import axios from "axios";
 const baseUrl = "http://localhost:3000";
 export const fetchListEmpoleeySuccess = (payload) => {
@@ -7,6 +8,7 @@ export const fetchListEmpoleeySuccess = (payload) => {
     payload,
   };
 };
+
 export const loginSuccess = (payload) => {
   return {
     type: LOGIN_USER,
@@ -27,6 +29,7 @@ export const fetchEmployees = () => {
   };
 };
 
+
 export const loginUser = (input) => {
   return (dispatch, getState) => {
     axios
@@ -37,6 +40,20 @@ export const loginUser = (input) => {
       .then(({ data }) =>
         localStorage.setItem("access_token", data.access_token)
       )
+      .catch((error) => console.log(error));
+  };
+};
+
+
+export const fetchAllReimbursement = () => {
+  return (dispatch, getState) => {
+    axios
+      .get(`${baseUrl}/reimbursements`, {
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      })
+      .then(({ data }) => dispatch(fetchListReimbursementSuccess(data)))
       .catch((error) => console.log(error));
   };
 };

@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import EmployeesTableRow from "../components/EmployeesTableRow";
-import { fetchEmployees } from "../store/action";
-// import "../assets/Script";
-export default function ListEmployees() {
+import ReimbursementTableRow from "../components/ReimbursementTableRow";
+import { fetchAllReimbursement } from "../store/action";
+export default function ListReimbursement() {
+  // const {loading} =
   const dispatch = useDispatch();
-  const employees = useSelector((state) => state.employees);
+  const reimbursements = useSelector((state) => state.reimbursements);
 
   useEffect(() => {
-    dispatch(fetchEmployees());
+    dispatch(fetchAllReimbursement());
   }, []);
   return (
     <div className="main">
       <div className="nav">
-        <h2>Employees</h2>
+        <h2>ALL REIMBURSEMENT</h2>
       </div>
       <div className="search">
         <label>
@@ -21,11 +21,6 @@ export default function ListEmployees() {
           <ion-icon name="search-outline"></ion-icon>
         </label>
       </div>
-      <div>
-        <p>add</p>
-      </div>
-      <div class="list-action">
-
       <div className="list-action">
         <div className="action">
           <ion-icon name="pencil-outline" className="icon"></ion-icon>
@@ -38,21 +33,23 @@ export default function ListEmployees() {
       </div>
       <table className="list-employees">
         <thead className="heading-table-employees">
-          <th></th>
-          <th>ID :</th>
-          <th>Name :</th>
-          <th>Position :</th>
-          <th>Department :</th>
-          <th>Email :</th>
-          <th>Experience :</th>
-          <th>Status :</th>
+          <tr>
+            <th></th>
+            <th>No</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Cost</th>
+            <th>Receipt / Bill</th>
+            <th>Status</th>
+            <th>Updated By</th>
+          </tr>
         </thead>
         <tbody>
-          {employees.map((employee, i) => {
+          {reimbursements.map((reimburse, i) => {
             return (
-              <EmployeesTableRow
-                key={(employee.id, i)}
-                employee={employee}
+              <ReimbursementTableRow
+                key={(reimburse.id, i)}
+                reimburse={reimburse}
                 i={i}
               />
             );
