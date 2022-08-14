@@ -5,8 +5,8 @@ import EmployeesTableRow from "../components/EmployeesTableRow";
 import { fetchEmployees } from "../store/action";
 export default function ListEmployees() {
   const dispatch = useDispatch();
-  const employees = useSelector((state) => state.user.employees);
-  console.log(employees, "<dari list");
+  const users = useSelector((state) => state.user.users);
+  console.log(users, "<dari list");
   useEffect(() => {
     dispatch(fetchEmployees());
   }, []);
@@ -49,7 +49,7 @@ export default function ListEmployees() {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee, i) => {
+          {users.map((employee, i) => {
             return (
               <EmployeesTableRow
                 key={(employee.id, i)}
