@@ -48,7 +48,7 @@ const AbsenceScreen = ({ navigation }) => {
             fontSize: 30,
           }}
         >
-          WELCOME TO DINASQ
+          ABSENCE
         </Text>
         <View style={{ marginTop: 40 }}>
           <AbsenceModal />

@@ -10,13 +10,19 @@ import {
   Image,
   Button,
 } from "react-native";
+import Constants from "expo-constants";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
-import { createReimbursement, getUserdetails } from "../store/action";
+import {
+  allOfficialLetterByLoggedIn,
+  createReimbursement,
+} from "../store/action";
 import SelectedImage from "./SelectedImage";
-
+import DropDownPicker from "react-native-dropdown-picker";
+import Dropdown from "./Dropdown";
 const FormReimbursement = () => {
   const [modalVisible, setModalVisible] = useState(false);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
@@ -45,6 +51,24 @@ const FormReimbursement = () => {
     dispatch(createReimbursement(form));
     setForm("");
   };
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+
+  const officialLetters = useSelector((state) => state.letter.officialLetters);
+  // console.log(officialLetters, "<<<<");
+
+  const [items, setItems] = officialLetters.map((el) =>
+    useState([
+      {
+        label: el.activityName,
+        value: el.id,
+        // key: i,
+      },
+    ])
+  );
+  useEffect(() => {
+    dispatch(allOfficialLetterByLoggedIn());
+  }, []);
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.centeredView}>
@@ -60,7 +84,21 @@ const FormReimbursement = () => {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>CREATE NEW REIMBURSEMENT</Text>
-              <TextInput
+              {/* {officialLetters.map((el) => { */}
+              <DropDownPicker
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+                onChangeValue={(value) =>
+                  handleChange(value, "OfficialLetterId")
+                }
+                // onChangeText={(text) => handleChange(text, "category")}
+                style={{ marginTop: 15 }}
+              />
+              {/* <TextInput
                 style={styles.input}
                 type="text"
                 placeholder="Official Letter Activity Name"
@@ -68,7 +106,7 @@ const FormReimbursement = () => {
                 autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "OfficialLetterId")}
                 value={form.OfficialLetterId}
-              />
+              /> */}
               <TextInput
                 style={styles.input}
                 type="text"
@@ -89,14 +127,15 @@ const FormReimbursement = () => {
                 onChangeText={(text) => handleChange(text, "cost")}
                 value={form.cost}
               />
-              <TextInput
+              <Dropdown />
+              {/* <TextInput
                 style={styles.input}
                 type="text"
                 name="category"
                 placeholder="Category"
                 onChangeText={(text) => handleChange(text, "category")}
                 value={form.category}
-              />
+              /> */}
               <TextInput
                 style={styles.input}
                 type="text"
@@ -105,7 +144,6 @@ const FormReimbursement = () => {
                 onChangeText={(text) => handleChange(text, "image")}
                 value={form.image}
               />
-
               <SelectedImage />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
@@ -127,6 +165,7 @@ const FormReimbursement = () => {
             </View>
           </View>
         </Modal>
+
         <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
@@ -141,8 +180,11 @@ const FormReimbursement = () => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
+    // flexDirection: "row",
+    // height: 200,
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: Constants.statusBarHeight,
   },
   modalView: {
     margin: 10,
