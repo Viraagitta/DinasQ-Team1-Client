@@ -6,3 +6,4 @@ export const UPDATE_PASSWORD = "update/userPassword";
 
 export const FETCH_REIMBURSEMENTS_BY_LETTERID = "fetch/listReimbursement";
 export const FETCH_OFFICIAL_LETTERS_BY_USERID = "fetch/listLetter";
+export const ABSENCE_USER = "absence/post";

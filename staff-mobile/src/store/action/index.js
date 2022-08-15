@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
+  ABSENCE_USER,
   CREATE_OFFICIAL_LETTERS,
   CREATE_REIMBURSEMENT,
   FETCH_OFFICIAL_LETTERS_BY_USERID,
@@ -110,7 +111,7 @@ export const getUserdetails = (id) => {
           access_token: await AsyncStorage.getItem("access_token"),
         },
       });
-      console.log(data, "<<");
+      // console.log(data, "<<");
       dispatch(fetchUserdetailSuccess(data));
     } catch (err) {
       console.log(err);
@@ -144,5 +145,27 @@ export const fetchReimbursementByLoggedInSuccess = (payload) => {
   return {
     type: FETCH_REIMBURSEMENTS_BY_LETTERID,
     payload,
+  };
+};
+
+export const absenceSuccess = (payload) => {
+  return {
+    type: ABSENCE_USER,
+    payload,
+  };
+};
+export const userAbsence = () => {
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios.post(`${baseUrl}/locations`, {
+        headers: {
+          access_token: await AsyncStorage.getItem("access_token"),
+        },
+      });
+      console.log(access_token);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 };

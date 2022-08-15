@@ -1,6 +1,10 @@
-import { LOGIN_STAFF, UPDATE_PASSWORD } from "../action/actionType";
+import {
+  ABSENCE_USER,
+  LOGIN_STAFF,
+  UPDATE_PASSWORD,
+} from "../action/actionType";
 
-const initialState = { users: [], detailUser: [] };
+const initialState = { users: [], detailUser: [], userlocation: [] };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -8,6 +12,8 @@ function userReducer(state = initialState, action) {
       return { ...state, users: action.payload };
     case UPDATE_PASSWORD:
       return { ...state, detailUser: action.payload };
+    case ABSENCE_USER:
+      return { ...state, userlocation: action.payload };
     default:
       return state;
   }

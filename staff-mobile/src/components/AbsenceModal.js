@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { useDispatch } from "react-redux";
+import { userAbsence } from "../store/action";
 
-const ModalForm = () => {
+const AbsenceModal = () => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
+  const submitAbsence = () => {
+    dispatch(userAbsence());
+  };
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -21,7 +27,10 @@ const ModalForm = () => {
             </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                submitAbsence();
+              }}
             >
               <Text style={styles.textStyle}>Close</Text>
             </Pressable>
@@ -35,14 +44,6 @@ const ModalForm = () => {
         >
           <Text style={styles.textStyle}>CLICK HERE TO ABSENCE</Text>
         </Pressable>
-        {/* <View style={{ marginHorizontal: 10 }}>
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.textStyle}>New Reimbursement</Text>
-          </Pressable>
-        </View> */}
       </View>
     </View>
   );
@@ -92,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalForm;
+export default AbsenceModal;
