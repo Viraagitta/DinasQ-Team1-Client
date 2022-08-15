@@ -18,7 +18,7 @@ export const loginStaff = (credential, callback = () => {}) => {
   // console.log(credential, "<<<");
   return async (dispatch, getState) => {
     try {
-      let { data } = await axios.post(`${baseUrl}/login`, {
+      let { data } = await axios.post(`${baseUrl}/login-all`, {
         email: credential.email,
         password: credential.password,
       });
@@ -110,6 +110,28 @@ export const getUserdetails = (id) => {
       });
       console.log(data, "<<");
       dispatch(fetchUserdetailSuccess(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchOfficialLetterByLoggedInSuccess = (payload) => {
+  return {
+    type: FETCH_OFFICIAL_LETTERS_BY_USERID,
+    payload,
+  };
+};
+export const allOfficialLetterByLoggedIn = () => {
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios.get(`${baseUrl}/logged-in-letter`, {
+        headers: {
+          access_token: await AsyncStorage.getItem("access_token"),
+        },
+      });
+      console.log(data, "<<");
+      dispatch(fetchOfficialLetterByLoggedInSuccess(data));
     } catch (err) {
       console.log(err);
     }
