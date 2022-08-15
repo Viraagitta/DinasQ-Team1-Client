@@ -54,7 +54,7 @@ export default function SelectedImage() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginBottom: 15,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",

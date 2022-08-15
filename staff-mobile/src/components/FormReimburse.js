@@ -100,11 +100,11 @@ const FormReimbursement = () => {
                   submitForm(e);
                 }}
               >
-                <Text style={styles.textStyle}>Create Official Letter</Text>
+                <Text style={styles.textStyle}>Submit</Text>
               </Pressable>
               <View style={{ marginTop: 10 }}>
                 <Pressable
-                  style={[styles.button, styles.buttonClose]}
+                  style={[styles.button, styles.cancelButton]}
                   onPress={() => setModalVisible(!modalVisible)}
                 >
                   <Text style={styles.textStyle}>Cancel</Text>
@@ -167,6 +167,9 @@ const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: "#2196F3",
   },
+  cancelButton: {
+    backgroundColor: "red",
+  },
   textStyle: {
     color: "white",
     fontWeight: "bold",
@@ -190,7 +193,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderWidth: 1,
     padding: 12,
-    width: "80%",
+    width: 250,
     borderRadius: 10,
     backgroundColor: "white",
     marginBottom: 16,
