@@ -5,6 +5,7 @@ import {
 
 const initialState = {
   officialLetters: [],
+  reimbursement: [],
 };
 
 function letterReducer(state = initialState, action) {
@@ -13,6 +14,8 @@ function letterReducer(state = initialState, action) {
       return { ...state, officialLetters: action.payload };
     case FETCH_OFFICIAL_LETTERS_BY_USERID:
       return { ...state, officialLetters: action.payload };
+    // case REIMBURSEMENT_BY_USERID:
+    //   return { ...state, officialLetters: action.payload };
     default:
       return state;
   }

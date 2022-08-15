@@ -1,19 +1,23 @@
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import {
-  Image,
-  ImageBackground,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { fetchReimbursementByLoggedInSuccess } from "../store/action";
+import { useDispatch } from "react-redux";
 
 export default function GenreCard({ letters }) {
   // console.log(genres.name);
-  // const navigation = useNavigation();
+  const renderItem = ({ item }) => {
+    return <Reimbursement reimburse={item} />;
+  };
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const toDetail = (reimbursement) => {
+    navigation.navigate("ReimbursementScreen");
+    dispatch(fetchReimbursementByLoggedInSuccess(reimbursement));
+  };
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => toDetail(letters.Reimbursements)}>
       <View style={styles.container}>
         <ImageBackground
           style={styles.logo}
@@ -30,12 +34,12 @@ export default function GenreCard({ letters }) {
               <Text style={styles.color}>
                 {letters.leaveDate} - {letters.returnDate}
               </Text>
-              {letters.status === "pending" ? (
-                <Text style={styles.colorStatus}>{letters.status}</Text>
-              ) : letters.status === "approved" ? (
+              {letters.status === "Rejected" ? (
+                <Text style={styles.colorStatusRejected}>{letters.status}</Text>
+              ) : letters.status === "Approved" ? (
                 <Text style={styles.colorStatusApproved}>{letters.status}</Text>
               ) : (
-                <Text style={styles.colorStatusRejected}>{letters.status}</Text>
+                <Text style={styles.colorStatus}>{letters.status}</Text>
               )}
               <Text style={styles.color}>{letters.updatedBy}</Text>
             </View>

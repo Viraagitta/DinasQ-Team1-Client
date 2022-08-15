@@ -1,6 +1,6 @@
 import { LOGIN_STAFF, UPDATE_PASSWORD } from "../action/actionType";
 
-const initialState = { users: [], detailUser: {} };
+const initialState = { users: [], detailUser: [] };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
