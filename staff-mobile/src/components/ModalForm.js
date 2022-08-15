@@ -16,12 +16,14 @@ const ModalForm = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>
+              Thank You! We Got Your Location!
+            </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Close</Text>
             </Pressable>
           </View>
         </View>
@@ -31,7 +33,7 @@ const ModalForm = () => {
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.textStyle}>New Official Letters</Text>
+          <Text style={styles.textStyle}>CLICK HERE TO ABSENCE</Text>
         </Pressable>
         {/* <View style={{ marginHorizontal: 10 }}>
           <Pressable
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: "#32cd32",
+    backgroundColor: "blue",
   },
   buttonClose: {
     backgroundColor: "#2196F3",

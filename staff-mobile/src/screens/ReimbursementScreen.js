@@ -12,6 +12,7 @@ import { StatusBar } from "expo-status-bar";
 import { useDispatch, useSelector } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import ReimbursementCard from "../components/ReimbursementCard";
+import FormReimbursement from "../components/FormReimburse";
 
 const ReimbursementScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -26,7 +27,9 @@ const ReimbursementScreen = ({ navigation }) => {
     <SafeAreaView style={[styles.container]}>
       {/* <StatusBar style={"dark"} /> */}
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("OfficialLetterScreen")}
+        >
           <ImageBackground
             style={styles.bars}
             source={{
@@ -41,12 +44,36 @@ const ReimbursementScreen = ({ navigation }) => {
       </View>
 
       <View />
-      <FlatList
-        // numColumns={2}
-        data={reimbursements}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      <View>
+        <FormReimbursement />
+      </View>
+      {reimbursements.length !== 0 ? (
+        <FlatList
+          numColumns={2}
+          key={"#"}
+          data={reimbursements}
+          renderItem={renderItem}
+          keyExtractor={(item) => "#" + item.id}
+        />
+      ) : (
+        <View>
+          <Text
+            style={{
+              color: "black",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            You have not submitted any reimbursement
+          </Text>
+          <Image
+            style={styles.oops}
+            source={{
+              uri: "https://eperformance.bsn.go.id/assets/img/empty-data.png",
+            }}
+          />
+        </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -64,13 +91,6 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     marginHorizontal: 20,
   },
-  logo: {
-    marginTop: 40,
-    marginBottom: 20,
-    marginLeft: 20,
-    width: 80,
-    height: 40,
-  },
   bars: {
     marginTop: 50,
     marginBottom: 20,
@@ -84,6 +104,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     width: 100,
     height: 60,
+  },
+  oops: {
+    marginTop: 10,
+    width: 350,
+    height: 200,
   },
   footer: {
     marginTop: 8,

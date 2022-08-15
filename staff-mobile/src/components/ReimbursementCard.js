@@ -2,8 +2,6 @@ import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function ReimbursementCard({ reimburse }) {
-  console.log(reimburse.image, "<");
-  // const navigation = useNavigation();
   return (
     <TouchableOpacity>
       <View style={styles.container}>
@@ -60,29 +58,30 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   color: {
-    fontSize: 18,
+    fontSize: 16,
     color: "white",
     fontWeight: "bold",
+    marginLeft: 5,
   },
   colorStatus: {
-    fontSize: 18,
+    fontSize: 14,
     color: "yellow",
     fontWeight: "bold",
   },
   colorStatusApproved: {
-    fontSize: 18,
+    fontSize: 14,
     color: "lime",
     fontWeight: "bold",
   },
   colorStatusRejected: {
-    fontSize: 18,
+    fontSize: 14,
     color: "lightcoral",
     fontWeight: "bold",
   },
   logo: {
-    margin: 10,
+    margin: 20,
     borderRadius: 12,
-    width: 220,
-    height: 200,
+    width: 140,
+    height: 180,
   },
 });

@@ -17,9 +17,10 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 // import ModalForm from "../components/ModalForm";
 import FormLetters from "../components/FormLetters";
 import FormReimbursement from "../components/FormReimburse";
+import ModalForm from "../components/ModalForm";
 // import SelectedImage from "../components/SelectedImage";
 // import PickImage from "../components/PickImage";
-const HomeScreen = ({ navigation }) => {
+const AbsenceScreen = ({ navigation }) => {
   return (
     // <View style={styles.container}>
     <SafeAreaView style={[styles.container]}>
@@ -57,10 +58,7 @@ const HomeScreen = ({ navigation }) => {
           WELCOME TO DINASQ
         </Text>
         <View style={{ marginTop: 40 }}>
-          <FormLetters />
-        </View>
-        <View style={{ marginTop: 20 }}>
-          <FormReimbursement />
+          <ModalForm />
         </View>
         {/* <PickImage /> */}
       </ScrollView>
@@ -81,7 +79,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-export default HomeScreen;
+export default AbsenceScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

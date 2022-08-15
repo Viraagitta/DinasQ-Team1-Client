@@ -5,14 +5,25 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CustomDrawer = (props) => {
+  const navigation = useNavigation();
+
+  const toLogout = (e) => {
+    e.preventDefault();
+    AsyncStorage.clear();
+    navigation.navigate("LoginScreen");
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView
@@ -51,15 +62,42 @@ const CustomDrawer = (props) => {
       </DrawerContentScrollView>
       <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#ccc" }}>
         <TouchableOpacity
-          // onPress={() => Linking.openURL("https://www.hotstar.com/id")}
+          onPress={() => Linking.openURL("https://web.whatsapp.com/")}
           style={{ paddingVertical: 15 }}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Image
+              source={{
+                uri: "https://st2.depositphotos.com/1116329/7584/v/600/depositphotos_75840613-stock-illustration-vector-modern-phone-icon-in.jpg",
+              }}
+              style={{
+                height: 40,
+                width: 20,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 15,
+                marginLeft: 10,
+              }}
+            >
+              Chat Now On Whatsapp
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={(e) => toLogout(e)}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: 10,
+            }}
+          >
             <Ionicons name="exit-outline" size={22} />
             <Text
               style={{
                 fontSize: 15,
-                marginLeft: 5,
+                marginLeft: 8,
               }}
             >
               Logout

@@ -23,7 +23,7 @@ export const loginStaff = (credential, callback = () => {}) => {
         email: credential.email,
         password: credential.password,
       });
-      // console.log(data, "<<");
+      // console.log(data.access_token, "<<");
       if (data.access_token) {
         const access_token = data.access_token;
         await AsyncStorage.setItem("access_token", access_token);
@@ -72,7 +72,7 @@ export const createReimbursementSucess = (payload) => {
   };
 };
 export const createReimbursement = (credential) => {
-  console.log(credential, "<<cre");
+  // console.log(credential, "<<cre");
   return async (dispatch, getState) => {
     try {
       let { data } = await axios.post(
@@ -80,6 +80,7 @@ export const createReimbursement = (credential) => {
         {
           OfficialLetterId: credential.OfficialLetterId,
           description: credential.description,
+          category: credential.category,
           cost: credential.cost,
           image: credential.image,
         },
@@ -131,7 +132,7 @@ export const allOfficialLetterByLoggedIn = () => {
           access_token: await AsyncStorage.getItem("access_token"),
         },
       });
-      console.log(data, "<<");
+      // console.log(data, "<<");
       dispatch(fetchOfficialLetterByLoggedInSuccess(data));
     } catch (err) {
       console.log(err);

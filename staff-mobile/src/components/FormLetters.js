@@ -114,22 +114,12 @@ const FormLetters = () => {
             </View>
           </View>
         </Modal>
-        <View style={{ flexDirection: "row", marginLeft: 10 }}>
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.textStyle}>Create New Official Letters</Text>
-          </Pressable>
-          {/* <View style={{ marginHorizontal: 10 }}>
-          <Pressable
+        <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
-          >
-          <Text style={styles.textStyle}>New Reimbursement</Text>
-          </Pressable>
-        </View> */}
-        </View>
+        >
+          <Text style={styles.textStyle}>Create New Official Letters</Text>
+        </Pressable>
       </View>
     </ScrollView>
   );
@@ -140,7 +130,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
   },
   modalView: {
     margin: 10,
@@ -195,7 +184,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "white",
     marginBottom: 16,
-    marginTop: 16,
+    // marginTop: 16,
   },
 });
 
