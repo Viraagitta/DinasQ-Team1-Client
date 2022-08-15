@@ -6,6 +6,7 @@ import {
   FETCH_OFFICIAL_LETTERS_BY_USERID,
   FETCH_REIMBURSEMENTS_BY_LETTERID,
   LOGIN_STAFF,
+  UPDATE_PASSWORD,
 } from "./actionType";
 import axios from "axios";
 const baseUrl = "http://192.168.100.13:3000";
@@ -164,6 +165,33 @@ export const userAbsence = () => {
       });
       console.log(access_token);
       console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const updatePasswordSuccess = (payload) => {
+  return {
+    type: UPDATE_PASSWORD,
+    payload,
+  };
+};
+export const updatePassword = (credential) => {
+  console.log(credential, "<<<<<<<<<");
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios.patch(
+        `${baseUrl}/users`,
+        {
+          password: credential.password,
+        },
+        {
+          headers: {
+            access_token: await AsyncStorage.getItem("access_token"),
+          },
+        }
+      );
     } catch (err) {
       console.log(err);
     }

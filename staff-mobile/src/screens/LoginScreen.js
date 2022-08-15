@@ -63,7 +63,6 @@ const LoginScreen = () => {
         value={form.password}
       />
       <Pressable
-        // style={styles.button}
         onPress={(e) => {
           submitForm(e);
         }}

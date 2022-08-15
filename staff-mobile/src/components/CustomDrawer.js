@@ -14,6 +14,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import UpdatePassModal from "./UpdatePassModal";
 
 const CustomDrawer = (props) => {
   const navigation = useNavigation();
@@ -59,6 +60,7 @@ const CustomDrawer = (props) => {
         <View style={{ flex: 1, backgroundColor: "white", paddingTop: 10 }}>
           <DrawerItemList {...props} />
         </View>
+        <UpdatePassModal />
       </DrawerContentScrollView>
       <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#ccc" }}>
         <TouchableOpacity
