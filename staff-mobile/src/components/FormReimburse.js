@@ -67,6 +67,8 @@ const FormReimbursement = () => {
                 style={styles.input}
                 type="text"
                 placeholder="Official Letter Activity Name"
+                autoCapitalize="none"
+                autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "OfficialLetterId")}
                 value={form.OfficialLetterId}
               />
@@ -75,6 +77,8 @@ const FormReimbursement = () => {
                 type="text"
                 name="description"
                 placeholder="description"
+                autoCapitalize="none"
+                autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "description")}
                 value={form.description}
               />
@@ -83,6 +87,8 @@ const FormReimbursement = () => {
                 type="integer"
                 name="cost"
                 placeholder="Cost"
+                autoCapitalize="none"
+                autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "cost")}
                 value={form.cost}
               />

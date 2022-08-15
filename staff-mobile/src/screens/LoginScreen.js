@@ -47,6 +47,8 @@ const LoginScreen = () => {
         style={styles.input}
         type="email"
         placeholder="Email"
+        autoCapitalize="none"
+        autoCorrect={false}
         onChangeText={(text) => handleChange(text, "email")}
         value={form.email}
       />
@@ -55,6 +57,8 @@ const LoginScreen = () => {
         secureTextEntry={true}
         name="password"
         placeholder="Password"
+        autoCapitalize="none"
+        autoCorrect={false}
         onChangeText={(text) => handleChange(text, "password")}
         value={form.password}
       />
