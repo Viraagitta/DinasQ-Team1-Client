@@ -39,7 +39,7 @@ const CustomDrawer = (props) => {
           style={{ padding: 20 }}
         >
           <Image
-            source={require("../assets/Logo-DinasQ2.jpeg")}
+            source={require("../assets/D.png")}
             style={{
               height: 80,
               width: 80,
