@@ -90,6 +90,12 @@ export default function Navigator() {
           component={Main}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          screenOptions={{ headerShown: false }}
+          name="ReimbursementScreen"
+          component={ReimbursementScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
     // </TailwindProvider>

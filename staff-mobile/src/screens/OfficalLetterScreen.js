@@ -18,6 +18,7 @@ const GenresScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const officialLetters = useSelector((state) => state.letter.officialLetters);
+  // console.log(officialLetters.Reimbursement, "<<<<");
   useEffect(() => {
     dispatch(allOfficialLetterByLoggedIn());
   }, []);
@@ -44,6 +45,7 @@ const GenresScreen = ({ navigation }) => {
 
       <View />
       <FlatList
+        // numColumns={2}
         data={officialLetters}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}

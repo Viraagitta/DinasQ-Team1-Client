@@ -3,6 +3,7 @@ import {
   CREATE_OFFICIAL_LETTERS,
   CREATE_REIMBURSEMENT,
   FETCH_OFFICIAL_LETTERS_BY_USERID,
+  FETCH_REIMBURSEMENTS_BY_LETTERID,
   LOGIN_STAFF,
 } from "./actionType";
 import axios from "axios";
@@ -137,53 +138,10 @@ export const allOfficialLetterByLoggedIn = () => {
     }
   };
 };
-// export const updateUserSuccess = (payload) => {
-//   return {
-//     type: EDIT_USER_DETAIL,
-//     payload,
-//   };
-// };
-// export const updateUser = (id, update) => {
-//   return async (dispatch, getState) => {
-//     try {
-//       let { data } = await axios.put(
-//         `${baseUrl}/users/${id}`,
-//         {
-//           password: update.password,
-//         },
-//         {
-//           headers: {
-//             access_token: AsyncStorage.getItem("access_token"),
-//           },
-//         }
-//       );
-//       // console.log(data, "<<");
-//       // dispatch(fetchEmployees());
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-// };
 
-// export const fetchListReimbursementByOfficialLetterIdSuccess = (payload) => {
-//   return {
-//     type: FETCH_LIST_REIMBURSEMENT_BY_OFFICIALLETTERID,
-//     payload,
-//   };
-// };
-// export const allReimbursementByOfficialLetterId = (id) => {
-//   return async (dispatch, getState) => {
-//     try {
-//       let { data } = await axios.get(`${baseUrl}/officialletters/${id}`, {
-//         headers: {
-//           access_token: AsyncStorage.getItem("access_token"),
-//         },
-//         params: { page: getState, size: 10 },
-//       });
-//       console.log(data, "<<");
-//       dispatch(fetchListReimbursementByOfficialLetterIdSuccess(data));
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-// };
+export const fetchReimbursementByLoggedInSuccess = (payload) => {
+  return {
+    type: FETCH_REIMBURSEMENTS_BY_LETTERID,
+    payload,
+  };
+};
