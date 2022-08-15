@@ -63,6 +63,8 @@ const FormLetters = () => {
                 style={styles.input}
                 type="text"
                 placeholder="Activity"
+                autoCapitalize="none"
+                autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "activityName")}
                 value={form.activityName}
               />
@@ -70,6 +72,8 @@ const FormLetters = () => {
                 style={styles.input}
                 name="from"
                 placeholder="From (City)"
+                autoCapitalize="none"
+                autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "from")}
                 value={form.from}
               />
@@ -77,6 +81,8 @@ const FormLetters = () => {
                 style={styles.input}
                 name="to"
                 placeholder="To (City)"
+                autoCapitalize="none"
+                autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "to")}
                 value={form.to}
               />
@@ -84,6 +90,8 @@ const FormLetters = () => {
                 style={styles.input}
                 name="leaveDate"
                 placeholder="Leave Date"
+                autoCapitalize="none"
+                autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "leaveDate")}
                 value={form.leaveDate}
               />
@@ -91,6 +99,8 @@ const FormLetters = () => {
                 style={styles.input}
                 name="returnDate"
                 placeholder="Return Date"
+                autoCapitalize="none"
+                autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "returnDate")}
                 value={form.returnDate}
               />
@@ -101,11 +111,11 @@ const FormLetters = () => {
                   submitForm(e);
                 }}
               >
-                <Text style={styles.textStyle}>Create Official Letter</Text>
+                <Text style={styles.textStyle}>Submit</Text>
               </Pressable>
               <View style={{ marginTop: 10 }}>
                 <Pressable
-                  style={[styles.button, styles.buttonClose]}
+                  style={[styles.button, styles.cancelButton]}
                   onPress={() => setModalVisible(!modalVisible)}
                 >
                   <Text style={styles.textStyle}>Cancel</Text>
@@ -150,12 +160,16 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    marginTop: 5,
   },
   buttonOpen: {
     backgroundColor: "#32cd32",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
+  },
+  cancelButton: {
+    backgroundColor: "red",
   },
   textStyle: {
     color: "white",
@@ -180,7 +194,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderWidth: 1,
     padding: 12,
-    width: "80%",
+    width: 250,
     borderRadius: 10,
     backgroundColor: "white",
     marginBottom: 16,
