@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
+  ABSENCE_USER,
   CREATE_OFFICIAL_LETTERS,
   CREATE_REIMBURSEMENT,
   FETCH_OFFICIAL_LETTERS_BY_USERID,
@@ -23,7 +24,7 @@ export const loginStaff = (credential, callback = () => {}) => {
         email: credential.email,
         password: credential.password,
       });
-      // console.log(data, "<<");
+      // console.log(data.access_token, "<<");
       if (data.access_token) {
         const access_token = data.access_token;
         await AsyncStorage.setItem("access_token", access_token);
@@ -72,7 +73,7 @@ export const createReimbursementSucess = (payload) => {
   };
 };
 export const createReimbursement = (credential) => {
-  console.log(credential, "<<cre");
+  // console.log(credential, "<<cre");
   return async (dispatch, getState) => {
     try {
       let { data } = await axios.post(
@@ -80,6 +81,7 @@ export const createReimbursement = (credential) => {
         {
           OfficialLetterId: credential.OfficialLetterId,
           description: credential.description,
+          category: credential.category,
           cost: credential.cost,
           image: credential.image,
         },
@@ -109,7 +111,7 @@ export const getUserdetails = (id) => {
           access_token: await AsyncStorage.getItem("access_token"),
         },
       });
-      console.log(data, "<<");
+      // console.log(data, "<<");
       dispatch(fetchUserdetailSuccess(data));
     } catch (err) {
       console.log(err);
@@ -131,7 +133,7 @@ export const allOfficialLetterByLoggedIn = () => {
           access_token: await AsyncStorage.getItem("access_token"),
         },
       });
-      console.log(data, "<<");
+      // console.log(data, "<<");
       dispatch(fetchOfficialLetterByLoggedInSuccess(data));
     } catch (err) {
       console.log(err);
@@ -143,5 +145,27 @@ export const fetchReimbursementByLoggedInSuccess = (payload) => {
   return {
     type: FETCH_REIMBURSEMENTS_BY_LETTERID,
     payload,
+  };
+};
+
+export const absenceSuccess = (payload) => {
+  return {
+    type: ABSENCE_USER,
+    payload,
+  };
+};
+export const userAbsence = () => {
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios.post(`${baseUrl}/locations`, {
+        headers: {
+          access_token: await AsyncStorage.getItem("access_token"),
+        },
+      });
+      console.log(access_token);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 };

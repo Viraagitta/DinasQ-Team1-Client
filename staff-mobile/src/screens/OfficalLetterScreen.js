@@ -13,8 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import OfficialLetterCard from "../components/OfficialLetterCard";
 import { allOfficialLetterByLoggedIn } from "../store/action";
+import FormLetters from "../components/FormLetters";
 
-const GenresScreen = ({ navigation }) => {
+const OfficialLetterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const officialLetters = useSelector((state) => state.letter.officialLetters);
@@ -44,17 +45,40 @@ const GenresScreen = ({ navigation }) => {
       </View>
 
       <View />
-      <FlatList
-        // numColumns={2}
-        data={officialLetters}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      <View>
+        <FormLetters />
+      </View>
+      {officialLetters.length !== 0 ? (
+        <FlatList
+          // numColumns={2}
+          data={officialLetters}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      ) : (
+        <View>
+          <Text
+            style={{
+              color: "black",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            You have not submitted any reimbursement
+          </Text>
+          <Image
+            style={styles.oops}
+            source={{
+              uri: "https://eperformance.bsn.go.id/assets/img/empty-data.png",
+            }}
+          />
+        </View>
+      )}
     </SafeAreaView>
   );
 };
 
-export default GenresScreen;
+export default OfficialLetterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -74,13 +98,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 40,
   },
-  bars: {
-    marginTop: 50,
-    marginBottom: 20,
-    marginLeft: 18,
-    width: 17,
-    height: 30,
-  },
+
   logo: {
     marginTop: 40,
     marginBottom: 20,

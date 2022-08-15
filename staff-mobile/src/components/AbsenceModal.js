@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { useDispatch } from "react-redux";
+import { userAbsence } from "../store/action";
 
-const AddNewLetters = () => {
+const AbsenceModal = () => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
+  const submitAbsence = () => {
+    dispatch(userAbsence());
+  };
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -16,22 +22,29 @@ const AddNewLetters = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>
+              Thank You! We Got Your Location!
+            </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                submitAbsence();
+              }}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Close</Text>
             </Pressable>
           </View>
         </View>
       </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
+      <View style={{ flexDirection: "row", marginLeft: 10 }}>
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.textStyle}>CLICK HERE TO ABSENCE</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -44,12 +57,12 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
-    margin: 20,
+    margin: 10,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 25,
     alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: "#008000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -64,7 +77,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "blue",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
@@ -80,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddNewLetters;
+export default AbsenceModal;

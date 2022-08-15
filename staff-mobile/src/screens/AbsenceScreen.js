@@ -5,25 +5,19 @@ import {
   Text,
   Image,
   StyleSheet,
-  FlatList,
   ScrollView,
   ImageBackground,
-  ActivityIndicator,
 } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
-// import AddNewLetters from "./AddNewLetters";
-// import ModalForm from "../components/ModalForm";
-import FormLetters from "../components/FormLetters";
-import FormReimbursement from "../components/FormReimburse";
-// import SelectedImage from "../components/SelectedImage";
-// import PickImage from "../components/PickImage";
-const HomeScreen = ({ navigation }) => {
+
+import AbsenceModal from "../components/AbsenceModal";
+import CityLocation from "../components/CityLocation";
+
+const AbsenceScreen = ({ navigation }) => {
   return (
-    // <View style={styles.container}>
     <SafeAreaView style={[styles.container]}>
-      {/* <StatusBar style={"dark"} /> */}
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <ImageBackground
@@ -57,10 +51,8 @@ const HomeScreen = ({ navigation }) => {
           WELCOME TO DINASQ
         </Text>
         <View style={{ marginTop: 40 }}>
-          <FormLetters />
-        </View>
-        <View style={{ marginTop: 20 }}>
-          <FormReimbursement />
+          <AbsenceModal />
+          <CityLocation />
         </View>
         {/* <PickImage /> */}
       </ScrollView>
@@ -81,7 +73,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-export default HomeScreen;
+export default AbsenceScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

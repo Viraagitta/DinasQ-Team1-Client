@@ -16,17 +16,13 @@ import { createReimbursement, getUserdetails } from "../store/action";
 import SelectedImage from "./SelectedImage";
 
 const FormReimbursement = () => {
-  // const detailUser = useSelector((state) => state.user.detailUser);
-  // console.log(detailUser, "<<<");
-  // useEffect(() => {
-  //   dispatch(getUserdetails(id));
-  // }, []);
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     OfficialLetterId: "",
     description: "",
+    category: "",
     cost: "",
     image: "",
   });
@@ -34,6 +30,7 @@ const FormReimbursement = () => {
     const getForm = {
       OfficialLetterId: form.OfficialLetterId,
       description: form.description,
+      category: form.category,
       cost: form.cost,
       image: form.image,
     };
@@ -80,12 +77,29 @@ const FormReimbursement = () => {
               />
               <TextInput
                 style={styles.input}
-                type="integer"
+                type="number"
                 name="cost"
                 placeholder="Cost"
                 onChangeText={(text) => handleChange(text, "cost")}
                 value={form.cost}
               />
+              <TextInput
+                style={styles.input}
+                type="text"
+                name="category"
+                placeholder="Category"
+                onChangeText={(text) => handleChange(text, "category")}
+                value={form.category}
+              />
+              <TextInput
+                style={styles.input}
+                type="text"
+                name="image"
+                placeholder="Image Url"
+                onChangeText={(text) => handleChange(text, "image")}
+                value={form.image}
+              />
+
               <SelectedImage />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
@@ -107,22 +121,12 @@ const FormReimbursement = () => {
             </View>
           </View>
         </Modal>
-        <View style={{ flexDirection: "row", marginLeft: 10 }}>
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.textStyle}>Create New Reimbursement</Text>
-          </Pressable>
-          {/* <View style={{ marginHorizontal: 10 }}>
-          <Pressable
+        <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
-          >
-          <Text style={styles.textStyle}>New Reimbursement</Text>
-          </Pressable>
-        </View> */}
-        </View>
+        >
+          <Text style={styles.textStyle}>Create New Reimbursement</Text>
+        </Pressable>
       </View>
     </ScrollView>
   );
@@ -133,7 +137,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
   },
   modalView: {
     margin: 10,
@@ -167,7 +170,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalText: {
-    marginBottom: 15,
+    // marginBottom: 15,
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
@@ -187,7 +190,7 @@ const styles = StyleSheet.create({
     width: "80%",
     borderRadius: 10,
     backgroundColor: "white",
-    marginBottom: 16,
+    // marginBottom: 16,
     marginTop: 16,
   },
 });

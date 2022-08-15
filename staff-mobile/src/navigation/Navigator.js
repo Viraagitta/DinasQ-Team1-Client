@@ -10,6 +10,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import CustomDrawer from "../components/CustomDrawer";
 import OfficialLetterScreen from "../screens/OfficalLetterScreen";
 import ReimbursementScreen from "../screens/ReimbursementScreen";
+import AbsenceScreen from "../screens/AbsenceScreen";
 const Drawer = createDrawerNavigator();
 
 function Main() {
@@ -57,6 +58,16 @@ function Main() {
           ),
         }}
       />
+      <Drawer.Screen
+        name="Absence"
+        textColor="white"
+        component={AbsenceScreen}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="location-outline" size={22} color={color} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }
@@ -94,6 +105,12 @@ export default function Navigator() {
           screenOptions={{ headerShown: false }}
           name="ReimbursementScreen"
           component={ReimbursementScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          screenOptions={{ headerShown: false }}
+          name="OfficialLetterScreen"
+          component={OfficialLetterScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
