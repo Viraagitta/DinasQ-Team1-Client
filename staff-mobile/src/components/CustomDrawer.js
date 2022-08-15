@@ -5,7 +5,6 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
-  Linking,
 } from "react-native";
 import {
   DrawerContentScrollView,

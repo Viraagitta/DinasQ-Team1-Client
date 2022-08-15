@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   Button,
+  Pressable,
 } from "react-native";
 // import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
@@ -57,14 +58,14 @@ const LoginScreen = () => {
         onChangeText={(text) => handleChange(text, "password")}
         value={form.password}
       />
-      <Button
-        title="submit"
+      <Pressable
+        // style={styles.button}
         onPress={(e) => {
           submitForm(e);
         }}
       >
         <Text style={styles.button}>LOGIN</Text>
-      </Button>
+      </Pressable>
     </ScrollView>
   );
 };
