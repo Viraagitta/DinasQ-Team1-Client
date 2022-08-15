@@ -5,14 +5,31 @@ import "react-medium-image-zoom/dist/styles.css";
 import { Controlled as ControlledZoom } from "react-medium-image-zoom";
 import { useCallback } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateStatusReimburse } from "../store/action/index";
 export default function ReimbursementTableRow({ reimburse, i }) {
+  const dispatch = useDispatch();
   const [isZoomed, setIsZoomed] = useState(false);
   const [isViewed, setViewed] = useState(false);
-  const [choice, setChoice] = useState();
+  const [choice, setChoice] = useState({
+    status: "",
+  });
 
   const handleZoomChange = useCallback((shouldZoom) => {
     setIsZoomed(shouldZoom);
   }, []);
+
+  const handleStatus = (e) => {
+    const { name, value } = e.target;
+
+    const getFrom = {
+      status: choice.status,
+    };
+    getFrom[name] = value;
+    setChoice(getFrom);
+    console.log(value, reimburse.id);
+    dispatch(updateStatusReimburse(value, reimburse.id));
+  };
 
   const options = ["pending", "approved", "rejected"];
   return (
@@ -38,12 +55,12 @@ export default function ReimbursementTableRow({ reimburse, i }) {
         </td>
         <td className="employees-details">
           <select
-            as="select"
-            value={choice}
-            onChange={(e) => {
-              // console.log("e.target.value", e.target.value);
-              setChoice(e.target.value);
-            }}
+            name="status"
+            id="status"
+            // value={choice.status}
+            className="status-reimburse"
+            onChange={handleStatus}
+            defaultValue={reimburse.status}
           >
             <option value="pending">pending</option>
             <option value="approved">approved</option>

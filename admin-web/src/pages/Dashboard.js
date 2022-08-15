@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllofficialLetters } from "../store/action";
+import User from "../assets/user.jpg";
 import OfficialLetterCard from "../components/OfficialLetterCard";
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function Dashboard() {
           </div>
 
           <div className="user">
-            <img src="" alt="user" />
+            <img src={User} alt="user" />
           </div>
         </div>
 
@@ -43,17 +44,50 @@ export default function Dashboard() {
           />
         </div>
 
-        <p className="title-list">List Official Letters</p>
-        <Link to="/officialletters">View All</Link>
-        <div className="cardBox">
-          {officialLetters.map((officialLetter) => {
-            return (
-              <OfficialLetterCard
-                key={officialLetter.id}
-                officialLetter={officialLetter}
-              />
-            );
-          })}
+        <div className="action-view-oletters">
+          <p className="title-list">List Official Letters</p>
+          <Link to="/officialletters" className="title-link">
+            View All
+          </Link>
+        </div>
+        <div className="column">
+          <div className="cardBox">
+            {officialLetters.slice(0, 3).map((officialLetter) => {
+              return (
+                <OfficialLetterCard
+                  key={officialLetter.id}
+                  officialLetter={officialLetter}
+                />
+              );
+            })}
+          </div>
+          <p className="title-sellers">Top Sellers</p>
+          <div className="cardBox">
+            <div className="card-bottom">
+              <div className="user">
+                <img src={User} alt="user" />
+              </div>
+              <div className="user">
+                <img src={User} alt="user" />
+              </div>
+              <div className="user">
+                <img src={User} alt="user" />
+              </div>
+              |<p>4.3700 product sold</p>
+            </div>
+            <div className="card-bottom">
+              <div className="user">
+                <img src={User} alt="user" />
+              </div>
+              <div className="user">
+                <img src={User} alt="user" />
+              </div>
+              <div className="user">
+                <img src={User} alt="user" />
+              </div>
+              |<p>4.3700 product sold</p>
+            </div>
+          </div>
         </div>
       </div>
     </>
