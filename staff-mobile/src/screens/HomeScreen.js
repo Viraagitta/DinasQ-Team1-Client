@@ -13,7 +13,12 @@ import {
 
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import AddNewLetters from "./AddNewLetters";
+// import AddNewLetters from "./AddNewLetters";
+// import ModalForm from "../components/ModalForm";
+import FormLetters from "../components/FormLetters";
+import FormReimbursement from "../components/FormReimburse";
+// import SelectedImage from "../components/SelectedImage";
+// import PickImage from "../components/PickImage";
 const HomeScreen = ({ navigation }) => {
   return (
     // <View style={styles.container}>
@@ -42,7 +47,9 @@ const HomeScreen = ({ navigation }) => {
           }}
         />
         <Text style={{ color: "black" }}>Reimbursement List</Text>
-        <AddNewLetters />
+        <FormLetters />
+        <FormReimbursement />
+        {/* <PickImage /> */}
       </ScrollView>
       <View style={{ flexDirection: "row" }}>
         <Ionicons
@@ -51,7 +58,6 @@ const HomeScreen = ({ navigation }) => {
           size={24}
           color="white"
         />
-
         <Image
           style={styles.footer}
           source={require("../assets/Logo-DinasQ2.jpeg")}
