@@ -27,9 +27,7 @@ const ReimbursementScreen = ({ navigation }) => {
     <SafeAreaView style={[styles.container]}>
       {/* <StatusBar style={"dark"} /> */}
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("OfficialLetterScreen")}
-        >
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <ImageBackground
             style={styles.bars}
             source={{

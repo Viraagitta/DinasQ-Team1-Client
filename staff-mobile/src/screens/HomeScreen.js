@@ -13,17 +13,14 @@ import {
 
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
-// import AddNewLetters from "./AddNewLetters";
-// import ModalForm from "../components/ModalForm";
+
 import FormLetters from "../components/FormLetters";
 import FormReimbursement from "../components/FormReimburse";
-// import SelectedImage from "../components/SelectedImage";
-// import PickImage from "../components/PickImage";
+import UpdatePassModal from "../components/UpdatePassModal";
+
 const HomeScreen = ({ navigation }) => {
   return (
-    // <View style={styles.container}>
     <SafeAreaView style={[styles.container]}>
-      {/* <StatusBar style={"dark"} /> */}
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <ImageBackground
