@@ -18,7 +18,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
-    email: "testing@gmail.com",
+    email: "testing3@gmail.com",
     password: "12345",
   });
   const handleChange = (text, name) => {
