@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import "./assets/Style.css";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ListEmployees from "./pages/ListEmployees";
@@ -15,7 +16,24 @@ import ReimbursementByLetterId from "./pages/ReimbursementByLetterId";
 import AddUserPage from "./pages/AddUserPage";
 import AuthNewUser from "./components/AuthNewUser";
 import AuthLogin from "./components/AuthLogin";
+import MessagePage from "./pages/MessagePage";
+import io from "socket.io-client";
 function App() {
+  const socket = io("http://localhost:3000", {
+    extraHeaders: {
+      access_token: localStorage.getItem("access_token"),
+    },
+  });
+  useEffect(() => {
+    socket.on("connect", () => {
+      // setIsConnected(true);
+      // console.log("test");
+    });
+
+    return () => {
+      socket.off("connect");
+    };
+  }, []);
   return (
     <>
       <SideBar />
@@ -50,6 +68,14 @@ function App() {
             <AuthUser>
               <ListEmployees />
             </AuthUser>
+          }
+        />
+        <Route
+          path="/users/:id"
+          element={
+            // <AuthUser>
+            <MessagePage />
+            // {/* </AuthUser> */}
           }
         />
         <Route

@@ -34,12 +34,12 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <ScrollView style={styles.scrollView}>
         <View style={styles.container} />
-        <Image
+        {/* <Image
           style={styles.banner}
           source={{
             uri: "https://st2.depositphotos.com/7865540/10657/i/950/depositphotos_106572130-stock-photo-gears-and-mechanisms-with-text.jpg",
           }}
-        />
+        /> */}
         <Text
           style={{
             color: "black",
@@ -58,18 +58,6 @@ const HomeScreen = ({ navigation }) => {
         </View>
         {/* <PickImage /> */}
       </ScrollView>
-      <View style={{ flexDirection: "row" }}>
-        <Ionicons
-          style={styles.footerBar}
-          name="home-outline"
-          size={24}
-          color="white"
-        />
-        <Image
-          style={styles.footer}
-          source={require("../assets/Logo-DinasQ2.jpeg")}
-        />
-      </View>
     </SafeAreaView>
   );
 };

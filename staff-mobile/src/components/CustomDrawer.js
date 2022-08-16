@@ -21,7 +21,7 @@ import { getUserDetail } from "../store/action";
 const CustomDrawer = (props) => {
   const navigation = useNavigation();
 
-  const toLogout = (e) => {
+  const toLogout = async (e) => {
     e.preventDefault();
     AsyncStorage.clear();
     navigation.navigate("LoginScreen");
@@ -40,9 +40,9 @@ const CustomDrawer = (props) => {
         contentContainerStyle={{ backgroundColor: "white" }}
       >
         <ImageBackground
-          source={{
-            uri: "https://img.freepik.com/premium-vector/online-registration-sign-up-user-interface-users-use-secure-login-password-user-interface_566886-1943.jpg?w=2000",
-          }}
+          // source={{
+          //   uri: "https://img.freepik.com/premium-vector/online-registration-sign-up-user-interface-users-use-secure-login-password-user-interface_566886-1943.jpg?w=2000",
+          // }}
           style={{ padding: 20 }}
         >
           <Image

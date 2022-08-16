@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function EmployeesTableRow({ employee, i }) {
   return (
     <>
@@ -6,7 +8,9 @@ export default function EmployeesTableRow({ employee, i }) {
           <input type="checkbox" name="checkUser" id="checkUser" />
         </td>
         <td className="employees-details">{i + 1}</td>
-        <td className="employees-details">{`${employee.firstName} ${employee.lastName}`}</td>
+        <Link to={`/users/${employee.id}`}>
+          <td className="employees-details">{`${employee.firstName} ${employee.lastName}`}</td>
+        </Link>
         <td className="employees-details">{employee.position}</td>
         <td className="employees-details">IT</td>
         <td className="employees-details">maguire@mail.com</td>

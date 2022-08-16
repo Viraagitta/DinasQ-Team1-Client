@@ -42,7 +42,6 @@ const OfficialLetterScreen = ({ navigation }) => {
           source={require("../assets/Logo-DinasQ2.jpeg")}
         />
       </View>
-
       <View />
       <View>
         <FormLetters />

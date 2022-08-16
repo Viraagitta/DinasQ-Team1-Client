@@ -12,6 +12,7 @@ import OfficialLetterScreen from "../screens/OfficalLetterScreen";
 import ReimbursementScreen from "../screens/ReimbursementScreen";
 import AbsenceScreen from "../screens/AbsenceScreen";
 import UserProfile from "../screens/UserProfile";
+import ChatMessage from "../screens/ChatMessage";
 
 const Drawer = createDrawerNavigator();
 
@@ -70,6 +71,16 @@ function Main() {
           ),
         }}
       />
+      {/* <Drawer.Screen
+        name="Chat"
+        textColor="white"
+        component={ChatMessage}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="location-outline" size={22} color={color} />
+          ),
+        }}
+      /> */}
     </Drawer.Navigator>
   );
 }
@@ -114,6 +125,12 @@ export default function Navigator() {
           component={OfficialLetterScreen}
           options={{ headerShown: false }}
         />
+        {/* <Stack.Screen
+          screenOptions={{ headerShown: false }}
+          name="ChatMessage"
+          component={ChatMessage}
+          options={{ headerShown: false }}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
