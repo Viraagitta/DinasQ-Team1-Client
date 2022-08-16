@@ -35,9 +35,24 @@ export default function EmployeesTableRow({ employee, i }) {
         <td className="employees-details">{employee.email}</td>
         <td className="employees-details">Full-time</td>
         <td>
-          <button onClick={(e) => handleDelete(e, employee.id)}>DELETE</button>
-          <button onClick={(e) => getDetails(e, employee.id)}>DETAILS</button>
-          <button onClick={(e) => editUser(e, employee.id)}>EDIT</button>
+          <button
+            onClick={(e) => handleDelete(e, employee.id)}
+            className="btn-delete"
+          >
+            DELETE
+          </button>
+          <button
+            onClick={(e) => getDetails(e, employee.id)}
+            className="btn-details"
+          >
+            DETAILS
+          </button>
+          <button
+            onClick={(e) => editUser(e, employee.id)}
+            className="btn-update"
+          >
+            UPDATE
+          </button>
         </td>
       </tr>
     </>

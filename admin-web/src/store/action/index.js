@@ -9,8 +9,11 @@ import {
   DETAILS_USER,
   EDIT_USER,
   UPDATE_STATUS_REIMBURSE,
+  GET_PDF_REIMBURSEMENTS,
+  USER_LOCATION,
 } from "./actionType";
 import axios from "axios";
+import fileDownload from "js-file-downloader";
 import Swal from "sweetalert2";
 const baseUrl = "http://localhost:3000";
 export const loginSuccess = (payload) => {
@@ -131,7 +134,6 @@ export const fetchAllofficialLetters = () => {
         },
         params: { page: getState, size: 10 },
       });
-      // console.log(data, "<<");
       dispatch(fetchListofficialLettersSuccess(data.response.rows));
     } catch (err) {
       console.error(err);
@@ -243,13 +245,14 @@ export const updateStatusReimburseSuccess = (payload) => {
     payload,
   };
 };
-export const updateStatusReimburse = (form, id) => {
+export const updateStatusReimburse = (form, id, target) => {
   return async (dispatch, getState) => {
     try {
       const { data } = await axios.patch(
         `${baseUrl}/reimbursements/${id}`,
         {
           status: form,
+          email: target[0].email,
         },
         {
           headers: {
@@ -258,6 +261,59 @@ export const updateStatusReimburse = (form, id) => {
         }
       );
       dispatch(fetchAllReimbursement());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getPdfSuccess = (payload) => {
+  return {
+    type: GET_PDF_REIMBURSEMENTS,
+    payload,
+  };
+};
+export const getPdfReimburse = (id) => {
+  return (dispatch, getState) => {
+    axios
+      .get(
+        `${baseUrl}/reimbursements/pdf/${id}`,
+        {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        },
+        {
+          responseType: "blob",
+        }
+      )
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const Link = document.createElement("a");
+        Link.href = url;
+        Link.setAttribute("download", "file.pdf");
+        document.body.appendChild(Link);
+        Link.click();
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const getLocationUserSuccess = (payload) => {
+  return {
+    type: USER_LOCATION,
+    payload,
+  };
+};
+export const getLocationUser = (id) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios.get(`${baseUrl}/locations`, {
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      });
+      dispatch(getLocationUserSuccess(data));
     } catch (error) {
       console.log(error);
     }

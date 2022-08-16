@@ -4,9 +4,15 @@ import {
   LOGIN_USER,
   DELETE_USER,
   DETAILS_USER,
+  USER_LOCATION,
 } from "../action/actionType";
 
-const initialState = { employees: [], users: [], details: [] };
+const initialState = {
+  employees: [],
+  users: [],
+  details: [],
+  locationUser: [],
+};
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -19,8 +25,9 @@ function userReducer(state = initialState, action) {
     case DELETE_USER:
       return { ...state, users: action.payload };
     case DETAILS_USER:
-      console.log("kepanggil");
       return { ...state, details: action.payload };
+    case USER_LOCATION:
+      return { ...state, locationUser: action.payload };
     default:
       return state;
   }

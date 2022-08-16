@@ -28,28 +28,10 @@ export default function ListEmployees() {
             </label>
           </div>
           <div className="list-action">
-            <div className="action">
-              <ion-icon name="pencil-outline" className="icon"></ion-icon>
-              <p className="title">Edit</p>
-            </div>
-            <div className="action">
-              <ion-icon name="trash-outline" className="icon"></ion-icon>
-              <p className="title">Delete</p>
-            </div>
             <Link to="/newUser" className="action">
               <ion-icon name="person-add-outline" class="icon"></ion-icon>
-              <p className="title">add</p>
+              {/* <p className="title">add</p> */}
             </Link>
-            <select
-              name="filterEmployees"
-              id="filterEmployeed"
-              className="filter-employees"
-            >
-              <option value="" selected disabled>
-                Position
-              </option>
-              <option value="">tes2</option>
-            </select>
           </div>
           <table className="list-employees">
             <thead className="heading-table-employees">

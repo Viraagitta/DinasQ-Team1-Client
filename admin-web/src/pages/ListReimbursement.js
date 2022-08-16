@@ -26,7 +26,7 @@ export default function ListReimbursement() {
       SetLocalReimburse(reimbursements);
     }
   }, [Category]);
-  console.log(LocalReimburse, "<<<");
+  console.log(LocalReimburse);
   return (
     <>
       {reimbursements.length ? (
@@ -44,14 +44,6 @@ export default function ListReimbursement() {
             </label>
           </div>
           <div className="list-action">
-            <div className="action">
-              <ion-icon name="pencil-outline" className="icon"></ion-icon>
-              <p className="title">Edit</p>
-            </div>
-            <div className="action">
-              <ion-icon name="trash-outline" className="icon"></ion-icon>
-              <p className="title">Delete</p>
-            </div>
             <form>
               <select
                 name="filterEmployees"
@@ -82,6 +74,7 @@ export default function ListReimbursement() {
                 <th>Receipt / Bill</th>
                 <th>Status</th>
                 <th>Updated By</th>
+                <th>Document</th>
               </tr>
             </thead>
             <tbody>

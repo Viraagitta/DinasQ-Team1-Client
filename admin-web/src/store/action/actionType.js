@@ -9,3 +9,5 @@ export const DELETE_USER = "delete/employees";
 export const DETAILS_USER = "user/details";
 export const EDIT_USER = "user/edit";
 export const UPDATE_STATUS_REIMBURSE = "reimburseStatus/update";
+export const GET_PDF_REIMBURSEMENTS = "pdf/getReimbursements";
+export const USER_LOCATION = "location/user";

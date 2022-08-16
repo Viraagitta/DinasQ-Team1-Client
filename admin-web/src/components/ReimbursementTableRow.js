@@ -3,10 +3,16 @@
 // import InnerImageZoom from "react-inner-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { Controlled as ControlledZoom } from "react-medium-image-zoom";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateStatusReimburse } from "../store/action/index";
+import {
+  fetchEmployees,
+  detailsUser,
+  allReimbursementByOfficialLetterId,
+  getPdfReimburse,
+} from "../store/action/index";
 export default function ReimbursementTableRow({ reimburse, i }) {
   const dispatch = useDispatch();
   const [isZoomed, setIsZoomed] = useState(false);
@@ -14,11 +20,13 @@ export default function ReimbursementTableRow({ reimburse, i }) {
   const [choice, setChoice] = useState({
     status: "",
   });
-
+  const users = useSelector((state) => state.user.employees);
+  const officialLetters = useSelector(
+    (state) => state.letter.reimbursementByOfficalLetterId
+  );
   const handleZoomChange = useCallback((shouldZoom) => {
     setIsZoomed(shouldZoom);
   }, []);
-
   const handleStatus = (e) => {
     const { name, value } = e.target;
 
@@ -27,10 +35,21 @@ export default function ReimbursementTableRow({ reimburse, i }) {
     };
     getFrom[name] = value;
     setChoice(getFrom);
-    console.log(value, reimburse.id);
-    dispatch(updateStatusReimburse(value, reimburse.id));
+    const getFilter = users.filter(
+      (elements) => elements.id === officialLetters.UserId
+    );
+    dispatch(updateStatusReimburse(value, reimburse.id, getFilter));
   };
 
+  const getPdf = (e, id) => {
+    e.preventDefault();
+    console.log("halo");
+    dispatch(getPdfReimburse(id));
+  };
+  useEffect(() => {
+    dispatch(fetchEmployees());
+    dispatch(allReimbursementByOfficialLetterId(reimburse.OfficialLetterId));
+  }, []);
   const options = ["pending", "approved", "rejected"];
   return (
     <>
@@ -68,6 +87,14 @@ export default function ReimbursementTableRow({ reimburse, i }) {
           </select>
         </td>
         <td className="employees-details">{reimburse.updatedBy}</td>
+        <td>
+          <button
+            onClick={(e) => getPdf(e, reimburse.id)}
+            className="btn-update"
+          >
+            GET DOCUMENT
+          </button>
+        </td>
       </tr>
     </>
   );
