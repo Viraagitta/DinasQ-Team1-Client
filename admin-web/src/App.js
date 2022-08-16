@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import { useEffect } from "react";
-// import "./assets/Script";
+import "./assets/Style.css";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ListEmployees from "./pages/ListEmployees";
@@ -18,7 +18,7 @@ import UpdateUserPage from "./pages/UpdateUserPage";
 import DetailsUser from "./pages/DetailsUser";
 import AuthNewUser from "./components/AuthNewUser";
 import AuthLogin from "./components/AuthLogin";
-import MessagePage from "./pages/MessagePage";
+// import MessagePage from "./pages/MessagePage";
 import io from "socket.io-client";
 function App() {
   const socket = io("http://localhost:3000", {
@@ -72,14 +72,14 @@ function App() {
             </AuthUser>
           }
         />
-        <Route
+        {/* <Route
           path="/users/:id"
           element={
-            // <AuthUser>
+            <AuthUser>
             <MessagePage />
-            // {/* </AuthUser> */}
+           </AuthUser>
           }
-        />
+        /> */}
         <Route
           path="/reimbursements"
           element={
