@@ -3,17 +3,53 @@
 // import InnerImageZoom from "react-inner-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { Controlled as ControlledZoom } from "react-medium-image-zoom";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateStatusReimburse } from "../store/action/index";
+import {
+  fetchEmployees,
+  detailsUser,
+  allReimbursementByOfficialLetterId,
+  getPdfReimburse,
+} from "../store/action/index";
 export default function ReimbursementTableRow({ reimburse, i }) {
+  const dispatch = useDispatch();
   const [isZoomed, setIsZoomed] = useState(false);
   const [isViewed, setViewed] = useState(false);
-  const [choice, setChoice] = useState();
-
+  const [choice, setChoice] = useState({
+    status: "",
+  });
+  const users = useSelector((state) => state.user.employees);
+  const officialLetters = useSelector(
+    (state) => state.letter.reimbursementByOfficalLetterId
+  );
   const handleZoomChange = useCallback((shouldZoom) => {
     setIsZoomed(shouldZoom);
   }, []);
+  const handleStatus = (e) => {
+    const { name, value } = e.target;
 
+    const getFrom = {
+      status: choice.status,
+    };
+    getFrom[name] = value;
+    setChoice(getFrom);
+    const getFilter = users.filter(
+      (elements) => elements.id === officialLetters.UserId
+    );
+    dispatch(updateStatusReimburse(value, reimburse.id, getFilter));
+  };
+
+  const getPdf = (e, id) => {
+    e.preventDefault();
+    console.log("halo");
+    dispatch(getPdfReimburse(id));
+  };
+  useEffect(() => {
+    dispatch(fetchEmployees());
+    dispatch(allReimbursementByOfficialLetterId(reimburse.OfficialLetterId));
+  }, []);
   const options = ["pending", "approved", "rejected"];
   return (
     <>
@@ -38,12 +74,12 @@ export default function ReimbursementTableRow({ reimburse, i }) {
         </td>
         <td className="employees-details">
           <select
-            as="select"
-            value={choice}
-            onChange={(e) => {
-              // console.log("e.target.value", e.target.value);
-              setChoice(e.target.value);
-            }}
+            name="status"
+            id="status"
+            // value={choice.status}
+            className="status-reimburse"
+            onChange={handleStatus}
+            defaultValue={reimburse.status}
           >
             <option value="pending">pending</option>
             <option value="approved">approved</option>
@@ -51,6 +87,14 @@ export default function ReimbursementTableRow({ reimburse, i }) {
           </select>
         </td>
         <td className="employees-details">{reimburse.updatedBy}</td>
+        <td>
+          <button
+            onClick={(e) => getPdf(e, reimburse.id)}
+            className="btn-update"
+          >
+            GET DOCUMENT
+          </button>
+        </td>
       </tr>
     </>
   );

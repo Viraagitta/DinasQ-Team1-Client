@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import "./assets/Style.css";
+// import "./assets/Script";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ListEmployees from "./pages/ListEmployees";
@@ -13,6 +14,8 @@ import AuthReimburse from "./components/AuthReimburse";
 import AuthLetter from "./components/AuthLetter";
 import ReimbursementByLetterId from "./pages/ReimbursementByLetterId";
 import AddUserPage from "./pages/AddUserPage";
+import UpdateUserPage from "./pages/UpdateUserPage";
+import DetailsUser from "./pages/DetailsUser";
 import AuthNewUser from "./components/AuthNewUser";
 import AuthLogin from "./components/AuthLogin";
 function App() {
@@ -77,6 +80,8 @@ function App() {
             // </AuthReimburse>
           }
         />
+        <Route path="/updateUser/:id" element={<UpdateUserPage />} />
+        <Route path="/user/:id" element={<DetailsUser />} />
       </Routes>
     </>
   );

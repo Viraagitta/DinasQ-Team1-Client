@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllofficialLetters } from "../store/action";
+import { fetchAllofficialLetters, getLocationUser } from "../store/action";
+import User from "../assets/user.jpg";
 import OfficialLetterCard from "../components/OfficialLetterCard";
 export default function Dashboard() {
   const dispatch = useDispatch();
   const officialLetters = useSelector((state) => state.letter.officialLetters);
-  // console.log(officialLetters, "<dari list");
+  const recentLocations = useSelector((state) => state.user.locationUser);
+
+  console.log(recentLocations, "><>");
   useEffect(() => {
     dispatch(fetchAllofficialLetters());
+    dispatch(getLocationUser());
   }, []);
   return (
     <>
@@ -26,34 +30,97 @@ export default function Dashboard() {
           </div>
 
           <div className="user">
-            <img src="" alt="user" />
+            <img src={User} alt="user" />
           </div>
         </div>
 
-        <div className="img-dashboard">
-          <img
-            className="img-finance"
-            src="https://img.freepik.com/premium-photo/businessman-protection-money-table-with-tree_34152-1752.jpg?w=996"
-            alt="img-finance"
-          />
-          <img
-            className="img-finance2"
-            src="https://img.freepik.com/free-photo/stacks-coins-arranged-bar-graph_35913-2518.jpg?w=1060&t=st=1660291565~exp=1660292165~hmac=a9a9f281d74f16b851f775ab28fe6b4a10b5be955bb0cf17b4f61e13da01377b"
-            alt="img-finance2"
-          />
+        <div class="cardBox">
+          <Link to="/reimbursements" class="card">
+            <div>
+              <div class="numbers">504</div>
+              <div class="cardName">Reimbursements</div>
+            </div>
+            <div class="iconBox">
+              <ion-icon name="cash-outline"></ion-icon>
+            </div>
+          </Link>
+          <Link to="/employees" class="card">
+            <div>
+              <div class="numbers">80</div>
+              <div class="cardName">Employees</div>
+            </div>
+            <div class="iconBox">
+              <ion-icon name="people-outline"></ion-icon>
+            </div>
+          </Link>
+          <Link to="/newUser" class="card">
+            <div>
+              <div class="numbers">+</div>
+              <div class="cardName">Add Employees</div>
+            </div>
+            <div class="iconBox">
+              <ion-icon name="person-add-outline"></ion-icon>
+            </div>
+          </Link>
+          <Link to="/officialletters" class="card">
+            <div>
+              <div class="numbers">842</div>
+              <div class="cardName">Official Letters</div>
+            </div>
+            <div class="iconBox">
+              <ion-icon name="newspaper-outline"></ion-icon>
+            </div>
+          </Link>
         </div>
-
-        <p className="title-list">List Official Letters</p>
-        <Link to="/officialletters">View All</Link>
-        <div className="cardBox">
-          {officialLetters.map((officialLetter) => {
-            return (
-              <OfficialLetterCard
-                key={officialLetter.id}
-                officialLetter={officialLetter}
-              />
-            );
-          })}
+        <div className="details">
+          <div class="listOfficialLetters">
+            <div class="cardHeader">
+              <h2>List Official letters</h2>
+              <Link to="/officialletters" class="btn">
+                View All
+              </Link>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Activity Name</th>
+                  <th>leaveDate</th>
+                  <th>returnDate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {officialLetters.map((officialLetter) => {
+                  return (
+                    <OfficialLetterCard
+                      key={officialLetter.id}
+                      officialLetter={officialLetter}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div class="recentLocations">
+            <div class="cardHeader">
+              <h2>Recent Location</h2>
+            </div>
+            <table>
+              <tr>
+                <td width="60px">
+                  <div class="user">
+                    <img src={User} alt="" />
+                  </div>
+                </td>
+                <td>
+                  <h4>
+                    Harry<span> Maguire</span>
+                  </h4>
+                </td>
+                <td>Kota Jakarta Pusat</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </>
