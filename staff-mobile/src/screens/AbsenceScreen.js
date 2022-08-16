@@ -12,7 +12,6 @@ import {
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import AbsenceModal from "../components/AbsenceModal";
 import CityLocation from "../components/CityLocation";
 
 const AbsenceScreen = ({ navigation }) => {
@@ -48,10 +47,9 @@ const AbsenceScreen = ({ navigation }) => {
             fontSize: 30,
           }}
         >
-          WELCOME TO DINASQ
+          ABSENCE
         </Text>
         <View style={{ marginTop: 40 }}>
-          <AbsenceModal />
           <CityLocation />
         </View>
         {/* <PickImage /> */}

@@ -9,33 +9,17 @@ import {
   UPDATE_PASSWORD,
 } from "./actionType";
 import axios from "axios";
-const baseUrl = "http://localhost:3000";
+import { useSelector } from "react-redux";
+const baseUrl = "http://192.168.100.13:3000";
+
+// const baseUrl = "http://localhost:3000";
+
 export const loginSuccess = (payload) => {
   return {
     type: LOGIN_STAFF,
     payload,
   };
 };
-
-// export const loginStaff = (credential, callback = () => {}) => {
-//   // console.log(credential, "<<<");
-//   return async (dispatch, getState) => {
-//     try {
-//       let { data } = await axios.post(`${baseUrl}/login-all`, {
-//         email: credential.email,
-//         password: credential.password,
-//       });
-//       // console.log(data.access_token, "<<");
-//       if (data.access_token) {
-//         const access_token = data.access_token;
-//         await AsyncStorage.setItem("access_token", access_token);
-//         callback();
-//       }
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-// };
 
 export const loginStaff = (credential) => {
   return (dispatch, getState) => {
@@ -142,12 +126,12 @@ export const fetchOfficialLetterByLoggedInSuccess = (payload) => {
 export const allOfficialLetterByLoggedIn = () => {
   return async (dispatch, getState) => {
     try {
+      // console.log(await AsyncStorage.getItem("access_token"));
       let { data } = await axios.get(`${baseUrl}/logged-in-letter`, {
         headers: {
           access_token: await AsyncStorage.getItem("access_token"),
         },
       });
-      // console.log(data, "<<");
       dispatch(fetchOfficialLetterByLoggedInSuccess(data));
     } catch (err) {
       console.log(err);
@@ -168,16 +152,24 @@ export const absenceSuccess = (payload) => {
     payload,
   };
 };
-export const userAbsence = () => {
+export const userAbsence = (credential) => {
+  console.log(credential, "<<<user");
   return async (dispatch, getState) => {
     try {
-      let { data } = await axios.post(`${baseUrl}/locations`, {
-        headers: {
-          access_token: await AsyncStorage.getItem("access_token"),
+      let { data } = await axios.post(
+        `${baseUrl}/locations`,
+        {
+          latitude: credential.latitude,
+          longitude: credential.longitude,
+          cityName: credential.cityName,
         },
-      });
-      console.log(access_token);
-      console.log(data);
+        {
+          headers: {
+            access_token: await AsyncStorage.getItem("access_token"),
+          },
+        }
+      );
+      // console.log(data);
     } catch (err) {
       console.log(err);
     }
