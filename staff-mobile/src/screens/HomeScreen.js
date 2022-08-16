@@ -5,10 +5,8 @@ import {
   Text,
   Image,
   StyleSheet,
-  FlatList,
   ScrollView,
   ImageBackground,
-  ActivityIndicator,
 } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
@@ -16,8 +14,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import FormLetters from "../components/FormLetters";
 import FormReimbursement from "../components/FormReimburse";
-import UpdatePassModal from "../components/UpdatePassModal";
-import Dropdown from "../components/Dropdown";
 
 const HomeScreen = ({ navigation }) => {
   return (
@@ -41,7 +37,7 @@ const HomeScreen = ({ navigation }) => {
         <Image
           style={styles.banner}
           source={{
-            uri: "https://img.freepik.com/premium-photo/businessman-protection-money-table-with-tree_34152-1752.jpg?w=996",
+            uri: "https://st2.depositphotos.com/7865540/10657/i/950/depositphotos_106572130-stock-photo-gears-and-mechanisms-with-text.jpg",
           }}
         />
         <Text
@@ -75,7 +71,6 @@ const HomeScreen = ({ navigation }) => {
         />
       </View>
     </SafeAreaView>
-    // </View>
   );
 };
 
@@ -111,7 +106,7 @@ const styles = StyleSheet.create({
   banner: {
     marginBottom: 20,
     // marginLeft: 20,
-    width: 400,
+    width: 350,
     height: 200,
   },
   bars: {

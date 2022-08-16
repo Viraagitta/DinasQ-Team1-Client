@@ -53,7 +53,7 @@ export default function CityLocation() {
       }
     })();
   }, [getLocation]);
-  console.log(location.longitude, "<<loc");
+  // console.log(location.longitude, "<<loc");
   const submitAbsence = (e) => {
     navigation.navigate("Main");
     e.preventDefault();
@@ -68,13 +68,6 @@ export default function CityLocation() {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.big}>
-        {!location
-          ? "Waiting"
-          : `Lat: ${location.latitude} \nLong: ${
-              location.longitude
-            } \n${JSON.stringify(address?.["subregion"])}`}
-      </Text> */}
       <TouchableOpacity onPress={() => setGetLocation(!getLocation)}>
         <View style={styles.centeredView}>
           <Modal
@@ -166,10 +159,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    marginTop: 20,
+    marginTop: 10,
   },
   buttonOpen: {
-    backgroundColor: "blue",
+    backgroundColor: "crimson",
   },
   buttonClose: {
     backgroundColor: "#2196F3",

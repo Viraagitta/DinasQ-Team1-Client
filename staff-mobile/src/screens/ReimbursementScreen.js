@@ -18,7 +18,7 @@ const ReimbursementScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const reimbursements = useSelector((state) => state.reimburse.reimbursements);
-
+  console.log(reimbursements);
   const renderItem = ({ item }) => {
     return <ReimbursementCard reimburse={item} />;
   };

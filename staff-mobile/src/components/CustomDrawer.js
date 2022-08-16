@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -15,6 +15,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import UpdatePassModal from "./UpdatePassModal";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserDetail } from "../store/action";
 
 const CustomDrawer = (props) => {
   const navigation = useNavigation();
@@ -24,17 +26,22 @@ const CustomDrawer = (props) => {
     AsyncStorage.clear();
     navigation.navigate("LoginScreen");
   };
+  const dispatch = useDispatch();
 
+  const detailUser = useSelector((state) => state.user.detailUser);
+  useEffect(() => {
+    dispatch(getUserDetail());
+  }, []);
+  // console.log(detailUser);
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView
         {...props}
         contentContainerStyle={{ backgroundColor: "white" }}
       >
-        {/* https://hotelska.com/wp-content/uploads/2020/03/2.png */}
         <ImageBackground
           source={{
-            uri: "https://img.freepik.com/free-photo/stacks-coins-arranged-bar-graph_35913-2518.jpg?w=1060&t=st=1660291565~exp=1660292165~hmac=a9a9f281d74f16b851f775ab28fe6b4a10b5be955bb0cf17b4f61e13da01377b",
+            uri: "https://img.freepik.com/premium-vector/online-registration-sign-up-user-interface-users-use-secure-login-password-user-interface_566886-1943.jpg?w=2000",
           }}
           style={{ padding: 20 }}
         >
@@ -50,12 +57,14 @@ const CustomDrawer = (props) => {
           />
           <Text
             style={{
-              color: "white",
-              fontSize: 30,
+              color: "black",
+              fontSize: 20,
               fontWeight: "bold",
               textAlign: "center",
             }}
-          ></Text>
+          >
+            {`${detailUser.firstName} ${detailUser.lastName} \n ${detailUser.position}`}
+          </Text>
         </ImageBackground>
         <View style={{ flex: 1, backgroundColor: "white", paddingTop: 10 }}>
           <DrawerItemList {...props} />

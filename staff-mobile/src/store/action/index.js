@@ -5,11 +5,12 @@ import {
   CREATE_REIMBURSEMENT,
   FETCH_OFFICIAL_LETTERS_BY_USERID,
   FETCH_REIMBURSEMENTS_BY_LETTERID,
+  FETCH_USER_DETAIL,
   LOGIN_STAFF,
   UPDATE_PASSWORD,
 } from "./actionType";
 import axios from "axios";
-import { useSelector } from "react-redux";
+
 const baseUrl = "http://192.168.100.13:3000";
 
 // const baseUrl = "http://localhost:3000";
@@ -28,7 +29,7 @@ export const loginStaff = (credential) => {
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(credential)
+      body: JSON.stringify(credential),
     });
   };
 };
@@ -197,6 +198,28 @@ export const updatePassword = (credential) => {
           },
         }
       );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchUserDetailSuccess = (payload) => {
+  return {
+    type: FETCH_USER_DETAIL,
+    payload,
+  };
+};
+export const getUserDetail = () => {
+  return async (dispatch, getState) => {
+    try {
+      // console.log(await AsyncStorage.getItem("access_token"));
+      let { data } = await axios.get(`${baseUrl}/logged-in-user`, {
+        headers: {
+          access_token: await AsyncStorage.getItem("access_token"),
+        },
+      });
+      dispatch(fetchUserDetailSuccess(data));
     } catch (err) {
       console.log(err);
     }

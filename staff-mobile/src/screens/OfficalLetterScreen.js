@@ -28,7 +28,6 @@ const OfficialLetterScreen = ({ navigation }) => {
   };
   return (
     <SafeAreaView style={[styles.container]}>
-      {/* <StatusBar style={"dark"} /> */}
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <ImageBackground
@@ -50,7 +49,6 @@ const OfficialLetterScreen = ({ navigation }) => {
       </View>
       {officialLetters.length !== 0 ? (
         <FlatList
-          // numColumns={2}
           data={officialLetters}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
@@ -83,11 +81,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    // flexDirection: "row",
   },
   scrollView: {
-    // textColor: "white",
-    // flexDirection: 'row',
     paddingTop: StatusBar.currentHeight,
     marginHorizontal: 20,
   },

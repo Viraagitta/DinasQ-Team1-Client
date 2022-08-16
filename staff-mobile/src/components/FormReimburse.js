@@ -135,7 +135,6 @@ const FormReimbursement = () => {
                 onChangeText={(text) => handleChange(text, "image")}
                 value={form.image}
               />
-
               <SelectedImage />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
