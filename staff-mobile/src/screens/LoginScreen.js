@@ -10,6 +10,7 @@ import {
   Button,
   Pressable,
 } from "react-native";
+import { useEffect } from "react";
 // import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { loginStaff } from "../store/action";
@@ -49,6 +50,12 @@ const LoginScreen = () => {
         console.error(err);
       });
   };
+  const token = AsyncStorage.getItem("access_token")
+  useEffect(() => {
+    if (token) {
+      navigation.navigate("Main")
+    }
+  }, [token])
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image style={styles.image} source={require("../assets/D.png")} />
