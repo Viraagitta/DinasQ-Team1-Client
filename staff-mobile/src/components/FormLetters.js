@@ -1,15 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-  Image,
-  Button,
-} from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
 import { createOfficialLetter } from "../store/action";

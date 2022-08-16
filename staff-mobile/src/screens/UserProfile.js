@@ -12,9 +12,18 @@ import {
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import CityLocation from "../components/CityLocation";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserDetail } from "../store/action";
+import { useEffect } from "react";
 
-const AbsenceScreen = ({ navigation }) => {
+const UserProfile = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const detailUser = useSelector((state) => state.user.detailUser);
+  useEffect(() => {
+    dispatch(getUserDetail());
+  }, []);
+  console.log(detailUser);
   return (
     <SafeAreaView style={[styles.container]}>
       <View style={{ flexDirection: "row" }}>
@@ -36,7 +45,7 @@ const AbsenceScreen = ({ navigation }) => {
         <Image
           style={styles.banner}
           source={{
-            uri: "https://i.pinimg.com/originals/20/d8/73/20d8733b97d44108a7c4cc40564dff71.gif",
+            uri: "https://us.123rf.com/450wm/arhimicrostok/arhimicrostok1707/arhimicrostok170703657/81645393-connection-mark-user-sign-icon-person-symbol-human-avatar-flat-style-.jpg",
           }}
         />
         <Text
@@ -47,11 +56,39 @@ const AbsenceScreen = ({ navigation }) => {
             fontSize: 30,
           }}
         >
-          ABSENCE
+          {`${detailUser.firstName} ${detailUser.lastName} \n ${detailUser.position}`}
         </Text>
-        <View style={{ marginTop: 40 }}>
-          <CityLocation />
-        </View>
+        <Text
+          style={{
+            color: "black",
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: 20,
+            marginTop: 20,
+          }}
+        >
+          Email : {detailUser.email}
+        </Text>
+        <Text
+          style={{
+            color: "black",
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: 20,
+          }}
+        >
+          Phone Number : {detailUser.phoneNumber}
+        </Text>
+        <Text
+          style={{
+            color: "black",
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: 20,
+          }}
+        >
+          Address : {detailUser.address}
+        </Text>
       </ScrollView>
       <View style={{ flexDirection: "row" }}>
         <Ionicons
@@ -69,7 +106,7 @@ const AbsenceScreen = ({ navigation }) => {
   );
 };
 
-export default AbsenceScreen;
+export default UserProfile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -102,8 +139,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignSelf: "center",
     // marginLeft: 20,
-    width: 320,
-    height: 200,
+    width: 250,
+    height: 220,
   },
   bars: {
     marginTop: 50,

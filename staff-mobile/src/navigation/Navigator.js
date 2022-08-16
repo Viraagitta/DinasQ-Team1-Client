@@ -11,6 +11,8 @@ import CustomDrawer from "../components/CustomDrawer";
 import OfficialLetterScreen from "../screens/OfficalLetterScreen";
 import ReimbursementScreen from "../screens/ReimbursementScreen";
 import AbsenceScreen from "../screens/AbsenceScreen";
+import UserProfile from "../screens/UserProfile";
+
 const Drawer = createDrawerNavigator();
 
 function Main() {
@@ -39,19 +41,19 @@ function Main() {
         }}
       />
       <Drawer.Screen
-        name=" My Official Letters"
+        name="My Profile"
         textColor="white"
-        component={OfficialLetterScreen}
+        component={UserProfile}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="document-text-outline" size={22} color={color} />
+            <Ionicons name="person-circle-outline" size={22} color={color} />
           ),
         }}
       />
       <Drawer.Screen
-        name="My Reimbursements"
+        name="My Official Letters"
         textColor="white"
-        component={ReimbursementScreen}
+        component={OfficialLetterScreen}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="document-attach-outline" size={22} color={color} />
@@ -75,7 +77,6 @@ function Main() {
 export default function Navigator() {
   const Stack = createNativeStackNavigator();
   return (
-    // <TailwindProvider utilities={utilities}>
     <NavigationContainer>
       <StatusBar style={"auto"} />
       <Stack.Navigator
@@ -115,7 +116,6 @@ export default function Navigator() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-    // </TailwindProvider>
   );
 }
 const styles = StyleSheet.create({
@@ -125,8 +125,6 @@ const styles = StyleSheet.create({
     textColor: "black",
   },
   scrollView: {
-    // textColor: "white",
-    // flexDirection: 'row',
     paddingTop: StatusBar.currentHeight,
     marginHorizontal: 20,
   },

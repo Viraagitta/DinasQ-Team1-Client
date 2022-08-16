@@ -4,11 +4,10 @@ import { useNavigation } from "@react-navigation/native";
 import { fetchReimbursementByLoggedInSuccess } from "../store/action";
 import { useDispatch } from "react-redux";
 
-export default function GenreCard({ letters }) {
-  // console.log(genres.name);
-  const renderItem = ({ item }) => {
-    return <Reimbursement reimburse={item} />;
-  };
+export default function OfficialLetterCard({ letters }) {
+  // const renderItem = ({ item }) => {
+  //   return <Reimbursement reimburse={item} />;
+  // };
   const navigation = useNavigation();
   const dispatch = useDispatch();
 

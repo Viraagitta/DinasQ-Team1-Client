@@ -93,9 +93,6 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundImage:
-    //   "https://media.istockphoto.com/vectors/online-booking-banner-online-flight-booking-travel-agent-stands-at-vector-id682602594?k=20&m=682602594&s=170667a&w=0&h=1uzxEBPuY81fs_4ZNNyZXZXwlq1zXuM2wTS5wHLOiXE=",
-    // backgroundColor: "#465881",
     backgroundColor: "#7ed957",
     alignItems: "center",
     justifyContent: "center",
@@ -127,7 +124,7 @@ const styles = StyleSheet.create({
   image: {
     width: 140,
     height: 140,
-    borderColor: "orange",
+    borderColor: "blue",
     borderWidth: 2,
     borderRadius: 89,
   },
