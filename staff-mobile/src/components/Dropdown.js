@@ -6,6 +6,18 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
 
 export default function Dropdown() {
+  const [form, setForm] = useState({
+    category: "",
+  });
+  const handleChange = (text, name) => {
+    const getForm = {
+      category: form.category,
+    };
+
+    getForm[name] = text;
+    setForm(getForm);
+  };
+
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
@@ -14,6 +26,8 @@ export default function Dropdown() {
     { label: "Entertaint", value: "Entertaint" },
     { label: "Others", value: "Others" },
   ]);
+  console.log(items);
+  console.log(setItems);
 
   return (
     <DropDownPicker

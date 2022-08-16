@@ -9,6 +9,7 @@ import {
   UPDATE_PASSWORD,
 } from "./actionType";
 import axios from "axios";
+import { useSelector } from "react-redux";
 const baseUrl = "http://192.168.100.13:3000";
 export const loginSuccess = (payload) => {
   return {
@@ -129,12 +130,12 @@ export const fetchOfficialLetterByLoggedInSuccess = (payload) => {
 export const allOfficialLetterByLoggedIn = () => {
   return async (dispatch, getState) => {
     try {
+      // console.log(await AsyncStorage.getItem("access_token"));
       let { data } = await axios.get(`${baseUrl}/logged-in-letter`, {
         headers: {
           access_token: await AsyncStorage.getItem("access_token"),
         },
       });
-      // console.log(data, "<<");
       dispatch(fetchOfficialLetterByLoggedInSuccess(data));
     } catch (err) {
       console.log(err);
@@ -155,16 +156,24 @@ export const absenceSuccess = (payload) => {
     payload,
   };
 };
-export const userAbsence = () => {
+export const userAbsence = (credential) => {
+  console.log(credential, "<<<user");
   return async (dispatch, getState) => {
     try {
-      let { data } = await axios.post(`${baseUrl}/locations`, {
-        headers: {
-          access_token: await AsyncStorage.getItem("access_token"),
+      let { data } = await axios.post(
+        `${baseUrl}/locations`,
+        {
+          latitude: credential.latitude,
+          longitude: credential.longitude,
+          cityName: credential.cityName,
         },
-      });
-      console.log(access_token);
-      console.log(data);
+        {
+          headers: {
+            access_token: await AsyncStorage.getItem("access_token"),
+          },
+        }
+      );
+      // console.log(data);
     } catch (err) {
       console.log(err);
     }

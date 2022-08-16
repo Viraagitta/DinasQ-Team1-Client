@@ -19,7 +19,6 @@ import {
 } from "../store/action";
 import SelectedImage from "./SelectedImage";
 import DropDownPicker from "react-native-dropdown-picker";
-import Dropdown from "./Dropdown";
 const FormReimbursement = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -51,24 +50,23 @@ const FormReimbursement = () => {
     dispatch(createReimbursement(form));
     setForm("");
   };
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [officialLetterOpen, setOfficialLetterOpen] = useState(false);
+  const [categoryOpen, setcategoryOpen] = useState(false);
+  const [officialLetterValue, setOfficialLetterValue] = useState(null);
+  const [value, setValue] = useState();
+  const [items, setItems] = useState([
+    { label: "Transport", value: "Transport" },
+    { label: "Accomodation", value: "Accomodation" },
+    { label: "Entertaint", value: "Entertaint" },
+    { label: "Others", value: "Others" },
+  ]);
 
   const officialLetters = useSelector((state) => state.letter.officialLetters);
-  // console.log(officialLetters, "<<<<");
 
-  const [items, setItems] = officialLetters.map((el) =>
-    useState([
-      {
-        label: el.activityName,
-        value: el.id,
-        // key: i,
-      },
-    ])
-  );
   useEffect(() => {
     dispatch(allOfficialLetterByLoggedIn());
   }, []);
+  // console.log(form.OfficialLetterLabel);
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.centeredView}>
@@ -84,29 +82,21 @@ const FormReimbursement = () => {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>CREATE NEW REIMBURSEMENT</Text>
-              {/* {officialLetters.map((el) => { */}
               <DropDownPicker
-                open={open}
-                value={value}
-                items={items}
-                setOpen={setOpen}
-                setValue={setValue}
-                setItems={setItems}
-                onChangeValue={(value) =>
-                  handleChange(value, "OfficialLetterId")
-                }
-                // onChangeText={(text) => handleChange(text, "category")}
+                open={officialLetterOpen}
+                value={officialLetterValue}
+                items={officialLetters.map((officialLetter) => ({
+                  label: officialLetter.activityName,
+                  value: officialLetter.id,
+                }))}
+                setValue={setOfficialLetterValue}
+                setOpen={setOfficialLetterOpen}
+                onChangeValue={(id) => {
+                  if (id !== form.OfficialLetterId)
+                    handleChange(id, "OfficialLetterId");
+                }}
                 style={{ marginTop: 15 }}
               />
-              {/* <TextInput
-                style={styles.input}
-                type="text"
-                placeholder="Official Letter Activity Name"
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={(text) => handleChange(text, "OfficialLetterId")}
-                value={form.OfficialLetterId}
-              /> */}
               <TextInput
                 style={styles.input}
                 type="text"
@@ -127,15 +117,16 @@ const FormReimbursement = () => {
                 onChangeText={(text) => handleChange(text, "cost")}
                 value={form.cost}
               />
-              <Dropdown />
-              {/* <TextInput
-                style={styles.input}
-                type="text"
-                name="category"
-                placeholder="Category"
-                onChangeText={(text) => handleChange(text, "category")}
-                value={form.category}
-              /> */}
+              <DropDownPicker
+                open={categoryOpen}
+                value={value}
+                items={items}
+                setOpen={setcategoryOpen}
+                setValue={setValue}
+                setItems={setItems}
+                onChangeValue={(value) => handleChange(value, "category")}
+                style={{ marginTop: 15 }}
+              />
               <TextInput
                 style={styles.input}
                 type="text"
@@ -144,6 +135,7 @@ const FormReimbursement = () => {
                 onChangeText={(text) => handleChange(text, "image")}
                 value={form.image}
               />
+
               <SelectedImage />
               <Pressable
                 style={[styles.button, styles.buttonClose]}

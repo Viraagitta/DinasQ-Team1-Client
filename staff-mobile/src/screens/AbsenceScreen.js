@@ -12,7 +12,6 @@ import {
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import AbsenceModal from "../components/AbsenceModal";
 import CityLocation from "../components/CityLocation";
 
 const AbsenceScreen = ({ navigation }) => {
@@ -51,7 +50,6 @@ const AbsenceScreen = ({ navigation }) => {
           ABSENCE
         </Text>
         <View style={{ marginTop: 40 }}>
-          <AbsenceModal />
           <CityLocation />
         </View>
         {/* <PickImage /> */}

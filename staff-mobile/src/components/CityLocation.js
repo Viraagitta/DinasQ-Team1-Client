@@ -1,15 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  Modal,
+  Pressable,
+} from "react-native";
 
 let apiKey = "AIzaSyDfBv6UQy1uY-uenve-vOGadjMny3CCeLw";
 
 import * as Location from "expo-location";
+import { useDispatch } from "react-redux";
+import { TextInput } from "react-native-gesture-handler";
+import { userAbsence } from "../store/action";
+import { useNavigation } from "@react-navigation/native";
+// import { userAbsence } from "../store/action";
 
 export default function CityLocation() {
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
   const [address, setAddress] = useState(null);
   const [getLocation, setGetLocation] = useState(false);
+  const dispatch = useDispatch();
+  const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -23,7 +39,7 @@ export default function CityLocation() {
 
       setLocation(coords);
 
-      console.log(coords);
+      // console.log(coords);
 
       if (coords) {
         let { longitude, latitude } = coords;
@@ -37,27 +53,76 @@ export default function CityLocation() {
       }
     })();
   }, [getLocation]);
+  console.log(location.longitude, "<<loc");
+  const submitAbsence = (e) => {
+    navigation.navigate("Main");
+    e.preventDefault();
+    dispatch(
+      userAbsence({
+        longitude: location.longitude,
+        latitude: location.latitude,
+        cityName: address.subregion,
+      })
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.big}>
+      {/* <Text style={styles.big}>
         {!location
           ? "Waiting"
           : `Lat: ${location.latitude} \nLong: ${
               location.longitude
             } \n${JSON.stringify(address?.["subregion"])}`}
-      </Text>
+      </Text> */}
       <TouchableOpacity onPress={() => setGetLocation(!getLocation)}>
-        <View
-          style={{
-            backgroundColor: "blue",
-            alignItems: "center",
-            borderRadius: 20,
-            marginTop: 20,
-            padding: 10,
-          }}
-        >
-          <Text style={styles.btnText}>Click Here To Absence</Text>
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>
+                  Thank You! We Got Your Location!
+                </Text>
+                {/* <Text style={styles.modalText}>CITY NAME</Text> */}
+                <TextInput
+                  style={styles.input}
+                  // secureTextEntry={true}
+                  type="text"
+                  placeholder="City Name"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  name="cityName"
+                  value={JSON.stringify(address?.["subregion"])}
+                />
+
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={(e) => {
+                    setModalVisible(!modalVisible);
+                    submitAbsence(e);
+                  }}
+                >
+                  <Text style={styles.textStyle}>OK</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+          <View style={{ flexDirection: "row", marginLeft: 10 }}>
+            <Pressable
+              style={[styles.button, styles.buttonOpen]}
+              onPress={() => setModalVisible(true)}
+            >
+              <Text style={styles.textStyle}>CLICK HERE TO ABSENCE</Text>
+            </Pressable>
+          </View>
         </View>
       </TouchableOpacity>
     </View>
@@ -76,9 +141,46 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "bold",
   },
-  btnText: {
-    fontWeight: "bold",
-    fontSize: 25,
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 5,
+  },
+  modalView: {
+    margin: 10,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 25,
+    alignItems: "center",
+    shadowColor: "#008000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 20,
+  },
+  buttonOpen: {
+    backgroundColor: "blue",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
     color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
