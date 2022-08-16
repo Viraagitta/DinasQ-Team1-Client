@@ -9,6 +9,7 @@ import {
   ScrollView,
   Button,
   Pressable,
+  ToastAndroid,
 } from "react-native";
 import { useEffect } from "react";
 // import { TouchableOpacity } from "react-native-gesture-handler";
@@ -18,6 +19,8 @@ import { useDispatch } from "react-redux";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const [retrieve, setRetrieve] = useState(false);
+
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "testing3@gmail.com",
@@ -33,29 +36,40 @@ const LoginScreen = () => {
     setForm(getForm);
   };
   const submitForm = (e) => {
-    // window.location.reload;
     e.preventDefault();
     dispatch(loginStaff(form))
-      .then((response) => {
-        return response.json();
+      .then(async (response) => {
+        return await response.json();
       })
       .then((data) => {
         if (data.access_token) {
           const access_token = data.access_token;
           AsyncStorage.setItem("access_token", access_token);
-          navigation.navigate("Main");
+          navigation.replace("Main");
+        } else {
+          ToastAndroid.show(data.message, ToastAndroid.SHORT);
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   };
-  const token = AsyncStorage.getItem("access_token")
   useEffect(() => {
-    if (token) {
-      navigation.navigate("Main")
+    const retrieveData = async () => {
+      try {
+        const token = await AsyncStorage.getItem("access_token");
+        if (token) {
+          navigation.replace("Main");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (!retrieve) {
+      retrieveData();
+      setRetrieve(true);
     }
-  }, [token])
+  }, [retrieve]);
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image style={styles.image} source={require("../assets/D.png")} />
@@ -80,7 +94,7 @@ const LoginScreen = () => {
         value={form.password}
       />
       <Pressable
-        onPress={(e) => {
+        onPressOut={(e) => {
           submitForm(e);
         }}
       >
@@ -93,14 +107,15 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#7ed957",
+    backgroundColor: "mediumseagreen",
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
     fontSize: 36,
-    marginBottom: 30,
-    marginTop: 16,
+    fontWeight: "bold",
+    marginBottom: 25,
+    marginTop: 25,
     color: "white",
   },
   error: {
@@ -130,11 +145,12 @@ const styles = StyleSheet.create({
   },
   button: {
     fontSize: 20,
+    fontWeight: "bold",
     color: "white",
     width: 120,
     marginTop: 8,
-    borderRadius: 10,
-    backgroundColor: "#2e8b57",
+    borderRadius: 18,
+    backgroundColor: "yellowgreen",
     padding: 8,
     textAlign: "center",
   },

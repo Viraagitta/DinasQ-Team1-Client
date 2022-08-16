@@ -5,9 +5,6 @@ import { fetchReimbursementByLoggedInSuccess } from "../store/action";
 import { useDispatch } from "react-redux";
 
 export default function OfficialLetterCard({ letters }) {
-  // const renderItem = ({ item }) => {
-  //   return <Reimbursement reimburse={item} />;
-  // };
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -21,7 +18,7 @@ export default function OfficialLetterCard({ letters }) {
         <ImageBackground
           style={styles.logo}
           source={{
-            uri: "https://hotelska.com/wp-content/uploads/2020/03/2.png",
+            uri: "https://img.freepik.com/free-vector/flat-summer-background-with-sunshine_23-2149389088.jpg?w=2000",
           }}
         >
           <View style={styles.inner}>

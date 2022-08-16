@@ -182,7 +182,7 @@ export const fetchAllReimbursement = () => {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
-        params: { page: getState, size: 10 },
+        params: { page: getState, size: 100 },
       });
       // console.log(data, "<<");
       dispatch(fetchListReimbursementSuccess(data.response.rows));

@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
   },
   logo: {
     margin: 20,
-    borderRadius: 12,
     width: 140,
     height: 180,
   },

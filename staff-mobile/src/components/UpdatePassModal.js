@@ -44,7 +44,7 @@ const UpdatePassModal = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert("Form Change Password has been closed.");
+            Alert.alert("Form Change Password Has Been Closed.");
             setModalVisible(!modalVisible);
           }}
         >
@@ -63,19 +63,21 @@ const UpdatePassModal = () => {
               />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
-                onPress={(e) => {
+                onPressIn={(e) => {
                   setModalVisible(!modalVisible);
                   submitForm(e);
                 }}
               >
-                <Text style={styles.textStyle}>Submit</Text>
+                <Text style={styles.textStyle}>SUBMIT</Text>
               </Pressable>
               <View style={{ marginTop: 10 }}>
                 <Pressable
                   style={[styles.button, styles.cancelButton]}
-                  onPress={() => setModalVisible(!modalVisible)}
+                  onPressIn={() => {
+                    setModalVisible(!modalVisible), setForm("");
+                  }}
                 >
-                  <Text style={styles.textStyle}>Cancel</Text>
+                  <Text style={styles.textStyle}>CANCEL</Text>
                 </Pressable>
               </View>
             </View>
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 18,
     padding: 10,
     elevation: 2,
     marginTop: 5,
@@ -149,10 +151,10 @@ const styles = StyleSheet.create({
     marginRight: 36,
   },
   input: {
-    fontSize: 18,
+    fontSize: 14,
     borderWidth: 1,
-    padding: 12,
-    width: 250,
+    padding: 10,
+    width: 230,
     borderRadius: 10,
     backgroundColor: "white",
     marginBottom: 16,

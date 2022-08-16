@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import {
   SafeAreaView,
   View,
@@ -7,6 +7,8 @@ import {
   StyleSheet,
   ScrollView,
   ImageBackground,
+  Pressable,
+  ToastAndroid,
 } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
@@ -14,16 +16,45 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetail } from "../store/action";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import io from "socket.io-client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const UserProfile = ({ navigation }) => {
+const ChatMessage = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const detailUser = useSelector((state) => state.user.detailUser);
+  const [value, setValue] = useState();
+  const socket = io("http://192.168.100.13:3000", {
+    extraHeaders: {
+      access_token: AsyncStorage.getItem("access_token"),
+    },
+  });
   useEffect(() => {
     dispatch(getUserDetail());
   }, []);
-  console.log(detailUser);
+
+  useEffect(() => {
+    // console.log(detailUser.id);
+    if (detailUser.id) {
+      socket.on(detailUser.id, (newChat) => {
+        ToastAndroid.show(newChat, ToastAndroid.LONG);
+      });
+    }
+
+    return () => {
+      socket.off(detailUser.id);
+    };
+  }, [detailUser]);
+
+  const sendChat = () => {
+    socket.emit("chat", {
+      receiver: `admin-${detailUser.id}`,
+      message: value,
+      sender: detailUser.firstName,
+    });
+  };
+
   return (
     <SafeAreaView style={[styles.container]}>
       <View style={{ flexDirection: "row" }}>
@@ -58,43 +89,42 @@ const UserProfile = ({ navigation }) => {
         >
           {`${detailUser.firstName} ${detailUser.lastName} \n ${detailUser.position}`}
         </Text>
-        <Text
-          style={{
-            color: "black",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: 20,
-            marginTop: 20,
-          }}
+        <TextInput
+          style={styles.input}
+          name="from"
+          placeholder="Chat Now"
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={(text) => setValue(text)}
+          value={value}
+        />
+        <Pressable
+          style={[styles.button, styles.buttonClose]}
+          onPress={
+            // setModalVisible(!modalVisible);
+            sendChat
+          }
         >
-          Email : {detailUser.email}
-        </Text>
-        <Text
-          style={{
-            color: "black",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: 20,
-          }}
-        >
-          Phone Number : {detailUser.phoneNumber}
-        </Text>
-        <Text
-          style={{
-            color: "black",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: 20,
-          }}
-        >
-          Address : {detailUser.address}
-        </Text>
+          <Text style={styles.textStyle}>Submit</Text>
+        </Pressable>
       </ScrollView>
+      <View style={{ flexDirection: "row" }}>
+        <Ionicons
+          style={styles.footerBar}
+          name="home-outline"
+          size={24}
+          color="white"
+        />
+        <Image
+          style={styles.footer}
+          source={require("../assets/Logo-DinasQ2.jpeg")}
+        />
+      </View>
     </SafeAreaView>
   );
 };
 
-export default UserProfile;
+export default ChatMessage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -108,6 +138,12 @@ const styles = StyleSheet.create({
   scrollView: {
     paddingTop: StatusBar.currentHeight,
     marginHorizontal: 20,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 5,
   },
   logo: {
     marginTop: 40,
@@ -148,5 +184,15 @@ const styles = StyleSheet.create({
     // flex: 1,
     width: "100%",
     height: "100%",
+  },
+  input: {
+    fontSize: 18,
+    borderWidth: 1,
+    padding: 12,
+    width: 250,
+    borderRadius: 10,
+    backgroundColor: "white",
+    marginBottom: 16,
+    // marginTop: 16,
   },
 });

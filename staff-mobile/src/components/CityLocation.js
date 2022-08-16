@@ -75,7 +75,7 @@ export default function CityLocation() {
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
+              Alert.alert("Form absence has been closed.");
               setModalVisible(!modalVisible);
             }}
           >
@@ -95,7 +95,6 @@ export default function CityLocation() {
                   name="cityName"
                   value={JSON.stringify(address?.["subregion"])}
                 />
-
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={(e) => {
@@ -156,7 +155,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 18,
     padding: 10,
     elevation: 2,
     marginTop: 10,
@@ -168,6 +167,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#2196F3",
   },
   textStyle: {
+    fontSize: 20,
     color: "white",
     fontWeight: "bold",
     textAlign: "center",

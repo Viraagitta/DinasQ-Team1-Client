@@ -41,10 +41,10 @@ const ReimbursementScreen = ({ navigation }) => {
         />
       </View>
 
-      <View />
       <View>
         <FormReimbursement />
       </View>
+      <View />
       {reimbursements.length !== 0 ? (
         <FlatList
           numColumns={2}
@@ -84,21 +84,11 @@ const styles = StyleSheet.create({
     // flexDirection: "row",
   },
   scrollView: {
-    // textColor: "white",
-    // flexDirection: 'row',
     paddingTop: StatusBar.currentHeight,
     marginHorizontal: 20,
   },
-  bars: {
-    marginTop: 50,
-    marginBottom: 20,
-    marginLeft: 18,
-    width: 17,
-    height: 30,
-  },
   logo: {
     marginTop: 40,
-    marginBottom: 20,
     marginLeft: 10,
     width: 100,
     height: 60,
@@ -116,14 +106,11 @@ const styles = StyleSheet.create({
     height: 40,
   },
   banner: {
-    marginBottom: 20,
-    // marginLeft: 20,
     width: 400,
     height: 200,
   },
   bars: {
     marginTop: 50,
-    marginBottom: 20,
     marginLeft: 18,
     width: 35,
     height: 30,

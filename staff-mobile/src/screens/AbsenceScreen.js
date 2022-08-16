@@ -53,18 +53,6 @@ const AbsenceScreen = ({ navigation }) => {
           <CityLocation />
         </View>
       </ScrollView>
-      <View style={{ flexDirection: "row" }}>
-        <Ionicons
-          style={styles.footerBar}
-          name="home-outline"
-          size={24}
-          color="white"
-        />
-        <Image
-          style={styles.footer}
-          source={require("../assets/Logo-DinasQ2.jpeg")}
-        />
-      </View>
     </SafeAreaView>
   );
 };

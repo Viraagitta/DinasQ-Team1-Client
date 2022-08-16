@@ -60,6 +60,8 @@ export const createOfficialLetter = (credential) => {
         }
       );
     } catch (err) {
+      // ToastAndroid.show(err, ToastAndroid.SHORT);
+
       console.log(err);
     }
   };
@@ -70,7 +72,7 @@ export const createReimbursementSucess = (payload) => {
     payload,
   };
 };
-export const createReimbursement = (credential) => {
+export const createReimbursement = (credential, callback = () => {}) => {
   // console.log(credential, "<<cre");
   return async (dispatch, getState) => {
     try {
@@ -89,8 +91,12 @@ export const createReimbursement = (credential) => {
           },
         }
       );
+      console.log(data, "<<");
+      // if (data) {
+      //   console.log("1");
+      //   dispatch(allOfficialLetterByLoggedIn());
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 };

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function SelectedImage() {
+export default function SelectedImage({ onChangeImage = () => {} }) {
   const [selectedImage, setSelectedImage] = React.useState(null);
+
+  useEffect(() => {
+    onChangeImage(selectedImage);
+  }, [selectedImage]);
 
   let openImagePickerAsync = async () => {
     let permissionResult =
@@ -19,14 +23,14 @@ export default function SelectedImage() {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       base64: true,
-      quality: 1,
+      quality: 0.5,
     });
 
     if (pickerResult.cancelled === true) {
       return;
     }
-    console.log(pickerResult.base64)
-    setSelectedImage(pickerResult.base64);
+    // console.log(pickerResult.base64);
+    setSelectedImage(`data:image/jpg;base64,${pickerResult.base64}`);
   };
 
   if (selectedImage !== null) {
@@ -35,7 +39,7 @@ export default function SelectedImage() {
       <View style={styles.container}>
         <Image
           source={{
-            uri: `data:image/jpg;base64,${selectedImage}`,
+            uri: selectedImage,
           }}
           style={styles.thumbnail}
         />
@@ -74,18 +78,22 @@ const styles = StyleSheet.create({
   },
   instructions: {
     color: "#191970",
-    fontSize: 18,
-    marginHorizontal: 15,
+    fontSize: 16,
+    marginHorizontal: 35,
     marginBottom: 10,
   },
   button: {
-    backgroundColor: "whitesmoke",
+    backgroundColor: "mintcream",
+    borderColor: "black",
+    marginTop: 15,
     borderColor: "black",
     padding: 10,
-    borderRadius: 20,
+    width: 290,
+    borderRadius: 12,
     elevation: 2,
   },
   buttonText: {
+    textAlign: "center",
     fontSize: 14,
     color: "silver",
   },

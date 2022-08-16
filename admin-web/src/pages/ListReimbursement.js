@@ -2,18 +2,42 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReimbursementTableRow from "../components/ReimbursementTableRow";
 import { fetchAllReimbursement } from "../store/action";
+import io from "socket.io-client";
 import User from "../assets/user.jpg";
+
 export default function ListReimbursement() {
   const dispatch = useDispatch();
   const reimbursements = useSelector((state) => state.reimburse.reimbursements);
   // console.log(reimbursements, "<<<");
-  const [Category, SetCategory] = useState("All");
-  const [LocalReimburse, SetLocalReimburse] = useState([]);
+
+  const socket = io("http://localhost:3000", {
+    extraHeaders: {
+      access_token: localStorage.getItem("access_token"),
+    },
+  });
   useEffect(() => {
     dispatch(fetchAllReimbursement());
   }, []);
 
   useEffect(() => {
+    socket.on("connect", () => {
+      // setIsConnected(true);
+      console.log("test");
+    });
+    socket.on("update-list-reimbursement", () => {
+      dispatch(fetchAllReimbursement());
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("update-list-reimbursement");
+    };
+  }, []);
+  
+    const [Category, SetCategory] = useState("All");
+  const [LocalReimburse, SetLocalReimburse] = useState([]);
+
+
     SetLocalReimburse(reimbursements);
   }, [reimbursements]);
   useEffect(() => {
@@ -27,6 +51,7 @@ export default function ListReimbursement() {
     }
   }, [Category]);
   console.log(LocalReimburse);
+
   return (
     <>
       {reimbursements.length ? (

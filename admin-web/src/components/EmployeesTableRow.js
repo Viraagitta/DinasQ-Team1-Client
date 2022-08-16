@@ -1,7 +1,10 @@
+
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { deleteEmployees } from "../store/action";
 import { useDispatch } from "react-redux";
 import { detailsUser } from "../store/action/index";
+
 export default function EmployeesTableRow({ employee, i }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,7 +32,9 @@ export default function EmployeesTableRow({ employee, i }) {
           <input type="checkbox" name="checkUser" id="checkUser" />
         </td>
         <td className="employees-details">{i + 1}</td>
-        <td className="employees-details">{`${employee.firstName} ${employee.lastName}`}</td>
+        <Link to={`/users/${employee.id}`}>
+          <td className="employees-details">{`${employee.firstName} ${employee.lastName}`}</td>
+        </Link>
         <td className="employees-details">{employee.position}</td>
         <td className="employees-details">IT</td>
         <td className="employees-details">{employee.email}</td>
