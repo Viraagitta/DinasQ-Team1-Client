@@ -10,7 +10,7 @@ import {
 } from "./actionType";
 import axios from "axios";
 import { useSelector } from "react-redux";
-const baseUrl = "http://192.168.100.13:3000";
+const baseUrl = "http://localhost:3000";
 
 // const baseUrl = "http://localhost:3000";
 
@@ -28,7 +28,7 @@ export const loginStaff = (credential) => {
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(credential)
+      body: JSON.stringify(credential),
     });
   };
 };
