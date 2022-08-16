@@ -9,7 +9,7 @@ import {
   UPDATE_PASSWORD,
 } from "./actionType";
 import axios from "axios";
-const baseUrl = "http://192.168.100.13:3000";
+const baseUrl = "http://localhost:3000";
 export const loginSuccess = (payload) => {
   return {
     type: LOGIN_STAFF,
@@ -17,25 +17,38 @@ export const loginSuccess = (payload) => {
   };
 };
 
-export const loginStaff = (credential, callback = () => {}) => {
-  // console.log(credential, "<<<");
-  return async (dispatch, getState) => {
-    try {
-      let { data } = await axios.post(`${baseUrl}/login-all`, {
-        email: credential.email,
-        password: credential.password,
-      });
-      // console.log(data.access_token, "<<");
-      if (data.access_token) {
-        const access_token = data.access_token;
-        await AsyncStorage.setItem("access_token", access_token);
-        callback();
-      }
-    } catch (err) {
-      console.error(err);
-    }
+// export const loginStaff = (credential, callback = () => {}) => {
+//   // console.log(credential, "<<<");
+//   return async (dispatch, getState) => {
+//     try {
+//       let { data } = await axios.post(`${baseUrl}/login-all`, {
+//         email: credential.email,
+//         password: credential.password,
+//       });
+//       // console.log(data.access_token, "<<");
+//       if (data.access_token) {
+//         const access_token = data.access_token;
+//         await AsyncStorage.setItem("access_token", access_token);
+//         callback();
+//       }
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+// };
+
+export const loginStaff = (credential) => {
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/login-all`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(credential)
+    });
   };
 };
+
 export const createOfficialLetterSuccess = (payload) => {
   return {
     type: CREATE_OFFICIAL_LETTERS,
