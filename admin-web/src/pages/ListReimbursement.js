@@ -33,11 +33,11 @@ export default function ListReimbursement() {
       socket.off("update-list-reimbursement");
     };
   }, []);
-  
-    const [Category, SetCategory] = useState("All");
+
+  const [Category, SetCategory] = useState("All");
   const [LocalReimburse, SetLocalReimburse] = useState([]);
 
-
+  useEffect(() => {
     SetLocalReimburse(reimbursements);
   }, [reimbursements]);
   useEffect(() => {
