@@ -5,9 +5,17 @@ import {
   FETCH_LIST_EMPLOYEES,
   FETCH_USER_DETAIL,
   LOGIN_USER,
+  DELETE_USER,
+  DETAILS_USER,
+  USER_LOCATION,
 } from "../action/actionType";
 
-const initialState = { users: [], detailUser: {} };
+const initialState = {
+  employees: [],
+  users: [],
+  details: [],
+  locationUser: [],
+};
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -19,6 +27,12 @@ function userReducer(state = initialState, action) {
       return { ...state, detailUser: action.payload };
     case CREATE_USER:
       return { ...state, users: action.payload };
+    case DELETE_USER:
+      return { ...state, users: action.payload };
+    case DETAILS_USER:
+      return { ...state, details: action.payload };
+    case USER_LOCATION:
+      return { ...state, locationUser: action.payload };
     case EDIT_USER_DETAIL:
       return { ...state, detailUser: action.payload };
     case DELETE_USER_DETAIL:

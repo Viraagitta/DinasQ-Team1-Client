@@ -1,7 +1,14 @@
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+// import "../assets/Script";
 export default function SideBar() {
+  let list = document.querySelectorAll(".navigation li");
+  function activeLink() {
+    list.forEach((item) => item.classList.remove("hovered"));
+    this.classList.add("hovered");
+  }
   const navigate = useNavigate();
+  list.forEach((item) => item.addEventListener("mouseover", activeLink));
 
   const toLogout = (e) => {
     e.preventDefault();
