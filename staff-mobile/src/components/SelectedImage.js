@@ -15,20 +15,28 @@ export default function SelectedImage() {
       return;
     }
 
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      base64: true,
+      quality: 1,
+    });
 
     if (pickerResult.cancelled === true) {
       return;
     }
-    setSelectedImage({ localUri: pickerResult.uri });
+    console.log(pickerResult.base64)
+    setSelectedImage(pickerResult.base64);
   };
 
   if (selectedImage !== null) {
-    console.log(selectedImage);
+    // console.log(selectedImage);
     return (
       <View style={styles.container}>
         <Image
-          source={{ uri: selectedImage.localUri }}
+          source={{
+            uri: `data:image/jpg;base64,${selectedImage}`,
+          }}
           style={styles.thumbnail}
         />
         <Text>{selectedImage.localUri}</Text>
