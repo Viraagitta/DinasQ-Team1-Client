@@ -4,16 +4,40 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllofficialLetters, getLocationUser } from "../store/action";
 import User from "../assets/user.jpg";
 import OfficialLetterCard from "../components/OfficialLetterCard";
+import io from "socket.io-client";
+
 export default function Dashboard() {
   const dispatch = useDispatch();
   const officialLetters = useSelector((state) => state.letter.officialLetters);
   const recentLocations = useSelector((state) => state.user.locationUser);
 
   console.log(recentLocations, "><>");
+  const socket = io("http://localhost:3000", {
+    extraHeaders: {
+      access_token: localStorage.getItem("access_token"),
+    },
+  });
+
   useEffect(() => {
     dispatch(fetchAllofficialLetters());
     dispatch(getLocationUser());
   }, []);
+
+  useEffect(() => {
+    console.log("ini dari socket");
+    socket.on("connect", () => {
+      console.log("test");
+    });
+    socket.on("update-list-letter", () => {
+      dispatch(fetchAllofficialLetters());
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("update-list-letter");
+    };
+  }, []);
+  
   return (
     <>
       <div className="main">

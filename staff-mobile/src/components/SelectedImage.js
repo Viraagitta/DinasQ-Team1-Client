@@ -23,7 +23,7 @@ export default function SelectedImage({ onChangeImage = () => {} }) {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       base64: true,
-      quality: 0.5,
+      quality: 0,
     });
 
     if (pickerResult.cancelled === true) {
