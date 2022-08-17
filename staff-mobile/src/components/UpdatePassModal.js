@@ -97,14 +97,15 @@ const UpdatePassModal = () => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
     marginTop: 10,
   },
   modalView: {
-    margin: 10,
+    // margin: 10,
     backgroundColor: "white",
     borderRadius: 20,
+    height: 400,
     padding: 25,
     alignItems: "center",
     shadowColor: "#008000",
@@ -117,19 +118,21 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 18,
+    borderRadius: 5,
     padding: 10,
     elevation: 2,
     marginTop: 5,
+    marginLeft: 10,
+    width: 260,
   },
   buttonOpen: {
-    backgroundColor: "#1e90ff",
+    backgroundColor: "#3CCF4E",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#3CCF4E",
   },
   cancelButton: {
-    backgroundColor: "red",
+    backgroundColor: "#2196F3",
   },
   textStyle: {
     color: "white",
@@ -152,7 +155,8 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 14,
-    borderWidth: 1,
+    borderBottomColor: "#2C3639",
+    borderBottomWidth: 1,
     padding: 10,
     width: 230,
     borderRadius: 10,

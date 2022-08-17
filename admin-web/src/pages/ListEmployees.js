@@ -8,6 +8,7 @@ export default function ListEmployees() {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.user.employees);
 
+  console.log(employees);
   useEffect(() => {
     dispatch(fetchEmployees());
   }, []);
