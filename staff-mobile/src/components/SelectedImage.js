@@ -23,7 +23,10 @@ export default function SelectedImage({ onChangeImage = () => {} }) {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       base64: true,
+
       quality: 0.2,
+
+      // quality: 0,
     });
 
     if (pickerResult.cancelled === true) {
@@ -52,8 +55,8 @@ export default function SelectedImage({ onChangeImage = () => {} }) {
     <View style={styles.container}>
       {/* <Text style={styles.instructions}></Text> */}
       <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
-        <View style={{ flexDirection: "row", marginLeft: 10 }}>
-          <Ionicons name="image-outline" size={22} />
+        <View style={{ flexDirection: "row" }}>
+          <Ionicons name="image-outline" size={22} style={styles.image} />
           <View>
             <Text style={styles.instructions}>Upload Receipt / Bill</Text>
             <Text style={styles.buttonText}>Choose Photo From Galery</Text>
@@ -67,17 +70,17 @@ export default function SelectedImage({ onChangeImage = () => {} }) {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 15,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: 22,
+    // backgroundColor: "#fff",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
   logo: {
     width: 305,
     height: 159,
-    marginBottom: 20,
   },
   instructions: {
-    color: "#191970",
+    color: "#256D85",
     fontSize: 16,
     marginHorizontal: 35,
     marginBottom: 10,
@@ -87,8 +90,9 @@ const styles = StyleSheet.create({
     borderColor: "black",
     marginTop: 15,
     borderColor: "black",
-    padding: 10,
+    // padding: 10,
     width: 290,
+    height: 60,
     borderRadius: 12,
     elevation: 2,
   },
@@ -101,5 +105,14 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     resizeMode: "contain",
+  },
+  image: {
+    backgroundColor: "#3CCF4E",
+    color: "#fff",
+    padding: 5,
+    height: 60,
+    borderBottomLeftRadius: 7,
+    borderTopLeftRadius: 7,
+    width: 40,
   },
 });

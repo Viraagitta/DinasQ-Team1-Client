@@ -7,9 +7,11 @@ import { fetchAllofficialLetters } from "../store/action";
 export default function ListOfficialLetter() {
   const dispatch = useDispatch();
   const officialLetters = useSelector((state) => state.letter.officialLetters);
+
   useEffect(() => {
     dispatch(fetchAllofficialLetters(page));
   }, []);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
   console.log(searchParams.get("page"));
@@ -34,6 +36,7 @@ export default function ListOfficialLetter() {
     }
   }, [status]);
   console.log(officialLetters);
+
   return (
     <>
       {officialLetters.length ? (

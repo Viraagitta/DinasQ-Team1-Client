@@ -72,17 +72,23 @@ const LoginScreen = () => {
   }, [retrieve]);
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image style={styles.image} source={require("../assets/D.png")} />
-      <Text style={styles.title}>LOGIN NOW</Text>
+      <Image style={styles.image} source={require("../assets/login.jpg")} />
+      <Text style={styles.title}>Welcome Back!</Text>
+      <Text style={styles.underTitle}>
+        Fill yout details or continue with social media
+      </Text>
+      <Text style={styles.socialMedia}>Social media</Text>
+      <Text style={styles.nameInput}>Email address</Text>
       <TextInput
         style={styles.input}
         type="email"
-        placeholder="Email"
+        placeholder="Email address"
         autoCapitalize="none"
         autoCorrect={false}
         onChangeText={(text) => handleChange(text, "email")}
         value={form.email}
       />
+      <Text style={styles.nameInput}>Password</Text>
       <TextInput
         style={styles.input}
         secureTextEntry={true}
@@ -100,6 +106,7 @@ const LoginScreen = () => {
       >
         <Text style={styles.button}>LOGIN</Text>
       </Pressable>
+      <Text style={styles.problem}>Any problem with login ? contact us</Text>
     </ScrollView>
   );
 };
@@ -107,16 +114,28 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "mediumseagreen",
-    alignItems: "center",
-    justifyContent: "center",
+    // backgroundColor: "mediumseagreen",
+    backgroundColor: "#F9F9F9",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // marginTop: 0,
   },
   title: {
-    fontSize: 36,
+    fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 25,
-    marginTop: 25,
-    color: "white",
+    // marginBottom: 25,
+    marginTop: 45,
+    marginLeft: 20,
+    color: "#100F0F",
+  },
+  underTitle: {
+    marginTop: 16,
+    marginLeft: 20,
+    color: "#2C3639",
+  },
+  socialMedia: {
+    marginLeft: 20,
+    color: "#2C3639",
   },
   error: {
     fontSize: 16,
@@ -127,32 +146,52 @@ const styles = StyleSheet.create({
     marginRight: 36,
   },
   input: {
-    fontSize: 18,
-    borderWidth: 1,
+    fontSize: 13,
+    // borderWidth: 1,
     padding: 12,
-    width: "80%",
-    borderRadius: 10,
-    backgroundColor: "white",
+    width: "90%",
+    // borderRadius: 10,
+    backgroundColor: "#fff",
     marginBottom: 16,
     marginTop: 16,
+    marginLeft: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 1.84,
+
+    elevation: 1.5,
+  },
+  nameInput: {
+    marginLeft: 20,
+    marginTop: 15,
+    color: "#2C3639",
   },
   image: {
-    width: 140,
-    height: 140,
-    borderColor: "blue",
-    borderWidth: 2,
-    borderRadius: 89,
+    width: 180,
+    height: 170,
+    marginTop: 35,
+    marginLeft: 130,
   },
   button: {
-    fontSize: 20,
+    fontSize: 12,
     fontWeight: "bold",
     color: "white",
-    width: 120,
+    width: "40%",
     marginTop: 8,
-    borderRadius: 18,
-    backgroundColor: "yellowgreen",
-    padding: 8,
+    borderRadius: 5,
+    backgroundColor: "#3CCF4E",
+    padding: 12,
+    marginLeft: 20,
     textAlign: "center",
+  },
+  problem: {
+    marginLeft: 20,
+    marginTop: 12,
+    color: "#2C3639",
   },
 });
 
