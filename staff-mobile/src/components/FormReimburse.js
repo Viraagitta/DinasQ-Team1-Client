@@ -88,9 +88,9 @@ const FormReimbursement = () => {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>CREATE NEW REIMBURSEMENT</Text>
+              <Text style={styles.modalText}>Create New Reimbursement</Text>
               <DropDownPicker
-                placeholder="Choose One Activity By Official Letters"
+                placeholder="Choose One Activity"
                 open={officialLetterOpen}
                 value={officialLetterValue}
                 items={officialLetters.map((officialLetter) => ({
@@ -103,7 +103,7 @@ const FormReimbursement = () => {
                   if (id !== form.OfficialLetterId)
                     handleChange(id, "OfficialLetterId");
                 }}
-                style={{ marginTop: 15 }}
+                style={styles.select}
               />
               <TextInput
                 style={styles.input}
@@ -134,21 +134,21 @@ const FormReimbursement = () => {
                 setValue={setValue}
                 setItems={setItems}
                 onChangeValue={(value) => handleChange(value, "category")}
-                style={{ marginTop: 15 }}
+                style={styles.select}
               />
               <SelectedImage
                 onChangeImage={(image) => handleChange(image, "image")}
               />
-              <Pressable
-                style={[styles.button, styles.buttonClose, { marginTop: 10 }]}
-                onPressIn={(e) => {
-                  // setModalVisible(!modalVisible);
-                  submitForm(e);
-                }}
-              >
-                <Text style={styles.textStyle}>SUBMIT</Text>
-              </Pressable>
-              <View style={{ marginTop: 15 }}>
+              <View style={styles.action}>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPressIn={(e) => {
+                    // setModalVisible(!modalVisible);
+                    submitForm(e);
+                  }}
+                >
+                  <Text style={styles.textStyle}>SUBMIT</Text>
+                </Pressable>
                 <Pressable
                   style={[styles.button, styles.cancelButton]}
                   onPressIn={() => {
@@ -165,7 +165,7 @@ const FormReimbursement = () => {
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.textStyle}>Create New Reimbursement</Text>
+          <Text style={styles.textStyle}>Create Reimbursement</Text>
         </Pressable>
       </View>
     </ScrollView>
@@ -175,16 +175,18 @@ const FormReimbursement = () => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: Constants.statusBarHeight,
+    // marginLeft: 19,
+    // justifyContent: "center",
+    // alignItems: "center",
+    // paddingTop: Constants.statusBarHeight,
   },
   modalView: {
-    margin: 10,
+    // margin: 10,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 25,
-    alignItems: "center",
+    height: 700,
+    // alignItems: "center",
     shadowColor: "#008000",
     shadowOffset: {
       width: 0,
@@ -195,22 +197,25 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 18,
-    padding: 10,
+    borderRadius: 5,
+    padding: 8,
     elevation: 2,
+    width: 150,
+    marginLeft: 5,
   },
   buttonOpen: {
-    backgroundColor: "mediumseagreen",
-    marginBottom: 10,
+    backgroundColor: "#256D85",
+    width: 150,
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#3CCF4E",
   },
   cancelButton: {
-    backgroundColor: "red",
+    backgroundColor: "#256D85",
+    marginLeft: 8,
   },
   textStyle: {
-    fontSize: 20,
+    fontSize: 10,
     padding: 5,
     color: "white",
     fontWeight: "bold",
@@ -220,7 +225,8 @@ const styles = StyleSheet.create({
     // marginBottom: 15,
     fontSize: 18,
     fontWeight: "bold",
-    textAlign: "center",
+    marginTop: 12,
+    // textAlign: "center",
   },
   error: {
     fontSize: 16,
@@ -232,13 +238,25 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 14,
-    borderWidth: 1,
+    // borderWidth: 1,
     padding: 10,
+    borderBottomColor: "#3F4E4F",
+    borderBottomWidth: 1,
     width: 290,
     borderRadius: 10,
     backgroundColor: "white",
     // marginBottom: 16,
     marginTop: 16,
+  },
+  select: {
+    width: 300,
+    height: 40,
+    borderWidth: 0,
+    marginTop: 5,
+  },
+  action: {
+    marginTop: 13,
+    flexDirection: "row",
   },
 });
 

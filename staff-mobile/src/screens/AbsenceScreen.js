@@ -19,35 +19,26 @@ const AbsenceScreen = ({ navigation }) => {
     <SafeAreaView style={[styles.container]}>
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <ImageBackground
-            style={styles.bars}
-            source={{
-              uri: "https://cdn-icons-png.flaticon.com/512/54/54878.png",
-            }}
-          />
+          <Ionicons name="menu-outline" size={30} style={styles.bars} />
         </TouchableOpacity>
-        <Image
-          style={styles.logo}
-          source={require("../assets/Logo-DinasQ2.jpeg")}
-        />
       </View>
       <ScrollView style={styles.scrollView}>
         <View style={styles.container} />
+        <Text style={styles.title}>Absence Location</Text>
+        <Text style={styles.undertitle}>Dinas Actifity</Text>
+        {/* <Text style={styles.description}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+          mollitia, molestiae quas vel sint commodi
+        </Text> */}
         <Image
           style={styles.banner}
           source={{
             uri: "https://i.pinimg.com/originals/20/d8/73/20d8733b97d44108a7c4cc40564dff71.gif",
           }}
         />
-        <Text
-          style={{
-            color: "black",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: 30,
-          }}
-        >
-          ABSENCE
+        <Text style={styles.action}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+          mollitia, molestiae quas vel sint commodi
         </Text>
         <View style={{ marginTop: 40 }}>
           <CityLocation />
@@ -91,7 +82,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     // marginLeft: 20,
     width: 320,
-    height: 200,
+    height: 230,
   },
   bars: {
     marginTop: 50,
@@ -111,5 +102,27 @@ const styles = StyleSheet.create({
     // flex: 1,
     width: "100%",
     height: "100%",
+  },
+  title: {
+    textAlign: "center",
+    // marginLeft: 82,
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+  undertitle: {
+    // marginLeft: 110,
+    textAlign: "center",
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+  description: {
+    marginTop: 12,
+    textAlign: "center",
+    color: "#7F8487",
+    padding: 1,
+  },
+  action: {
+    color: "#7F8487",
+    textAlign: "center",
   },
 });
