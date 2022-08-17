@@ -54,9 +54,6 @@ export default function ReimbursementTableRow({ reimburse, i }) {
   return (
     <>
       <tr className="data-employees">
-        <td className="employees-details">
-          <input type="checkbox" name="checkUser" id="checkUser" />
-        </td>
         <td className="employees-details">{i + 1}</td>
         <td className="employees-details">{reimburse.description}</td>
         <td className="employees-details">{reimburse.category}</td>

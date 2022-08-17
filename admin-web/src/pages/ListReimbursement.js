@@ -66,7 +66,6 @@ export default function ListReimbursement() {
           <table className="list-employees">
             <thead className="heading-table-employees">
               <tr>
-                <th></th>
                 <th>No</th>
                 <th>Description</th>
                 <th>Category</th>
