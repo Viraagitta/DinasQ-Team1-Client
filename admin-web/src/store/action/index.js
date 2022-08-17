@@ -13,9 +13,11 @@ import {
   UPDATE_STATUS_REIMBURSE,
   GET_PDF_REIMBURSEMENTS,
   USER_LOCATION,
+  FETCH_USER_LOGGEDIN,
+  UPDATE_STATUS_LETTER,
 } from "./actionType";
 import axios from "axios";
-import fileDownload from "js-file-downloader";
+// import fileDownload from "js-file-downloader";
 import Swal from "sweetalert2";
 const baseUrl = "http://localhost:3000";
 export const loginSuccess = (payload) => {
@@ -81,16 +83,17 @@ export const fetchListEmployeesSuccess = (payload) => {
     payload,
   };
 };
-export const fetchEmployees = () => {
+export const fetchEmployees = (page) => {
   return async (dispatch, getState) => {
     try {
       let { data } = await axios.get(`${baseUrl}/users`, {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
+        params: { page, size: 30 },
       });
-      // console.log(data, "<<");
-      dispatch(fetchListEmployeesSuccess(data));
+      console.log(data, "<<");
+      dispatch(fetchListEmployeesSuccess(data.response.rows));
     } catch (err) {
       console.error(err);
     }
@@ -175,14 +178,14 @@ export const fetchListReimbursementSuccess = (payload) => {
     payload,
   };
 };
-export const fetchAllReimbursement = () => {
+export const fetchAllReimbursement = (page) => {
   return async (dispatch, getState) => {
     try {
       let { data } = await axios.get(`${baseUrl}/reimbursements`, {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
-        params: { page: getState, size: 100 },
+        params: { page, size: 12 },
       });
       // console.log(data, "<<");
       dispatch(fetchListReimbursementSuccess(data.response.rows));
@@ -199,14 +202,14 @@ export const fetchListofficialLettersSuccess = (payload) => {
   };
 };
 
-export const fetchAllofficialLetters = () => {
+export const fetchAllofficialLetters = (page) => {
   return async (dispatch, getState) => {
     try {
       let { data } = await axios.get(`${baseUrl}/officialletters`, {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
-        params: { page: getState, size: 10 },
+        params: { page, size: 13 },
       });
       dispatch(fetchListofficialLettersSuccess(data.response.rows));
     } catch (err) {
@@ -221,14 +224,14 @@ export const fetchListReimbursementByOfficialLetterIdSuccess = (payload) => {
     payload,
   };
 };
-export const allReimbursementByOfficialLetterId = (id) => {
+export const allReimbursementByOfficialLetterId = (id, page) => {
   return async (dispatch, getState) => {
     try {
       let { data } = await axios.get(`${baseUrl}/officialletters/${id}`, {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
-        params: { page: getState, size: 10 },
+        params: { page, size: 10 },
       });
       dispatch(fetchListReimbursementByOfficialLetterIdSuccess(data));
     } catch (err) {
@@ -272,6 +275,7 @@ export const detailsUser = (id) => {
           access_token: localStorage.getItem("access_token"),
         },
       });
+      console.log(data, "<<");
       dispatch(detailsSuccess(data));
     } catch (error) {
       console.log(error);
@@ -341,6 +345,35 @@ export const updateStatusReimburse = (form, id, target) => {
   };
 };
 
+export const updateStatusLetterSuccess = (payload) => {
+  return {
+    type: UPDATE_STATUS_LETTER,
+    payload,
+  };
+};
+export const updateStatusLetter = (form, id, target) => {
+  // console.log(form);
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios.patch(
+        `${baseUrl}/officialletters/${id}`,
+        {
+          status: form,
+          email: target[0].email,
+        },
+        {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        }
+      );
+      dispatch(fetchAllofficialLetters());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const getPdfSuccess = (payload) => {
   return {
     type: GET_PDF_REIMBURSEMENTS,
@@ -390,6 +423,28 @@ export const getLocationUser = (id) => {
       dispatch(getLocationUserSuccess(data));
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+export const fetchUserLoggedInSuccess = (payload) => {
+  return {
+    type: FETCH_USER_LOGGEDIN,
+    payload,
+  };
+};
+export const getUserLoggedIn = () => {
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios.get(`${baseUrl}/logged-in-user`, {
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      });
+      // console.log(data, "<<");
+      dispatch(fetchUserLoggedInSuccess(data));
+    } catch (err) {
+      console.log(err);
     }
   };
 };
