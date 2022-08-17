@@ -36,7 +36,6 @@ export default function ListEmployees() {
           <table className="list-employees">
             <thead className="heading-table-employees">
               <tr>
-                <th></th>
                 <th>ID :</th>
                 <th>Name :</th>
                 <th>Position :</th>
