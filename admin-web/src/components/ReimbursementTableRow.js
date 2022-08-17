@@ -13,6 +13,7 @@ import {
   allReimbursementByOfficialLetterId,
   getPdfReimburse,
 } from "../store/action/index";
+
 export default function ReimbursementTableRow({ reimburse, i }) {
   const dispatch = useDispatch();
   const [isZoomed, setIsZoomed] = useState(false);
@@ -20,7 +21,7 @@ export default function ReimbursementTableRow({ reimburse, i }) {
   const [choice, setChoice] = useState({
     status: "",
   });
-  const users = useSelector((state) => state.user.employees);
+  const users = useSelector((state) => state.user.users);
   const officialLetters = useSelector(
     (state) => state.letter.reimbursementByOfficalLetterId
   );

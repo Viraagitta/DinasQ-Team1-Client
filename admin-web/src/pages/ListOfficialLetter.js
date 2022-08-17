@@ -5,9 +5,12 @@ import { fetchAllofficialLetters } from "../store/action";
 export default function ListOfficialLetter() {
   const dispatch = useDispatch();
   const officialLetters = useSelector((state) => state.letter.officialLetters);
+
   useEffect(() => {
     dispatch(fetchAllofficialLetters());
   }, []);
+
+
   return (
     <>
       {officialLetters.length ? (
