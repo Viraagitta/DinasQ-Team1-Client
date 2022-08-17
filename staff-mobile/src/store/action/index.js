@@ -40,7 +40,6 @@ export const createOfficialLetterSuccess = (payload) => {
   };
 };
 export const createOfficialLetter = (credential) => {
-  // console.log(credential, "<<cre");
   return async (dispatch, getState) => {
     try {
       // console.log(data, " <<Store");
@@ -73,7 +72,6 @@ export const createReimbursementSucess = (payload) => {
   };
 };
 export const createReimbursement = (credential, callback = () => {}) => {
-  // console.log(credential, "<<cre");
   return async (dispatch, getState) => {
     try {
       let { data } = await axios.post(
@@ -149,6 +147,21 @@ export const fetchReimbursementByLoggedInSuccess = (payload) => {
   return {
     type: FETCH_REIMBURSEMENTS_BY_LETTERID,
     payload,
+  };
+};
+
+export const fetchReimbursementByLoggedIn = (id) => {
+  return async (dispatch) => {
+    try {
+      let { data } = await axios.get(`${baseUrl}/reimburse-letter/${id}`, {
+        headers: {
+          access_token: await AsyncStorage.getItem("access_token"),
+        },
+      });
+      dispatch(fetchReimbursementByLoggedInSuccess(data));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 

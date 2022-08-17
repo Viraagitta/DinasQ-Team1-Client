@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   SafeAreaView,
   View,
@@ -15,14 +16,16 @@ import OfficialLetterCard from "../components/OfficialLetterCard";
 import { allOfficialLetterByLoggedIn } from "../store/action";
 import FormLetters from "../components/FormLetters";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
 const OfficialLetterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const officialLetters = useSelector((state) => state.letter.officialLetters);
-  // console.log(officialLetters.Reimbursement, "<<<<");
+
   useEffect(() => {
     dispatch(allOfficialLetterByLoggedIn());
   }, []);
+
   const renderItem = ({ item }) => {
     return <OfficialLetterCard letters={item} />;
   };

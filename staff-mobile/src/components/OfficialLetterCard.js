@@ -1,19 +1,21 @@
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { fetchReimbursementByLoggedInSuccess } from "../store/action";
 import { useDispatch } from "react-redux";
+
+
 
 export default function OfficialLetterCard({ letters }) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const toDetail = (reimbursement) => {
-    navigation.navigate("ReimbursementScreen");
-    dispatch(fetchReimbursementByLoggedInSuccess(reimbursement));
+  const toDetail = () => {
+    navigation.navigate("ReimbursementScreen", {
+      id: letters.id
+    });
   };
   return (
-    <TouchableOpacity onPress={() => toDetail(letters.Reimbursements)}>
+    <TouchableOpacity onPress={() => toDetail()}>
       <View style={styles.container}>
         <View style={styles.logo}>
           <View style={styles.inner}>
