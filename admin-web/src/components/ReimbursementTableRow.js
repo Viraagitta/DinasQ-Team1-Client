@@ -20,7 +20,7 @@ export default function ReimbursementTableRow({ reimburse, i }) {
   const [choice, setChoice] = useState({
     status: "",
   });
-  const users = useSelector((state) => state.user.employees);
+  const users = useSelector((state) => state.user.users);
   const officialLetters = useSelector(
     (state) => state.letter.reimbursementByOfficalLetterId
   );
@@ -57,7 +57,9 @@ export default function ReimbursementTableRow({ reimburse, i }) {
         <td className="employees-details">{i + 1}</td>
         <td className="employees-details">{reimburse.description}</td>
         <td className="employees-details">{reimburse.category}</td>
-        <td className="employees-details">{reimburse.cost}</td>
+        <td className="employees-details">
+          Rp {reimburse.cost.toLocaleString("id-ID")}
+        </td>
         <td>
           {isViewed ? (
             <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoomChange}>
@@ -84,6 +86,7 @@ export default function ReimbursementTableRow({ reimburse, i }) {
           </select>
         </td>
         <td className="employees-details">{reimburse.updatedBy}</td>
+        <td>{new Date(reimburse.updatedAt).toISOString().slice(0, 10)}</td>
         <td>
           <button
             onClick={(e) => getPdf(e, reimburse.id)}

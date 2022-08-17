@@ -4,6 +4,8 @@ import ReimbursementTableRow from "../components/ReimbursementTableRow";
 import { fetchAllReimbursement } from "../store/action";
 import io from "socket.io-client";
 import User from "../assets/user.jpg";
+import Pagination from "../components/Pagination";
+import PaginationList from "../components/Pagination";
 
 export default function ListReimbursement() {
   const dispatch = useDispatch();
@@ -34,14 +36,14 @@ export default function ListReimbursement() {
     };
   }, []);
 
-  const [Category, SetCategory] = useState("All");
+  const [Category, SetCategory] = useState("All Category");
   const [LocalReimburse, SetLocalReimburse] = useState([]);
 
   useEffect(() => {
     SetLocalReimburse(reimbursements);
   }, [reimbursements]);
   useEffect(() => {
-    if (Category !== "All") {
+    if (Category !== "All Category") {
       const filteredReimburse = reimbursements.filter(
         (reimbursements) => reimbursements.category === Category
       );
@@ -52,12 +54,33 @@ export default function ListReimbursement() {
   }, [Category]);
   console.log(LocalReimburse);
 
+  const [status, SetStatus] = useState("All");
+  const [checked, setChecked] = useState();
+
+  useEffect(() => {
+    if (status !== "All") {
+      const filteredStatus = reimbursements.filter(
+        (reimbursement) => reimbursement.status === status
+      );
+      SetLocalReimburse(filteredStatus);
+    } else {
+      SetLocalReimburse(reimbursements);
+    }
+  }, [status]);
+
   return (
     <>
       {reimbursements.length ? (
         <div className="main">
-          <div className="nav">
-            <h2>ALL REIMBURSEMENT</h2>
+          <div className="nav cardHeader">
+            <h2
+              style={{
+                color: "#77B032",
+                fontWeight: "bold",
+              }}
+            >
+              ALL REIMBURSEMENTS
+            </h2>
             <div className="employees">
               <img src={User} alt="" />
             </div>
@@ -69,7 +92,7 @@ export default function ListReimbursement() {
             </label>
           </div>
           <div className="list-action">
-            <form>
+            <form style={{ marginLeft: 20 }}>
               <select
                 name="filterEmployees"
                 id="filterEmployeed"
@@ -80,12 +103,51 @@ export default function ListReimbursement() {
                 <option value="" selected disabled>
                   Category
                 </option>
-                <option value={"All"}>All</option>
+                <option value={"All Category"}>All</option>
                 <option value={"Transport"}>Transport</option>
                 <option value={"Accomodation"}>Accomodation</option>
                 <option value={"Entertaint"}>Entertaint</option>
                 <option value={"Others"}>Others</option>
               </select>
+              <div style={{ marginTop: "10px" }}>
+                <label style={{ margin: "10px" }}>
+                  <input
+                    type="checkbox"
+                    name="All"
+                    value={"All"}
+                    onChange={(e) => SetStatus(e.target.value)}
+                  />
+                  All List
+                </label>
+                <label style={{ margin: "10px" }}>
+                  <input
+                    type="checkbox"
+                    name="pending"
+                    value={"pending"}
+                    onChange={(e) => SetStatus(e.target.value)}
+                  />
+                  Pending
+                </label>
+                <label style={{ margin: "10px" }}>
+                  <input
+                    type="checkbox"
+                    name="approved"
+                    value={"approved"}
+                    onChange={(e) => SetStatus(e.target.value)}
+                  />
+                  Approved
+                </label>
+                <label style={{ margin: "10px" }}>
+                  <input
+                    type="checkbox"
+                    name="rejected"
+                    value={"rejected"}
+                    // checked="false"
+                    onChange={(e) => SetStatus(e.target.value)}
+                  />
+                  Rejected
+                </label>
+              </div>
             </form>
           </div>
           <table className="list-employees">
@@ -98,7 +160,8 @@ export default function ListReimbursement() {
                 <th>Receipt / Bill</th>
                 <th>Status</th>
                 <th>Updated By</th>
-                <th>Document</th>
+                <th>Updated At</th>
+                <th>Download</th>
               </tr>
             </thead>
             <tbody>
@@ -112,6 +175,7 @@ export default function ListReimbursement() {
                 );
               })}
             </tbody>
+            {/* <PaginationList /> */}
           </table>
         </div>
       ) : (

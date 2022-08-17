@@ -8,6 +8,7 @@ import {
   DELETE_USER,
   DETAILS_USER,
   USER_LOCATION,
+  FETCH_USER_LOGGEDIN,
 } from "../action/actionType";
 
 const initialState = {
@@ -24,6 +25,8 @@ function userReducer(state = initialState, action) {
     case FETCH_LIST_EMPLOYEES:
       return { ...state, users: action.payload };
     case FETCH_USER_DETAIL:
+      return { ...state, detailUser: action.payload };
+    case FETCH_USER_LOGGEDIN:
       return { ...state, detailUser: action.payload };
     case CREATE_USER:
       return { ...state, users: action.payload };

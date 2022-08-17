@@ -41,7 +41,15 @@ export default function SideBar() {
                 <span className="icon">
                   <ion-icon name="people-outline"></ion-icon>
                 </span>
-                <span className="title">Employees</span>
+                <span className="title">All Employees</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/officialletters">
+                <span className="icon">
+                  <ion-icon name="documents-outline"></ion-icon>
+                </span>
+                <span className="title">All Official Letters</span>
               </Link>
             </li>
             <li>
@@ -49,17 +57,17 @@ export default function SideBar() {
                 <span className="icon">
                   <ion-icon name="documents-outline"></ion-icon>
                 </span>
-                <span className="title">All Reimbursement</span>
+                <span className="title">All Reimbursements</span>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <a href="">
                 <span className="icon">
                   <ion-icon name="chatbubble-outline"></ion-icon>
                 </span>
                 <span className="title">Message</span>
               </a>
-            </li>
+            </li> */}
             <li>
               <Link to="/" onClick={(e) => toLogout(e)}>
                 <span className="icon">

@@ -1,26 +1,52 @@
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllofficialLetters, getLocationUser } from "../store/action";
+import {
+  fetchAllofficialLetters,
+  fetchAllReimbursement,
+  fetchEmployees,
+  getLocationUser,
+  getUserLoggedIn,
+} from "../store/action";
 import User from "../assets/user.jpg";
 import OfficialLetterCard from "../components/OfficialLetterCard";
+import UserLocationsCard from "../components/UserLocationsCard";
 export default function Dashboard() {
   const dispatch = useDispatch();
   const officialLetters = useSelector((state) => state.letter.officialLetters);
+  const reimbursements = useSelector((state) => state.reimburse.reimbursements);
   const recentLocations = useSelector((state) => state.user.locationUser);
-
-  console.log(recentLocations, "><>");
+  const detailUser = useSelector((state) => state.user.detailUser);
+  const employees = useSelector((state) => state.user.users);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page");
+  console.log(searchParams.get("page"));
   useEffect(() => {
-    dispatch(fetchAllofficialLetters());
+    dispatch(getUserLoggedIn());
     dispatch(getLocationUser());
+    dispatch(fetchAllofficialLetters());
+    dispatch(fetchAllReimbursement());
+    dispatch(fetchEmployees());
   }, []);
+  console.log(recentLocations);
   return (
     <>
       <div className="main">
         <div className="topbar">
           <div>
-            <p id="welcome">Welcome to DinasQ</p>
-            <p id="under-welcome">Hello admin, welcome back</p>
+            <p
+              id="welcome"
+              style={{
+                marginBottom: 10,
+                color: "#77B032",
+                fontWeight: "bold",
+              }}
+            >
+              WELCOME TO DINASQ
+            </p>
+            <p id="under-welcome">
+              Hello {detailUser?.firstName}, Welcome Back
+            </p>
           </div>
           <div className="search">
             <label>
@@ -35,9 +61,18 @@ export default function Dashboard() {
         </div>
 
         <div class="cardBox">
+          <Link to="/officialletters" class="card">
+            <div>
+              <div class="numbers">{officialLetters.length}</div>
+              <div class="cardName">Official Letters</div>
+            </div>
+            <div class="iconBox">
+              <ion-icon name="newspaper-outline"></ion-icon>
+            </div>
+          </Link>
           <Link to="/reimbursements" class="card">
             <div>
-              <div class="numbers">504</div>
+              <div class="numbers">{reimbursements.length}</div>
               <div class="cardName">Reimbursements</div>
             </div>
             <div class="iconBox">
@@ -46,7 +81,7 @@ export default function Dashboard() {
           </Link>
           <Link to="/employees" class="card">
             <div>
-              <div class="numbers">80</div>
+              <div class="numbers">{employees.length}</div>
               <div class="cardName">Employees</div>
             </div>
             <div class="iconBox">
@@ -62,15 +97,6 @@ export default function Dashboard() {
               <ion-icon name="person-add-outline"></ion-icon>
             </div>
           </Link>
-          <Link to="/officialletters" class="card">
-            <div>
-              <div class="numbers">842</div>
-              <div class="cardName">Official Letters</div>
-            </div>
-            <div class="iconBox">
-              <ion-icon name="newspaper-outline"></ion-icon>
-            </div>
-          </Link>
         </div>
         <div className="details">
           <div class="listOfficialLetters">
@@ -83,18 +109,24 @@ export default function Dashboard() {
             <table>
               <thead>
                 <tr>
+                  <th>No</th>
                   <th>Activity Name</th>
-                  <th>leaveDate</th>
-                  <th>returnDate</th>
+                  <th>Departure</th>
+                  <th>Destination</th>
+                  <th>Leave Date</th>
+                  <th>Return Date</th>
                   <th>Status</th>
+                  <th>Created At</th>
+                  <th>Detail</th>
                 </tr>
               </thead>
               <tbody>
-                {officialLetters.map((officialLetter) => {
+                {officialLetters.map((officialLetter, i) => {
                   return (
                     <OfficialLetterCard
-                      key={officialLetter.id}
+                      key={(officialLetter.id, i)}
                       officialLetter={officialLetter}
+                      i={i}
                     />
                   );
                 })}
@@ -107,17 +139,15 @@ export default function Dashboard() {
             </div>
             <table>
               <tr>
-                <td width="60px">
-                  <div class="user">
-                    <img src={User} alt="" />
-                  </div>
-                </td>
-                <td>
-                  <h4>
-                    Harry<span> Maguire</span>
-                  </h4>
-                </td>
-                <td>Kota Jakarta Pusat</td>
+                {recentLocations.map((locations) => {
+                  return (
+                    <UserLocationsCard
+                      key={locations.id}
+                      locations={locations}
+                      // i={i}
+                    />
+                  );
+                })}
               </tr>
             </table>
           </div>
