@@ -20,14 +20,11 @@ export default function OfficialLetterCard({ officialLetter, i }) {
     getFrom[name] = value;
     setChoice(getFrom);
     const getFilter = users.filter(
-      (elements) => elements.id === officialLetter.UserId
+      (elements) => officialLetter.UserId === elements.id
     );
     dispatch(updateStatusLetter(value, officialLetter.id, getFilter));
   };
 
-  useEffect(() => {
-    dispatch(fetchAllofficialLetters());
-  }, []);
   return (
     <>
       <tr>
@@ -42,7 +39,7 @@ export default function OfficialLetterCard({ officialLetter, i }) {
             name="status"
             id="status"
             // value={choice.status}
-            className="status-reimburse"
+            className="status-letters"
             onChange={handleStatus}
             defaultValue={officialLetter.status}
           >

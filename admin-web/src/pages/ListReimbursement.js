@@ -4,7 +4,7 @@ import ReimbursementTableRow from "../components/ReimbursementTableRow";
 import { fetchAllReimbursement } from "../store/action";
 import io from "socket.io-client";
 import User from "../assets/user.jpg";
-import Pagination from "../components/Pagination";
+// import Pagination from "../components/Pagination";
 import PaginationList from "../components/Pagination";
 
 export default function ListReimbursement() {
@@ -22,16 +22,11 @@ export default function ListReimbursement() {
   }, []);
 
   useEffect(() => {
-    socket.on("connect", () => {
-      // setIsConnected(true);
-      console.log("test");
-    });
     socket.on("update-list-reimbursement", () => {
       dispatch(fetchAllReimbursement());
     });
 
     return () => {
-      socket.off("connect");
       socket.off("update-list-reimbursement");
     };
   }, []);
@@ -103,7 +98,7 @@ export default function ListReimbursement() {
                 <option value="" selected disabled>
                   Category
                 </option>
-                <option value={"All Category"}>All</option>
+                <option value={"All Category"}>All Category</option>
                 <option value={"Transport"}>Transport</option>
                 <option value={"Accomodation"}>Accomodation</option>
                 <option value={"Entertaint"}>Entertaint</option>

@@ -121,7 +121,7 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                {officialLetters.map((officialLetter, i) => {
+                {officialLetters.rows.map((officialLetter, i) => {
                   return (
                     <OfficialLetterCard
                       key={(officialLetter.id, i)}

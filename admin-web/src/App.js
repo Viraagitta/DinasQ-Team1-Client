@@ -28,8 +28,7 @@ function App() {
   });
   useEffect(() => {
     socket.on("connect", () => {
-      // setIsConnected(true);
-      // console.log("test");
+      console.log("socket connect");
     });
 
     return () => {

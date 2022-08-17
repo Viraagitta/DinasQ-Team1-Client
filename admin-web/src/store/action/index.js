@@ -203,15 +203,21 @@ export const fetchListofficialLettersSuccess = (payload) => {
 };
 
 export const fetchAllofficialLetters = (page) => {
+  // console.log(page, "<<");
   return async (dispatch, getState) => {
     try {
       let { data } = await axios.get(`${baseUrl}/officialletters`, {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
-        params: { page, size: 13 },
+        params: { page, size: 10 },
       });
-      dispatch(fetchListofficialLettersSuccess(data.response.rows));
+      dispatch(
+        fetchListofficialLettersSuccess({
+          ...data.response,
+          totalPages: data.totalPages,
+        })
+      );
     } catch (err) {
       console.error(err);
     }

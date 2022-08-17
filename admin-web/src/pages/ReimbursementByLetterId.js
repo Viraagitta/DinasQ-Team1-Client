@@ -28,7 +28,10 @@ export default function ReimbursementByLetterId() {
   return (
     <div className="main">
       <div className="nav">
-        <h2>{reimbursementByOfficalLetterId.activityName}</h2>
+        <h2>
+          Official Letter No. {reimbursementByOfficalLetterId.id} (
+          {reimbursementByOfficalLetterId.activityName})
+        </h2>
       </div>
       <div className="search">
         <label>
@@ -73,6 +76,12 @@ export default function ReimbursementByLetterId() {
             Status: {reimbursementByOfficalLetterId.status}
           </p>
         </div>
+        <div className="action">
+          <ion-icon name="alert-outline"></ion-icon>
+          <p className="title">
+            Updated By: {reimbursementByOfficalLetterId.updatedBy}
+          </p>
+        </div>
       </div>
       {/* <div style={{ color: "var(--green)" }}> */}
       <div className="list-employees">
@@ -90,7 +99,7 @@ export default function ReimbursementByLetterId() {
           <table
             style={{
               marginTop: "2em",
-              width: "73em",
+              width: "72em",
               boxShadow: "0 7px 25px rgba(16, 14, 14, 0.08)",
               backgroundColor: "var(--white)",
             }}

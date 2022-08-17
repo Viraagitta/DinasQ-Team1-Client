@@ -2,41 +2,78 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
 import OfficialLetterCard from "../components/OfficialLetterCard";
+import ReactPaginate from "react-paginate";
+import styled from "styled-components";
+import io from "socket.io-client";
+
 import { fetchAllofficialLetters } from "../store/action";
+
+const MyPaginate = styled(ReactPaginate).attrs({
+  // You can redifine classes here, if you want.
+  activeClassName: "active", // default to "disabled"
+})`
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0 5rem;
+  li a {
+    border-radius: 7px;
+    padding: 0.1rem 1rem;
+    border: gray 1px solid;
+    cursor: pointer;
+  }
+  li.previous a,
+  li.next a,
+  li.break a {
+    border-color: transparent;
+  }
+  li.active a {
+    background-color: #0366d6;
+    border-color: transparent;
+    color: white;
+    min-width: 32px;
+  }
+  li.disabled a {
+    color: grey;
+  }
+  li.disable,
+  li.disabled a {
+    cursor: default;
+  }
+`;
 
 export default function ListOfficialLetter() {
   const dispatch = useDispatch();
+  const socket = io("http://localhost:3000", {
+    extraHeaders: {
+      access_token: localStorage.getItem("access_token"),
+    },
+  });
   const officialLetters = useSelector((state) => state.letter.officialLetters);
-  useEffect(() => {
-    dispatch(fetchAllofficialLetters(page));
-  }, []);
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = searchParams.get("page");
-  console.log(searchParams.get("page"));
+  const page = searchParams.get("page") || 1;
 
   const [status, SetStatus] = useState("All");
-  const [checked, setChecked] = useState();
-
-  const [LocalLetters, SetLocalLetters] = useState([]);
 
   useEffect(() => {
-    SetLocalLetters(officialLetters);
-  }, [officialLetters]);
+    dispatch(fetchAllofficialLetters(page));
+  }, [page]);
 
   useEffect(() => {
-    if (status !== "All") {
-      const filteredStatus = officialLetters.filter(
-        (officialLetters) => officialLetters.status === status
-      );
-      SetLocalLetters(filteredStatus);
-    } else {
-      SetLocalLetters(officialLetters);
-    }
-  }, [status]);
-  console.log(officialLetters);
+    socket.on("update-list-letter", () => {
+      dispatch(fetchAllofficialLetters(page));
+    });
+
+    return () => {
+      socket.off("update-list-letter");
+    };
+  }, []);
+
   return (
     <>
-      {officialLetters.length ? (
+      {officialLetters.rows.length ? (
         <div className="main">
           <div className="nav cardHeader">
             <h2
@@ -127,17 +164,35 @@ export default function ListOfficialLetter() {
                   </tr>
                 </thead>
                 <tbody>
-                  {LocalLetters.map((officialLetter, i) => {
-                    return (
-                      <OfficialLetterCard
-                        key={(officialLetter.id, i)}
-                        officialLetter={officialLetter}
-                        i={i}
-                      />
-                    );
-                  })}
+                  {officialLetters.rows
+                    .filter((officialLetters) =>
+                      status === "All"
+                        ? true
+                        : officialLetters.status === status
+                    )
+                    .map((officialLetter, i) => {
+                      return (
+                        <OfficialLetterCard
+                          key={(officialLetter.id, i)}
+                          officialLetter={officialLetter}
+                          i={i}
+                        />
+                      );
+                    })}
                 </tbody>
               </table>
+              <MyPaginate
+                breakLabel="..."
+                nextLabel="next"
+                onPageChange={({ selected }) => {
+                  setSearchParams(`page=${selected + 1}`);
+                }}
+                pageRangeDisplayed={5}
+                pageCount={officialLetters.totalPages}
+                previousLabel="previous"
+                initialPage={page - 1}
+                renderOnZeroPageCount={null}
+              />
             </div>
           </div>
         </div>
