@@ -22,7 +22,7 @@ const ReimbursementScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const reimbursements = useSelector((state) => state.reimburse.reimbursements);
 
-  const socket = io("http://localhost:3000", {
+  const socket = io("http://192.168.100.13:3000", {
     jsonp: false,
     extraHeaders: {
       access_token: AsyncStorage.getItem("access_token"),

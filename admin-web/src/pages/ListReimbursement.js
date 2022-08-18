@@ -72,36 +72,7 @@ export default function ListReimbursement() {
     };
   }, []);
 
-  // const [Category, SetCategory] = useState("All Category");
-  // const [LocalReimburse, SetLocalReimburse] = useState([]);
-
-  // useEffect(() => {
-  //   SetLocalReimburse(reimbursements);
-  // }, [reimbursements]);
-  // useEffect(() => {
-  //   if (Category !== "All Category") {
-  //     const filteredReimburse = reimbursements.filter(
-  //       (reimbursements) => reimbursements.category === Category
-  //     );
-  //     SetLocalReimburse(filteredReimburse);
-  //   } else {
-  //     SetLocalReimburse(reimbursements);
-  //   }
-  // }, [Category]);
-  // console.log(LocalReimburse);
-
   const [status, SetStatus] = useState("All");
-
-  // useEffect(() => {
-  //   if (status !== "All") {
-  //     const filteredStatus = reimbursements.filter(
-  //       (reimbursement) => reimbursement.status === status
-  //     );
-  //     SetLocalReimburse(filteredStatus);
-  //   } else {
-  //     SetLocalReimburse(reimbursements);
-  //   }
-  // }, [status]);
 
   return (
     <>
