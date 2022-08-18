@@ -35,7 +35,7 @@ export default function LoginPage() {
         <img src={LoginImage} alt="#login" />
       </div>
       <div className="form">
-        <h2>Welcome to DinasQ</h2>
+        <h2>WELCOME TO DINASQ</h2>
         <form className="input-login" onSubmit={submitForm}>
           <input
             type="email"
@@ -60,10 +60,8 @@ export default function LoginPage() {
         </form>
         <div className="notes">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-            facilis ratione cum eos quas, molestias distinctio ex doloremque ut
-            dolorum esse! Culpa, autem? Iusto quo enim commodi, mollitia hic
-            corporis.
+            DinasQ is an application that can make it easier for companies to
+            process reimbursement claims for business trips out of town.
           </p>
         </div>
       </div>
