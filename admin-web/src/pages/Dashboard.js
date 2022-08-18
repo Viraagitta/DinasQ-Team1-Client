@@ -52,6 +52,9 @@ export default function Dashboard() {
     socket.on("update-list-letter", () => {
       dispatch(fetchAllofficialLetters());
     });
+    socket.on("update-list-recent-loc",()=>{
+      dispatch(getLocationUser())
+    })
 
     return () => {
       socket.off("connect");
