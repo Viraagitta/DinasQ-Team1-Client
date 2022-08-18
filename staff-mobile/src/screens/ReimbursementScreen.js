@@ -22,29 +22,29 @@ const ReimbursementScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const reimbursements = useSelector((state) => state.reimburse.reimbursements);
 
-  // const socket = io("http://localhost:3000", {
-  //   jsonp: false,
-  //   extraHeaders: {
-  //     access_token: AsyncStorage.getItem("access_token"),
-  //   },
-  // });
+  const socket = io("http://localhost:3000", {
+    jsonp: false,
+    extraHeaders: {
+      access_token: AsyncStorage.getItem("access_token"),
+    },
+  });
 
-  // useEffect(() => {
-  //   dispatch(fetchReimbursementByLoggedIn(id));
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchReimbursementByLoggedIn(id));
+  }, []);
 
-  // useEffect(() => {
-  //   socket.on("connect", () => {
-  //     console.log("semoga bisa");
-  //   });
-  //   socket.on("update-status-reimbursement", () => {
-  //     dispatch(fetchReimbursementByLoggedIn(id));
-  //   });
-  //   return () => {
-  //     socket.off("connect");
-  //     socket.off("update-status-reimbursement");
-  //   };
-  // }, []);
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("semoga bisa");
+    });
+    socket.on("update-status-reimbursement", () => {
+      dispatch(fetchReimbursementByLoggedIn(id));
+    });
+    return () => {
+      socket.off("connect");
+      socket.off("update-status-reimbursement");
+    };
+  }, []);
 
   const renderItem = ({ item }) => {
     return <ReimbursementCard reimburse={item} />;

@@ -49,6 +49,7 @@ export default function OfficialLetterCard({ officialLetter, i }) {
           </select>
         </td>
         <td>{new Date(officialLetter.createdAt).toISOString().slice(0, 10)}</td>
+        <td>{officialLetter.updatedBy}</td>
         <td>
           <Link
             to={`/officialletters/${officialLetter.id}`}
