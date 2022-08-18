@@ -10,12 +10,10 @@ export default function EmployeesTableRow({ employee, i }) {
     dispatch(deleteEmployees(id));
     navigate("/employees");
   };
-  const getDetails = (id) => {
-    // e.preventDefault();
+  const getDetails = (e, id) => {
+    e.preventDefault();
     dispatch(detailsUser(id));
-    setTimeout(() => {
-      navigate(`/user/${id}`);
-    }, 2000);
+    navigate(`/user/${id}`);
   };
   const editUser = (e, id) => {
     e.preventDefault();
@@ -43,17 +41,6 @@ export default function EmployeesTableRow({ employee, i }) {
             className="action"
             style={{ marginLeft: 30 }}
           >
-            DELETE
-          </button>
-          <button
-            onClick={() => getDetails(employee.id)}
-            className="btn-details"
-          >
-            DETAILS
-          </button>
-          <button
-            onClick={(e) => editUser(e, employee.id)}
-            className="btn-update"
             <ion-icon name="create-outline"></ion-icon>
           </Link>
           <Link
