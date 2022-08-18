@@ -188,7 +188,12 @@ export const fetchAllReimbursement = (page) => {
         params: { page, size: 12 },
       });
       // console.log(data, "<<");
-      dispatch(fetchListReimbursementSuccess(data.response.rows));
+      dispatch(
+        fetchListReimbursementSuccess({
+          ...data.response,
+          totalPages: data.totalPages,
+        })
+      );
     } catch (err) {
       console.error(err);
     }

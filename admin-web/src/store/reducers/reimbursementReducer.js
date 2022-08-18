@@ -3,7 +3,13 @@ import {
   GET_PDF_REIMBURSEMENTS,
 } from "../action/actionType";
 
-const initialState = { reimbursements: [], getPdf: [] };
+const initialState = {
+  reimbursements: {
+    rows: [],
+    totalPages: 1,
+  },
+  getPdf: [],
+};
 
 function reimbursementReducer(state = initialState, action) {
   switch (action.type) {
