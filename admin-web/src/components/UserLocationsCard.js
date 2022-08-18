@@ -5,9 +5,9 @@ export default function UserLocationsCard({ locations }) {
   return (
     <>
       <tr>
-        <td width="60px">
-          <div class="user">
-            <img src={User} alt="" />
+        <td width="40px">
+          <div>
+            <ion-icon name="location-outline"></ion-icon>
           </div>
         </td>
         <td>

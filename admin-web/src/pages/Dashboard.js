@@ -14,7 +14,6 @@ import UserLocationsCard from "../components/UserLocationsCard";
 
 import io from "socket.io-client";
 
-
 export default function Dashboard() {
   const dispatch = useDispatch();
   const officialLetters = useSelector((state) => state.letter.officialLetters);
@@ -25,9 +24,8 @@ export default function Dashboard() {
   const employees = useSelector((state) => state.user.users);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
-  console.log(searchParams.get("page"));
-
-  console.log(recentLocations, "><>");
+  // console.log(searchParams.get("page"));
+  // console.log(recentLocations, "><>");
   const socket = io("http://localhost:3000", {
     extraHeaders: {
       access_token: localStorage.getItem("access_token"),
@@ -93,7 +91,7 @@ export default function Dashboard() {
         <div class="cardBox">
           <Link to="/officialletters" class="card">
             <div>
-              <div class="numbers">{officialLetters.length}</div>
+              <div class="numbers">{officialLetters.rows.length}</div>
               <div class="cardName">Official Letters</div>
             </div>
             <div class="iconBox">

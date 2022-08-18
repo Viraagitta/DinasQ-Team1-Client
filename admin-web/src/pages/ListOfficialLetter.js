@@ -159,6 +159,7 @@ export default function ListOfficialLetter() {
                     <th>Leave Date</th>
                     <th>Return Date</th>
                     <th>Status</th>
+                    <th>Updated By</th>
                     <th>Created At</th>
                     <th>Detail</th>
                   </tr>
@@ -181,18 +182,20 @@ export default function ListOfficialLetter() {
                     })}
                 </tbody>
               </table>
-              <MyPaginate
-                breakLabel="..."
-                nextLabel="next"
-                onPageChange={({ selected }) => {
-                  setSearchParams(`page=${selected + 1}`);
-                }}
-                pageRangeDisplayed={5}
-                pageCount={officialLetters.totalPages}
-                previousLabel="previous"
-                initialPage={page - 1}
-                renderOnZeroPageCount={null}
-              />
+              <div style={{ marginTop: "25px" }}>
+                <MyPaginate
+                  breakLabel="..."
+                  nextLabel="next"
+                  onPageChange={({ selected }) => {
+                    setSearchParams(`page=${selected + 1}`);
+                  }}
+                  pageRangeDisplayed={5}
+                  pageCount={officialLetters.totalPages}
+                  previousLabel="previous"
+                  initialPage={page - 1}
+                  renderOnZeroPageCount={null}
+                />
+              </div>
             </div>
           </div>
         </div>
