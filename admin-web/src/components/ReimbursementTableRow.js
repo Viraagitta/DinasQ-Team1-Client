@@ -41,10 +41,9 @@ export default function ReimbursementTableRow({ reimburse, i }) {
     );
     dispatch(updateStatusReimburse(value, reimburse.id, getFilter));
   };
-
+  console.log(reimburse, "<<");
   const getPdf = (e, id) => {
     e.preventDefault();
-    console.log("halo");
     dispatch(getPdfReimburse(id));
   };
   useEffect(() => {

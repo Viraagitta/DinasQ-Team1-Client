@@ -90,7 +90,7 @@ export const fetchEmployees = (page) => {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
-        params: { page, size: 30 },
+        params: { page, size: 15 },
       });
       // console.log(data, "<<");
       console.log(data.response, ">>>");
@@ -189,7 +189,12 @@ export const fetchAllReimbursement = (page) => {
         params: { page, size: 12 },
       });
       // console.log(data, "<<");
-      dispatch(fetchListReimbursementSuccess(data.response.rows));
+      dispatch(
+        fetchListReimbursementSuccess({
+          ...data.response,
+          totalPages: data.totalPages,
+        })
+      );
     } catch (err) {
       console.error(err);
     }

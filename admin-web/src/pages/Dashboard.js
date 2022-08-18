@@ -57,6 +57,18 @@ export default function Dashboard() {
     };
   }, []);
 
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Testing");
+    });
+    socket.on("update-list-location", () => {
+      dispatch(getLocationUser());
+    });
+    return () => {
+      socket.off("connect");
+      socket.off("update-list-location");
+    };
+  }, []);
   return (
     <>
       <div className="main">
@@ -100,7 +112,7 @@ export default function Dashboard() {
           </Link>
           <Link to="/reimbursements" class="card">
             <div>
-              <div class="numbers">{reimbursements.length}</div>
+              <div class="numbers">{reimbursements.rows.length}</div>
               <div class="cardName">Reimbursements</div>
             </div>
             <div class="iconBox">
