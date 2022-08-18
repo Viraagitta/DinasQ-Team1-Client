@@ -9,7 +9,6 @@ import {
   Pressable,
 } from "react-native";
 
-let apiKey = "AIzaSyDfBv6UQy1uY-uenve-vOGadjMny3CCeLw";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import * as Location from "expo-location";
 import { useDispatch } from "react-redux";
@@ -18,6 +17,7 @@ import { userAbsence } from "../store/action";
 import { useNavigation } from "@react-navigation/native";
 // import { userAbsence } from "../store/action";
 
+let apiKey = "AIzaSyDfBv6UQy1uY-uenve-vOGadjMny3CCeLw";
 export default function CityLocation() {
   const [location, setLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
