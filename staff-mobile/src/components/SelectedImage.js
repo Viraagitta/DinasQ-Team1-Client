@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function SelectedImage() {
+export default function SelectedImage({ onChangeImage = () => {} }) {
   const [selectedImage, setSelectedImage] = React.useState(null);
+
+  useEffect(() => {
+    onChangeImage(selectedImage);
+  }, [selectedImage]);
 
   let openImagePickerAsync = async () => {
     let permissionResult =
@@ -19,14 +23,17 @@ export default function SelectedImage() {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       base64: true,
-      quality: 1,
+
+      quality: 0.2,
+
+      // quality: 0,
     });
 
     if (pickerResult.cancelled === true) {
       return;
     }
-    console.log(pickerResult.base64)
-    setSelectedImage(pickerResult.base64);
+    // console.log(pickerResult.base64);
+    setSelectedImage(`data:image/jpg;base64,${pickerResult.base64}`);
   };
 
   if (selectedImage !== null) {
@@ -35,7 +42,7 @@ export default function SelectedImage() {
       <View style={styles.container}>
         <Image
           source={{
-            uri: `data:image/jpg;base64,${selectedImage}`,
+            uri: selectedImage,
           }}
           style={styles.thumbnail}
         />
@@ -48,8 +55,8 @@ export default function SelectedImage() {
     <View style={styles.container}>
       {/* <Text style={styles.instructions}></Text> */}
       <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
-        <View style={{ flexDirection: "row", marginLeft: 10 }}>
-          <Ionicons name="image-outline" size={22} />
+        <View style={{ flexDirection: "row" }}>
+          <Ionicons name="image-outline" size={22} style={styles.image} />
           <View>
             <Text style={styles.instructions}>Upload Receipt / Bill</Text>
             <Text style={styles.buttonText}>Choose Photo From Galery</Text>
@@ -63,29 +70,34 @@ export default function SelectedImage() {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 15,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: 22,
+    // backgroundColor: "#fff",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
   logo: {
     width: 305,
     height: 159,
-    marginBottom: 20,
   },
   instructions: {
-    color: "#191970",
-    fontSize: 18,
-    marginHorizontal: 15,
+    color: "#256D85",
+    fontSize: 16,
+    marginHorizontal: 35,
     marginBottom: 10,
   },
   button: {
-    backgroundColor: "whitesmoke",
+    backgroundColor: "mintcream",
     borderColor: "black",
-    padding: 10,
-    borderRadius: 20,
+    marginTop: 15,
+    borderColor: "black",
+    // padding: 10,
+    width: 290,
+    height: 60,
+    borderRadius: 12,
     elevation: 2,
   },
   buttonText: {
+    textAlign: "center",
     fontSize: 14,
     color: "silver",
   },
@@ -93,5 +105,14 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     resizeMode: "contain",
+  },
+  image: {
+    backgroundColor: "#3CCF4E",
+    color: "#fff",
+    padding: 5,
+    height: 60,
+    borderBottomLeftRadius: 7,
+    borderTopLeftRadius: 7,
+    width: 40,
   },
 });

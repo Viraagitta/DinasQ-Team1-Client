@@ -40,10 +40,22 @@ export default function AddUserPage() {
     e.preventDefault();
     navigate("/employees");
   };
+
   return (
     <div className="main">
       <div className="pageRegister">
         <div className="image">
+          <p
+            style={{
+              margin: "auto",
+              textAlign: "center",
+              fontWeight: "bold",
+              fontSize: "26px",
+              padding: "30px",
+            }}
+          >
+            CREATE NEW USER
+          </p>
           <img src={RegisterImage} alt="register" />
         </div>
         <form onSubmit={submitForm} className="form">
@@ -51,7 +63,7 @@ export default function AddUserPage() {
             type="text"
             name="firstName"
             id="firstName"
-            placeholder="firstName"
+            placeholder="Type First Name"
             onChange={handleChange}
           />
           <br />
@@ -59,7 +71,7 @@ export default function AddUserPage() {
             type="text"
             name="lastName"
             id="lastName"
-            placeholder="lastName"
+            placeholder="Type Last Name"
             onChange={handleChange}
           />
           <br />
@@ -70,7 +82,7 @@ export default function AddUserPage() {
             onChange={handleChange}
           >
             <option value="" selected disabled>
-              Select one
+              Choose One Role
             </option>
             <option value="Super Admin">Super Admin</option>
             <option value="Admin">Admin</option>
@@ -81,7 +93,7 @@ export default function AddUserPage() {
             type="email"
             name="email"
             id="emailRegister"
-            placeholder="email"
+            placeholder="Type Email Address"
             onChange={handleChange}
           />
           <br />
@@ -89,7 +101,7 @@ export default function AddUserPage() {
             type="password"
             name="password"
             id="passwordRegiser"
-            placeholder="password"
+            placeholder="Type Password"
             onChange={handleChange}
           />
           <br />
@@ -97,7 +109,7 @@ export default function AddUserPage() {
             type="text"
             name="phoneNumber"
             id="phoneNumber"
-            placeholder="phoneNumber"
+            placeholder="Type Phone Number"
             onChange={handleChange}
           />
           <br />
@@ -105,7 +117,7 @@ export default function AddUserPage() {
             type="text"
             name="address"
             id="address"
-            placeholder="address"
+            placeholder="Type Address"
             onChange={handleChange}
           />
           <br />
@@ -113,7 +125,7 @@ export default function AddUserPage() {
             type="text"
             name="position"
             id="position"
-            placeholder="position"
+            placeholder="Type Employee Position"
             onChange={handleChange}
           />
           <br />

@@ -44,7 +44,7 @@ const UpdatePassModal = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert("Form Change Password has been closed.");
+            Alert.alert("Form Change Password Has Been Closed.");
             setModalVisible(!modalVisible);
           }}
         >
@@ -63,19 +63,21 @@ const UpdatePassModal = () => {
               />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
-                onPress={(e) => {
+                onPressIn={(e) => {
                   setModalVisible(!modalVisible);
                   submitForm(e);
                 }}
               >
-                <Text style={styles.textStyle}>Submit</Text>
+                <Text style={styles.textStyle}>SUBMIT</Text>
               </Pressable>
               <View style={{ marginTop: 10 }}>
                 <Pressable
                   style={[styles.button, styles.cancelButton]}
-                  onPress={() => setModalVisible(!modalVisible)}
+                  onPressIn={() => {
+                    setModalVisible(!modalVisible), setForm("");
+                  }}
                 >
-                  <Text style={styles.textStyle}>Cancel</Text>
+                  <Text style={styles.textStyle}>CANCEL</Text>
                 </Pressable>
               </View>
             </View>
@@ -95,14 +97,15 @@ const UpdatePassModal = () => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
     marginTop: 10,
   },
   modalView: {
-    margin: 10,
+    // margin: 10,
     backgroundColor: "white",
     borderRadius: 20,
+    height: 400,
     padding: 25,
     alignItems: "center",
     shadowColor: "#008000",
@@ -115,19 +118,21 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 5,
     padding: 10,
     elevation: 2,
     marginTop: 5,
+    marginLeft: 10,
+    width: 260,
   },
   buttonOpen: {
-    backgroundColor: "#1e90ff",
+    backgroundColor: "#3CCF4E",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#3CCF4E",
   },
   cancelButton: {
-    backgroundColor: "red",
+    backgroundColor: "#2196F3",
   },
   textStyle: {
     color: "white",
@@ -149,10 +154,11 @@ const styles = StyleSheet.create({
     marginRight: 36,
   },
   input: {
-    fontSize: 18,
-    borderWidth: 1,
-    padding: 12,
-    width: 250,
+    fontSize: 14,
+    borderBottomColor: "#2C3639",
+    borderBottomWidth: 1,
+    padding: 10,
+    width: 230,
     borderRadius: 10,
     backgroundColor: "white",
     marginBottom: 16,

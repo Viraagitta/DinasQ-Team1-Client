@@ -1,9 +1,20 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  ToastAndroid,
+} from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
-import { useDispatch } from "react-redux";
-import { createOfficialLetter } from "../store/action";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  allOfficialLetterByLoggedIn,
+  createOfficialLetter,
+} from "../store/action";
 
 const FormLetters = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -28,11 +39,20 @@ const FormLetters = () => {
     getForm[name] = text;
     setForm(getForm);
   };
+  // const officialLetters = useSelector((state) => state.letter.officialLetters);
+
+  // useEffect(() => {
+  //   dispatch(allOfficialLetterByLoggedIn());
+  // }, []);
 
   const submitForm = (e) => {
     navigation.navigate("Main");
     e.preventDefault();
-    dispatch(createOfficialLetter(form));
+    dispatch(
+      createOfficialLetter(form, (err) => {
+        ToastAndroid.show(err, ToastAndroid.SHORT);
+      })
+    );
     setForm("");
   };
   return (
@@ -43,13 +63,13 @@ const FormLetters = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert("Form Official Letter has been closed.");
+            Alert.alert("Form Official Letter Has Been Closed.");
             setModalVisible(!modalVisible);
           }}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>CREATE NEW OFFICIAL LETTER</Text>
+              <Text style={styles.modalText}>Create New Official Letter</Text>
               <TextInput
                 style={styles.input}
                 type="text"
@@ -62,7 +82,7 @@ const FormLetters = () => {
               <TextInput
                 style={styles.input}
                 name="from"
-                placeholder="From (City)"
+                placeholder="From (Type City Name)"
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "from")}
@@ -71,7 +91,7 @@ const FormLetters = () => {
               <TextInput
                 style={styles.input}
                 name="to"
-                placeholder="To (City)"
+                placeholder="To (Type City Name)"
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "to")}
@@ -95,22 +115,26 @@ const FormLetters = () => {
                 onChangeText={(text) => handleChange(text, "returnDate")}
                 value={form.returnDate}
               />
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={(e) => {
-                  setModalVisible(!modalVisible);
-                  submitForm(e);
-                }}
-              >
-                <Text style={styles.textStyle}>Submit</Text>
-              </Pressable>
-              <View style={{ marginTop: 10 }}>
+              <View style={styles.action}>
                 <Pressable
-                  style={[styles.button, styles.cancelButton]}
-                  onPress={() => setModalVisible(!modalVisible)}
+                  style={[styles.button, styles.buttonClose, { marginTop: 20 }]}
+                  onPressIn={(e) => {
+                    setModalVisible(!modalVisible);
+                    submitForm(e);
+                  }}
                 >
-                  <Text style={styles.textStyle}>Cancel</Text>
+                  <Text style={styles.textStyle}>SUBMIT</Text>
                 </Pressable>
+                <View>
+                  <Pressable
+                    style={[styles.button, styles.cancelButton]}
+                    onPressIn={() => {
+                      setModalVisible(!modalVisible), setForm("");
+                    }}
+                  >
+                    <Text style={styles.textStyle}>CANCEL</Text>
+                  </Pressable>
+                </View>
               </View>
             </View>
           </View>
@@ -119,7 +143,7 @@ const FormLetters = () => {
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.textStyle}>Create New Official Letters</Text>
+          <Text style={styles.textStyle}>Create Official Letters</Text>
         </Pressable>
       </View>
     </ScrollView>
@@ -129,15 +153,16 @@ const FormLetters = () => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   modalView: {
-    margin: 10,
+    // margin: 10,
+    height: 700,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 25,
-    alignItems: "center",
+    // alignItems: "center",
     shadowColor: "#008000",
     shadowOffset: {
       width: 0,
@@ -148,30 +173,38 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
-    padding: 10,
+    borderRadius: 5,
+    padding: 8,
     elevation: 2,
-    marginTop: 5,
+    width: 150,
+    // marginTop: 20,
+    marginLeft: 5,
   },
   buttonOpen: {
-    backgroundColor: "#32cd32",
+    backgroundColor: "#3CCF4E",
+    width: 150,
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#3CCF4E",
   },
   cancelButton: {
-    backgroundColor: "red",
+    backgroundColor: "#256D85",
+    marginTop: 20,
   },
   textStyle: {
+    fontSize: 10,
+    padding: 5,
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
+
   modalText: {
-    marginBottom: 15,
+    marginTop: 12,
+    // marginBottom: 15,
     fontSize: 18,
     fontWeight: "bold",
-    textAlign: "center",
+    // textAlign: "center",
   },
   error: {
     fontSize: 16,
@@ -182,14 +215,20 @@ const styles = StyleSheet.create({
     marginRight: 36,
   },
   input: {
-    fontSize: 18,
-    borderWidth: 1,
-    padding: 12,
-    width: 250,
+    fontSize: 14,
+    // borderWidth: 1,
+    padding: 10,
+    borderBottomColor: "#3F4E4F",
+    borderBottomWidth: 1,
+    width: 290,
     borderRadius: 10,
     backgroundColor: "white",
-    marginBottom: 16,
-    // marginTop: 16,
+    // marginBottom: 16,
+    marginTop: 19,
+  },
+  action: {
+    marginTop: 13,
+    flexDirection: "row",
   },
 });
 

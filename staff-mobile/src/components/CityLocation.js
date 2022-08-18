@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 let apiKey = "AIzaSyDfBv6UQy1uY-uenve-vOGadjMny3CCeLw";
-
+import Ionicons from "react-native-vector-icons/Ionicons";
 import * as Location from "expo-location";
 import { useDispatch } from "react-redux";
 import { TextInput } from "react-native-gesture-handler";
@@ -75,7 +75,7 @@ export default function CityLocation() {
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
+              Alert.alert("Form absence has been closed.");
               setModalVisible(!modalVisible);
             }}
           >
@@ -95,7 +95,6 @@ export default function CityLocation() {
                   name="cityName"
                   value={JSON.stringify(address?.["subregion"])}
                 />
-
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={(e) => {
@@ -113,7 +112,7 @@ export default function CityLocation() {
               style={[styles.button, styles.buttonOpen]}
               onPress={() => setModalVisible(true)}
             >
-              <Text style={styles.textStyle}>CLICK HERE TO ABSENCE</Text>
+              <Text style={styles.textStyle}>Absence</Text>
             </Pressable>
           </View>
         </View>
@@ -156,18 +155,20 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 12,
     padding: 10,
     elevation: 2,
     marginTop: 10,
+    width: 300,
   },
   buttonOpen: {
-    backgroundColor: "crimson",
+    backgroundColor: "#FD5D5D",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
   },
   textStyle: {
+    fontSize: 20,
     color: "white",
     fontWeight: "bold",
     textAlign: "center",

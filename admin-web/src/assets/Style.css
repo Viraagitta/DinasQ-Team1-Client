@@ -159,7 +159,8 @@
 .main .list-employees {
   margin-top: 2em;
   margin-left: 2em;
-  width: 100em;
+  width: 73em;
+  padding: 10px;
   box-shadow: 0 7px 25px rgba(16, 14, 14, 0.08);
   background-color: var(--white);
 }
@@ -170,14 +171,16 @@
   height: 2em;
 }
 .main .list-employees .data-employees .employees-details {
-  padding: 1em;
+  padding: 8px;
   border-bottom: 3px solid var(--grey);
 }
 .main .list-employees .data-employees .employees-details .status-reimburse {
-  border: none;
+  border-color: black;
+  border-radius: 10px;
+  text-align: center;
   width: 10.4em;
   height: 2em;
-  background-color: var(--grey);
+  background-color:white;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
 
@@ -222,7 +225,7 @@
   display: grid;
   margin-top: 1.5em;
   position: relative;
-  width: 65%;
+  /* width: 80%; */
   grid-template-columns: repeat(4, 1fr);
 }
 .main .list-action .action {
@@ -231,11 +234,13 @@
   text-decoration: none;
 }
 .main .list-action .filter-employees {
-  border: none;
+  border-color: black;
+  text-align: center;
+  border-radius: 12px;
   width: 10.4em;
   height: 2em;
-  background-color: var(--grey);
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  background-color: #7ce21d81;
+  box-shadow: 0 7px 25px rgba(71, 40, 40, 0.08);
 }
 .main .list-action .action .icon {
   color: var(--green);
@@ -478,11 +483,11 @@
 }
 
 .btn-reimburse {
-  padding: 5px;
+  padding: 8px;
   border-radius: 10px;
   border: none;
-  color: var(--white);
-  background-color: var(--green);
+  color: var(--black);
+  background-color: rgba(153, 223, 48, 0.747);
   cursor: pointer;
 }
 /* register */
@@ -627,9 +632,9 @@
 .btn-update {
   background-color: #dbd527;
   border: none;
-  color: var(--white);
+  color: var(--black);
   padding: 0.5em;
-  border-radius: 3px;
+  border-radius: 8px;
 }
 .details {
   position: relative;
@@ -653,6 +658,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-bottom: 14px;
 }
 .cardHeader h2 {
   font-weight: 600;
@@ -686,6 +692,20 @@
 
 .details .listOfficialLetters table tr td {
   color: var(--black1);
-  padding: 4px;
+  padding: 6px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+ion-icon {
+  font-size: 25px;
+}
+
+.status-letters {
+  border-color: black;
+  border-radius: 10px;
+  text-align: center;
+  width: 7em;
+  height: 2em;
+  background-color:white;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }

@@ -15,16 +15,18 @@ export default function AddUserPage() {
   const user = useSelector((state) => state.user.details);
 
   console.log(user);
-  const [form, setForm] = useState({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    role: user.role,
-    email: user.email,
-    password: user.password,
-    phoneNumber: user.phoneNumber,
-    address: user.address,
-    position: user.position,
-  });
+  const [form, setForm] = useState({});
+  useEffect(() => {
+    setForm({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      address: user.address,
+      position: user.position,
+    });
+  }, [user]);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -34,7 +36,6 @@ export default function AddUserPage() {
       lastName: form.lastName,
       role: form.role,
       email: form.email,
-      password: form.password,
       phoneNumber: form.phoneNumber,
       address: form.address,
       position: form.position,
@@ -54,9 +55,19 @@ export default function AddUserPage() {
         <div className="main">
           <div className="pageRegister">
             <div className="image">
+              <p
+                style={{
+                  margin: "auto",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: "26px",
+                  padding: "30px",
+                }}
+              >
+                UPDATE USER
+              </p>
               <img src={RegisterImage} alt="register" />
             </div>
-            <p>ini update</p>
             <form onSubmit={submitForm} className="form">
               <input
                 type="text"
@@ -82,12 +93,18 @@ export default function AddUserPage() {
                 value={form.role}
                 onChange={handleChange}
               >
-                <option value="" selected disabled>
-                  Select one
+                <option
+                  value="Super Admin"
+                  disabled={user.role === "Super Admin"}
+                >
+                  Super Admin
                 </option>
-                <option value="Super Admin">Super Admin</option>
-                <option value="Admin">Admin</option>
-                <option value="Staff">Staff</option>
+                <option value="Admin" disabled={user.role === "Admin"}>
+                  Admin
+                </option>
+                <option value="Staff" disabled={user.role === "Staff"}>
+                  Staff
+                </option>
               </select>
               <br />
               <input
@@ -96,14 +113,6 @@ export default function AddUserPage() {
                 id="emailRegister"
                 value={form.email}
                 placeholder="email"
-                onChange={handleChange}
-              />
-              <br />
-              <input
-                type="password"
-                name="password"
-                id="passwordRegiser"
-                placeholder="password"
                 onChange={handleChange}
               />
               <br />

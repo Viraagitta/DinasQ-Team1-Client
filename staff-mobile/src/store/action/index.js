@@ -40,7 +40,6 @@ export const createOfficialLetterSuccess = (payload) => {
   };
 };
 export const createOfficialLetter = (credential) => {
-  // console.log(credential, "<<cre");
   return async (dispatch, getState) => {
     try {
       // console.log(data, " <<Store");
@@ -60,6 +59,8 @@ export const createOfficialLetter = (credential) => {
         }
       );
     } catch (err) {
+      // ToastAndroid.show(err, ToastAndroid.SHORT);
+
       console.log(err);
     }
   };
@@ -70,8 +71,7 @@ export const createReimbursementSucess = (payload) => {
     payload,
   };
 };
-export const createReimbursement = (credential) => {
-  // console.log(credential, "<<cre");
+export const createReimbursement = (credential, callback = () => {}) => {
   return async (dispatch, getState) => {
     try {
       let { data } = await axios.post(
@@ -89,8 +89,12 @@ export const createReimbursement = (credential) => {
           },
         }
       );
+      console.log(data, "<<");
+      // if (data) {
+      //   console.log("1");
+      //   dispatch(allOfficialLetterByLoggedIn());
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 };
@@ -143,6 +147,21 @@ export const fetchReimbursementByLoggedInSuccess = (payload) => {
   return {
     type: FETCH_REIMBURSEMENTS_BY_LETTERID,
     payload,
+  };
+};
+
+export const fetchReimbursementByLoggedIn = (id) => {
+  return async (dispatch) => {
+    try {
+      let { data } = await axios.get(`${baseUrl}/reimburse-letter/${id}`, {
+        headers: {
+          access_token: await AsyncStorage.getItem("access_token"),
+        },
+      });
+      dispatch(fetchReimbursementByLoggedInSuccess(data));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 

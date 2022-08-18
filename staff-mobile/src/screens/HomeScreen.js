@@ -20,56 +20,41 @@ const HomeScreen = ({ navigation }) => {
     <SafeAreaView style={[styles.container]}>
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <ImageBackground
+          {/* <Image
             style={styles.bars}
             source={{
               uri: "https://cdn-icons-png.flaticon.com/512/54/54878.png",
             }}
-          />
+          /> */}
+          {/* <ion-icon name="menu-outline"></ion-icon> */}
+          <Ionicons name="menu-outline" size={30} style={styles.bars} />
         </TouchableOpacity>
-        <Image
+        {/* <Image
           style={styles.logo}
           source={require("../assets/Logo-DinasQ2.jpeg")}
-        />
+        /> */}
       </View>
       <ScrollView style={styles.scrollView}>
         <View style={styles.container} />
         <Image
           style={styles.banner}
-          source={{
-            uri: "https://st2.depositphotos.com/7865540/10657/i/950/depositphotos_106572130-stock-photo-gears-and-mechanisms-with-text.jpg",
-          }}
+          source={require("../assets/undraw_Mobile_encryption_re_yw3o.png")}
         />
-        <Text
-          style={{
-            color: "black",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: 30,
-          }}
-        >
-          WELCOME TO DINASQ
+        <Text style={styles.title}>Everything you {"\n"}need in one app</Text>
+        <Text style={styles.text}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+          mollitia, molestiae quas vel sint commodi
         </Text>
-        <View style={{ marginTop: 40 }}>
-          <FormLetters />
-        </View>
-        <View style={{ marginTop: 20 }}>
-          <FormReimbursement />
+        <View style={styles.link}>
+          <View>
+            <FormLetters />
+          </View>
+          <View>
+            <FormReimbursement />
+          </View>
         </View>
         {/* <PickImage /> */}
       </ScrollView>
-      <View style={{ flexDirection: "row" }}>
-        <Ionicons
-          style={styles.footerBar}
-          name="home-outline"
-          size={24}
-          color="white"
-        />
-        <Image
-          style={styles.footer}
-          source={require("../assets/Logo-DinasQ2.jpeg")}
-        />
-      </View>
     </SafeAreaView>
   );
 };
@@ -105,15 +90,16 @@ const styles = StyleSheet.create({
   },
   banner: {
     marginBottom: 20,
-    // marginLeft: 20,
-    width: 350,
-    height: 200,
+    // marginLeft: 5,
+    width: 360,
+    height: 290,
+    marginTop: 45,
   },
   bars: {
-    marginTop: 50,
+    marginTop: 28,
     marginBottom: 20,
-    marginLeft: 18,
-    width: 35,
+    marginLeft: 12,
+    width: 95,
     height: 30,
   },
   footerBar: {
@@ -127,5 +113,19 @@ const styles = StyleSheet.create({
     // flex: 1,
     width: "100%",
     height: "100%",
+  },
+  title: {
+    fontSize: 30,
+    textAlign: "center",
+    marginLeft: 5,
+  },
+  text: {
+    textAlign: "center",
+    color: "#2C3639",
+  },
+  link: {
+    marginTop: 40,
+    flexDirection: "row",
+    marginLeft: 32,
   },
 });

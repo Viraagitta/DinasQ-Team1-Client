@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteEmployees } from "../store/action";
 import { useDispatch } from "react-redux";
 import { detailsUser } from "../store/action/index";
@@ -27,19 +27,21 @@ export default function EmployeesTableRow({ employee, i }) {
   return (
     <>
       <tr className="data-employees">
-        <td className="employees-details">
-          <input type="checkbox" name="checkUser" id="checkUser" />
-        </td>
         <td className="employees-details">{i + 1}</td>
         <td className="employees-details">{`${employee.firstName} ${employee.lastName}`}</td>
         <td className="employees-details">{employee.position}</td>
-        <td className="employees-details">IT</td>
         <td className="employees-details">{employee.email}</td>
-        <td className="employees-details">Full-time</td>
+        <td className="employees-details">{employee.phoneNumber}</td>
+        <td className="employees-details">{employee.address}</td>
+
         <td>
-          <button
-            onClick={(e) => handleDelete(e, employee.id)}
-            className="btn-delete"
+          <Link to={`/user/${employee.id}`} className="action">
+            <ion-icon name="person-outline"></ion-icon>
+          </Link>
+          <Link
+            to={`/updateUser/${employee.id}`}
+            className="action"
+            style={{ marginLeft: 30 }}
           >
             DELETE
           </button>
@@ -52,9 +54,16 @@ export default function EmployeesTableRow({ employee, i }) {
           <button
             onClick={(e) => editUser(e, employee.id)}
             className="btn-update"
+            <ion-icon name="create-outline"></ion-icon>
+          </Link>
+          <Link
+            to="/employees"
+            onClick={(e) => handleDelete(e, employee.id)}
+            className="action"
+            style={{ marginLeft: 30 }}
           >
-            UPDATE
-          </button>
+            <ion-icon name="trash-outline"></ion-icon>
+          </Link>
         </td>
       </tr>
     </>

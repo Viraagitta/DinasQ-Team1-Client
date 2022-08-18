@@ -9,6 +9,7 @@ import {
   View,
   Image,
   Button,
+  ToastAndroid,
 } from "react-native";
 import Constants from "expo-constants";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
@@ -46,9 +47,14 @@ const FormReimbursement = () => {
   };
 
   const submitForm = (e) => {
-    navigation.navigate("Main");
     e.preventDefault();
-    dispatch(createReimbursement(form));
+    dispatch(
+      createReimbursement(form, (err) => {
+        console.log(err);
+        ToastAndroid.show(err, ToastAndroid.SHORT);
+      })
+    );
+    // navigation.navigate("Main");
     setForm("");
   };
   const [officialLetterOpen, setOfficialLetterOpen] = useState(false);
@@ -76,14 +82,15 @@ const FormReimbursement = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert("Form Official Letter has been closed.");
+            Alert.alert("Form Reimbursement Has Been Closed.");
             setModalVisible(!modalVisible);
           }}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>CREATE NEW REIMBURSEMENT</Text>
+              <Text style={styles.modalText}>Create New Reimbursement</Text>
               <DropDownPicker
+                placeholder="Choose One Activity"
                 open={officialLetterOpen}
                 value={officialLetterValue}
                 items={officialLetters.map((officialLetter) => ({
@@ -96,13 +103,13 @@ const FormReimbursement = () => {
                   if (id !== form.OfficialLetterId)
                     handleChange(id, "OfficialLetterId");
                 }}
-                style={{ marginTop: 15 }}
+                style={styles.select}
               />
               <TextInput
                 style={styles.input}
                 type="text"
                 name="description"
-                placeholder="description"
+                placeholder="Description of Costs"
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "description")}
@@ -110,15 +117,16 @@ const FormReimbursement = () => {
               />
               <TextInput
                 style={styles.input}
-                type="number"
+                keyboardType="numeric"
                 name="cost"
-                placeholder="Cost"
+                placeholder="Total Cost"
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={(text) => handleChange(text, "cost")}
                 value={form.cost}
               />
               <DropDownPicker
+                placeholder="Choose a Category That Relates To Your Costs"
                 open={categoryOpen}
                 value={value}
                 items={items}
@@ -126,43 +134,38 @@ const FormReimbursement = () => {
                 setValue={setValue}
                 setItems={setItems}
                 onChangeValue={(value) => handleChange(value, "category")}
-                style={{ marginTop: 15 }}
+                style={styles.select}
               />
-              <TextInput
-                style={styles.input}
-                type="text"
-                name="image"
-                placeholder="Image Url"
-                onChangeText={(text) => handleChange(text, "image")}
-                value={form.image}
+              <SelectedImage
+                onChangeImage={(image) => handleChange(image, "image")}
               />
-              <SelectedImage />
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={(e) => {
-                  setModalVisible(!modalVisible);
-                  submitForm(e);
-                }}
-              >
-                <Text style={styles.textStyle}>Submit</Text>
-              </Pressable>
-              <View style={{ marginTop: 10 }}>
+              <View style={styles.action}>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPressIn={(e) => {
+                    // setModalVisible(!modalVisible);
+                    submitForm(e);
+                  }}
+                >
+                  <Text style={styles.textStyle}>SUBMIT</Text>
+                </Pressable>
                 <Pressable
                   style={[styles.button, styles.cancelButton]}
-                  onPress={() => setModalVisible(!modalVisible)}
+                  onPressIn={() => {
+                    setModalVisible(!modalVisible), setForm("");
+                  }}
                 >
-                  <Text style={styles.textStyle}>Cancel</Text>
+                  <Text style={styles.textStyle}>CANCEL</Text>
                 </Pressable>
               </View>
             </View>
           </View>
         </Modal>
-
         <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.textStyle}>Create New Reimbursement</Text>
+          <Text style={styles.textStyle}>Create Reimbursement</Text>
         </Pressable>
       </View>
     </ScrollView>
@@ -172,18 +175,18 @@ const FormReimbursement = () => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    // flexDirection: "row",
-    // height: 200,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: Constants.statusBarHeight,
+    // marginLeft: 19,
+    // justifyContent: "center",
+    // alignItems: "center",
+    // paddingTop: Constants.statusBarHeight,
   },
   modalView: {
-    margin: 10,
+    // margin: 10,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 25,
-    alignItems: "center",
+    height: 700,
+    // alignItems: "center",
     shadowColor: "#008000",
     shadowOffset: {
       width: 0,
@@ -194,20 +197,26 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
-    padding: 10,
+    borderRadius: 5,
+    padding: 8,
     elevation: 2,
+    width: 150,
+    marginLeft: 5,
   },
   buttonOpen: {
-    backgroundColor: "#32cd32",
+    backgroundColor: "#256D85",
+    width: 150,
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#3CCF4E",
   },
   cancelButton: {
-    backgroundColor: "red",
+    backgroundColor: "#256D85",
+    marginLeft: 8,
   },
   textStyle: {
+    fontSize: 10,
+    padding: 5,
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
@@ -216,7 +225,8 @@ const styles = StyleSheet.create({
     // marginBottom: 15,
     fontSize: 18,
     fontWeight: "bold",
-    textAlign: "center",
+    marginTop: 12,
+    // textAlign: "center",
   },
   error: {
     fontSize: 16,
@@ -227,14 +237,26 @@ const styles = StyleSheet.create({
     marginRight: 36,
   },
   input: {
-    fontSize: 18,
-    borderWidth: 1,
-    padding: 12,
-    width: 250,
+    fontSize: 14,
+    // borderWidth: 1,
+    padding: 10,
+    borderBottomColor: "#3F4E4F",
+    borderBottomWidth: 1,
+    width: 290,
     borderRadius: 10,
     backgroundColor: "white",
     // marginBottom: 16,
     marginTop: 16,
+  },
+  select: {
+    width: 300,
+    height: 40,
+    borderWidth: 0,
+    marginTop: 5,
+  },
+  action: {
+    marginTop: 13,
+    flexDirection: "row",
   },
 });
 

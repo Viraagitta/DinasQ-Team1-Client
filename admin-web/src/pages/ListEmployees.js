@@ -17,7 +17,14 @@ export default function ListEmployees() {
       {employees.length ? (
         <div className="main">
           <div className="nav">
-            <h2>Employees</h2>
+            <h2
+              style={{
+                color: "#77B032",
+                fontWeight: "bold",
+              }}
+            >
+              ALL EMPLOYEES
+            </h2>
             <div className="employees">
               <img src={User} alt="" />
             </div>
@@ -37,14 +44,13 @@ export default function ListEmployees() {
           <table className="list-employees">
             <thead className="heading-table-employees">
               <tr>
-                <th></th>
-                <th>ID :</th>
-                <th>Name :</th>
-                <th>Position :</th>
-                <th>Department :</th>
-                <th>Email :</th>
-                <th>Status :</th>
-                <th>Action :</th>
+                <th>ID </th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
