@@ -92,8 +92,9 @@ export const fetchEmployees = (page) => {
         },
         params: { page, size: 30 },
       });
-      console.log(data, "<<");
-      dispatch(fetchListEmployeesSuccess(data.response.rows));
+      // console.log(data, "<<");
+      console.log(data.response, ">>>");
+      dispatch(fetchListEmployeesSuccess(data));
     } catch (err) {
       console.error(err);
     }

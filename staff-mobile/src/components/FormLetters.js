@@ -8,9 +8,11 @@ import {
   Pressable,
   View,
   ToastAndroid,
+  Button,
 } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
+import DatePicker from "react-native-neat-date-picker";
 import {
   allOfficialLetterByLoggedIn,
   createOfficialLetter,
@@ -27,6 +29,32 @@ const FormLetters = () => {
     leaveDate: "",
     returnDate: "",
   });
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showDateRetun, setShowDateReturn] = useState(false);
+  const openDatePicker = () => {
+    setShowDatePicker(true);
+  };
+  const onCancel = () => {
+    // You should close the modal in here
+    setShowDatePicker(false);
+  };
+  const onConfirm = (date) => {
+    setShowDatePicker(false);
+    const format = date.dateString.split("-").reverse().join("/");
+    form.leaveDate = format;
+  };
+  const retrunConfirm = (date) => {
+    setShowDateReturn(false);
+    const format = date.dateString.split("-").reverse().join("/");
+    form.returnDate = format;
+  };
+
+  const openDateReturn = () => {
+    setShowDateReturn(true);
+  };
+  const onCancelReturn = () => {
+    setShowDateReturn(false);
+  };
   const handleChange = (text, name) => {
     const getForm = {
       activityName: form.activityName,
@@ -41,6 +69,7 @@ const FormLetters = () => {
   };
   // const officialLetters = useSelector((state) => state.letter.officialLetters);
 
+  console.log(form);
   // useEffect(() => {
   //   dispatch(allOfficialLetterByLoggedIn());
   // }, []);
@@ -97,6 +126,15 @@ const FormLetters = () => {
                 onChangeText={(text) => handleChange(text, "to")}
                 value={form.to}
               />
+              <View>
+                <Button title={"leave date"} onPress={openDatePicker} />
+                <DatePicker
+                  isVisible={showDatePicker}
+                  mode={"single"}
+                  onCancel={onCancel}
+                  onConfirm={onConfirm}
+                />
+              </View>
               <TextInput
                 style={styles.input}
                 name="leaveDate"
@@ -106,6 +144,15 @@ const FormLetters = () => {
                 onChangeText={(text) => handleChange(text, "leaveDate")}
                 value={form.leaveDate}
               />
+              <View>
+                <Button title={"return date"} onPress={openDateReturn} />
+                <DatePicker
+                  isVisible={showDateRetun}
+                  mode={"single"}
+                  onCancel={onCancelReturn}
+                  onConfirm={retrunConfirm}
+                />
+              </View>
               <TextInput
                 style={styles.input}
                 name="returnDate"

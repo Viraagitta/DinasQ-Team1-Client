@@ -21,8 +21,10 @@ const initialState = {
 function userReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_USER:
+      console.log("b");
       return { ...state, users: action.payload };
     case FETCH_LIST_EMPLOYEES:
+      console.log("k");
       return { ...state, users: action.payload };
     case FETCH_USER_DETAIL:
       return { ...state, detailUser: action.payload };
