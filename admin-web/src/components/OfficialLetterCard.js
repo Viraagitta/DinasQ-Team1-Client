@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Male from "../assets/undraw_male_avatar_323b.svg";
 import Tree from "../assets/tree in vas.jpg";
 import { fetchAllofficialLetters, updateStatusLetter } from "../store/action";
@@ -25,15 +25,19 @@ export default function OfficialLetterCard({ officialLetter, i }) {
     dispatch(updateStatusLetter(value, officialLetter.id, getFilter));
   };
 
+export default function OfficialLetterCard({ officialLetter }) {
+  const navigate = useNavigate();
+  const getdetailsOfficialLetters = (e, id) => {
+    e.preventDefault();
+    navigate(`/officialletters/${id}`);
+  };
   return (
     <>
-      <tr>
-        <td>{i + 1} </td>
+      <tr onClick={(e) => getdetailsOfficialLetters(e, officialLetter.id)}>
         <td>{officialLetter.activityName}</td>
-        <td>{officialLetter.from}</td>
-        <td>{officialLetter.to}</td>
         <td>{officialLetter.leaveDate}</td>
         <td>{officialLetter.returnDate}</td>
+        <td>{officialLetter.status}</td>
         <td className="employees-details">
           <select
             name="status"
