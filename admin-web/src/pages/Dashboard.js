@@ -100,7 +100,7 @@ export default function Dashboard() {
           </Link>
           <Link to="/reimbursements" class="card">
             <div>
-              <div class="numbers">{reimbursements.length}</div>
+              <div class="numbers">{reimbursements.rows.length}</div>
               <div class="cardName">Reimbursements</div>
             </div>
             <div class="iconBox">
