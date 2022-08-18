@@ -5,7 +5,10 @@ import {
 } from "../action/actionType";
 
 const initialState = {
-  officialLetters: [],
+  officialLetters: {
+    rows: [],
+    totalPages: 1,
+  },
   reimbursementByOfficalLetterId: {},
 };
 
