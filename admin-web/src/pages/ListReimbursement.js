@@ -185,50 +185,60 @@ export default function ListReimbursement() {
               </div>
             </form>
           </div>
-          <table className="list-employees">
-            <thead className="heading-table-employees">
-              <tr>
-                <th>No</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Cost</th>
-                <th>Receipt / Bill</th>
-                <th>Status</th>
-                <th>Updated By</th>
-                <th>Updated At</th>
-                <th>Download</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reimbursements.rows
-                .filter((reimbursements) =>
-                  status === "All" ? true : reimbursements.status === status
-                )
-                .map((reimburse, i) => {
-                  return (
-                    <ReimbursementTableRow
-                      key={(reimburse.id, i)}
-                      reimburse={reimburse}
-                      i={i}
-                    />
-                  );
-                })}
-            </tbody>
-            {/* <PaginationList /> */}
-          </table>
-          <div style={{ marginTop: "25px" }}>
-            <MyPaginate
-              breakLabel="..."
-              nextLabel="next"
-              onPageChange={({ selected }) => {
-                setSearchParams(`page=${selected + 1}`);
+
+          <div className="list-employees">
+            <table
+              style={{
+                marginTop: "2em",
+                width: "72em",
+                boxShadow: "0 7px 25px rgba(16, 14, 14, 0.08)",
+                backgroundColor: "var(--white)",
               }}
-              pageRangeDisplayed={5}
-              pageCount={reimbursements.totalPages}
-              previousLabel="previous"
-              initialPage={page - 1}
-              renderOnZeroPageCount={null}
-            />
+            >
+              <thead className="heading-table-employees">
+                <tr>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Cost</th>
+                  <th>Receipt / Bill</th>
+                  <th>Status</th>
+                  <th>Updated By</th>
+                  <th>Updated At</th>
+                  <th>Download</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reimbursements.rows
+                  .filter((reimbursements) =>
+                    status === "All" ? true : reimbursements.status === status
+                  )
+                  .map((reimburse, i) => {
+                    return (
+                      <ReimbursementTableRow
+                        key={(reimburse.id, i)}
+                        reimburse={reimburse}
+                        i={i}
+                      />
+                    );
+                  })}
+              </tbody>
+              {/* <PaginationList /> */}
+            </table>
+            <div style={{ marginTop: "25px" }}>
+              <MyPaginate
+                breakLabel="..."
+                nextLabel="next"
+                onPageChange={({ selected }) => {
+                  setSearchParams(`page=${selected + 1}`);
+                }}
+                pageRangeDisplayed={5}
+                pageCount={reimbursements.totalPages}
+                previousLabel="previous"
+                initialPage={page - 1}
+                renderOnZeroPageCount={null}
+              />
+            </div>
           </div>
         </div>
       ) : (

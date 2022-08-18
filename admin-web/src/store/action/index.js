@@ -90,7 +90,7 @@ export const fetchEmployees = (page) => {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
-        params: { page, size: 30 },
+        params: { page, size: 15 },
       });
       console.log(data, "<<");
       dispatch(fetchListEmployeesSuccess(data.response.rows));

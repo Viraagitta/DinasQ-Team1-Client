@@ -55,9 +55,19 @@ export default function AddUserPage() {
         <div className="main">
           <div className="pageRegister">
             <div className="image">
+              <p
+                style={{
+                  margin: "auto",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: "26px",
+                  padding: "30px",
+                }}
+              >
+                UPDATE USER
+              </p>
               <img src={RegisterImage} alt="register" />
             </div>
-            <p>ini update</p>
             <form onSubmit={submitForm} className="form">
               <input
                 type="text"
