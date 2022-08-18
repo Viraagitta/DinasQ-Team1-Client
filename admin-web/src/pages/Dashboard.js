@@ -11,16 +11,29 @@ import {
 import User from "../assets/user.jpg";
 import OfficialLetterCard from "../components/OfficialLetterCard";
 import UserLocationsCard from "../components/UserLocationsCard";
+
+import io from "socket.io-client";
+
+
 export default function Dashboard() {
   const dispatch = useDispatch();
   const officialLetters = useSelector((state) => state.letter.officialLetters);
   const reimbursements = useSelector((state) => state.reimburse.reimbursements);
   const recentLocations = useSelector((state) => state.user.locationUser);
+
   const detailUser = useSelector((state) => state.user.detailUser);
   const employees = useSelector((state) => state.user.users);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
   console.log(searchParams.get("page"));
+
+  console.log(recentLocations, "><>");
+  const socket = io("http://localhost:3000", {
+    extraHeaders: {
+      access_token: localStorage.getItem("access_token"),
+    },
+  });
+
   useEffect(() => {
     dispatch(getUserLoggedIn());
     dispatch(getLocationUser());
@@ -28,7 +41,24 @@ export default function Dashboard() {
     dispatch(fetchAllReimbursement());
     dispatch(fetchEmployees());
   }, []);
+
   console.log(recentLocations);
+
+  useEffect(() => {
+    console.log("ini dari socket");
+    socket.on("connect", () => {
+      console.log("test");
+    });
+    socket.on("update-list-letter", () => {
+      dispatch(fetchAllofficialLetters());
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("update-list-letter");
+    };
+  }, []);
+
   return (
     <>
       <div className="main">

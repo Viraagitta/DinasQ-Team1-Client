@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   SafeAreaView,
   View,
@@ -14,15 +15,17 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import OfficialLetterCard from "../components/OfficialLetterCard";
 import { allOfficialLetterByLoggedIn } from "../store/action";
 import FormLetters from "../components/FormLetters";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const OfficialLetterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const officialLetters = useSelector((state) => state.letter.officialLetters);
-  // console.log(officialLetters.Reimbursement, "<<<<");
+
   useEffect(() => {
     dispatch(allOfficialLetterByLoggedIn());
   }, []);
+
   const renderItem = ({ item }) => {
     return <OfficialLetterCard letters={item} />;
   };
@@ -30,20 +33,12 @@ const OfficialLetterScreen = ({ navigation }) => {
     <SafeAreaView style={[styles.container]}>
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <ImageBackground
-            style={styles.bars}
-            source={{
-              uri: "https://cdn-icons-png.flaticon.com/512/54/54878.png",
-            }}
-          />
+          <Ionicons name="menu-outline" size={30} style={styles.bars} />
         </TouchableOpacity>
-        <Image
-          style={styles.logo}
-          source={require("../assets/Logo-DinasQ2.jpeg")}
-        />
+        <Text style={styles.title}>List Official Letter</Text>
       </View>
       <View />
-      <View>
+      <View style={{ marginLeft: 9 }}>
         <FormLetters />
       </View>
       {officialLetters.length !== 0 ? (
@@ -119,5 +114,10 @@ const styles = StyleSheet.create({
     marginLeft: 18,
     width: 35,
     height: 30,
+  },
+  title: {
+    marginTop: 51,
+    marginLeft: 72,
+    fontSize: 19,
   },
 });

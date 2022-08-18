@@ -69,7 +69,7 @@ const FormLetters = () => {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>CREATE NEW OFFICIAL LETTER</Text>
+              <Text style={styles.modalText}>Create New Official Letter</Text>
               <TextInput
                 style={styles.input}
                 type="text"
@@ -115,24 +115,26 @@ const FormLetters = () => {
                 onChangeText={(text) => handleChange(text, "returnDate")}
                 value={form.returnDate}
               />
-              <Pressable
-                style={[styles.button, styles.buttonClose, { marginTop: 20 }]}
-                onPressIn={(e) => {
-                  setModalVisible(!modalVisible);
-                  submitForm(e);
-                }}
-              >
-                <Text style={styles.textStyle}>SUBMIT</Text>
-              </Pressable>
-              <View style={{ marginTop: 15 }}>
+              <View style={styles.action}>
                 <Pressable
-                  style={[styles.button, styles.cancelButton]}
-                  onPressIn={() => {
-                    setModalVisible(!modalVisible), setForm("");
+                  style={[styles.button, styles.buttonClose, { marginTop: 20 }]}
+                  onPressIn={(e) => {
+                    setModalVisible(!modalVisible);
+                    submitForm(e);
                   }}
                 >
-                  <Text style={styles.textStyle}>CANCEL</Text>
+                  <Text style={styles.textStyle}>SUBMIT</Text>
                 </Pressable>
+                <View>
+                  <Pressable
+                    style={[styles.button, styles.cancelButton]}
+                    onPressIn={() => {
+                      setModalVisible(!modalVisible), setForm("");
+                    }}
+                  >
+                    <Text style={styles.textStyle}>CANCEL</Text>
+                  </Pressable>
+                </View>
               </View>
             </View>
           </View>
@@ -141,7 +143,7 @@ const FormLetters = () => {
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.textStyle}>Create New Official Letters</Text>
+          <Text style={styles.textStyle}>Create Official Letters</Text>
         </Pressable>
       </View>
     </ScrollView>
@@ -151,15 +153,16 @@ const FormLetters = () => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   modalView: {
-    margin: 10,
+    // margin: 10,
+    height: 700,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 25,
-    alignItems: "center",
+    // alignItems: "center",
     shadowColor: "#008000",
     shadowOffset: {
       width: 0,
@@ -170,22 +173,26 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 18,
-    padding: 10,
+    borderRadius: 5,
+    padding: 8,
     elevation: 2,
+    width: 150,
+    // marginTop: 20,
+    marginLeft: 5,
   },
   buttonOpen: {
-    backgroundColor: "mediumseagreen",
-    marginBottom: 10,
+    backgroundColor: "#3CCF4E",
+    width: 150,
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#3CCF4E",
   },
   cancelButton: {
-    backgroundColor: "red",
+    backgroundColor: "#256D85",
+    marginTop: 20,
   },
   textStyle: {
-    fontSize: 20,
+    fontSize: 10,
     padding: 5,
     color: "white",
     fontWeight: "bold",
@@ -193,10 +200,11 @@ const styles = StyleSheet.create({
   },
 
   modalText: {
-    marginBottom: 15,
+    marginTop: 12,
+    // marginBottom: 15,
     fontSize: 18,
     fontWeight: "bold",
-    textAlign: "center",
+    // textAlign: "center",
   },
   error: {
     fontSize: 16,
@@ -208,13 +216,19 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 14,
-    borderWidth: 1,
+    // borderWidth: 1,
     padding: 10,
-    width: 250,
+    borderBottomColor: "#3F4E4F",
+    borderBottomWidth: 1,
+    width: 290,
     borderRadius: 10,
     backgroundColor: "white",
     // marginBottom: 16,
-    marginTop: 16,
+    marginTop: 19,
+  },
+  action: {
+    marginTop: 13,
+    flexDirection: "row",
   },
 });
 
