@@ -4,27 +4,67 @@ import ReimbursementTableRow from "../components/ReimbursementTableRow";
 import { fetchAllReimbursement } from "../store/action";
 import io from "socket.io-client";
 import User from "../assets/user.jpg";
-// import Pagination from "../components/Pagination";
+import ReactPaginate from "react-paginate";
+import styled from "styled-components";
 import PaginationList from "../components/Pagination";
+import { useSearchParams } from "react-router-dom";
 
+const MyPaginate = styled(ReactPaginate).attrs({
+  // You can redifine classes here, if you want.
+  activeClassName: "active", // default to "disabled"
+})`
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0 5rem;
+  li a {
+    border-radius: 7px;
+    padding: 0.1rem 1rem;
+    border: gray 1px solid;
+    cursor: pointer;
+  }
+  li.previous a,
+  li.next a,
+  li.break a {
+    border-color: transparent;
+  }
+  li.active a {
+    background-color: #0366d6;
+    border-color: transparent;
+    color: white;
+    min-width: 32px;
+  }
+  li.disabled a {
+    color: grey;
+  }
+  li.disable,
+  li.disabled a {
+    cursor: default;
+  }
+`;
 export default function ListReimbursement() {
   const dispatch = useDispatch();
   const reimbursements = useSelector((state) => state.reimburse.reimbursements);
-  // console.log(reimbursements, "<<<");
+  console.log(reimbursements.rows, "<<<");
 
   const socket = io("http://localhost:3000", {
     extraHeaders: {
       access_token: localStorage.getItem("access_token"),
     },
   });
-  
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page") || 1;
+
   useEffect(() => {
-    dispatch(fetchAllReimbursement());
-  }, []);
+    dispatch(fetchAllReimbursement(page));
+  }, [page]);
 
   useEffect(() => {
     socket.on("update-list-reimbursement", () => {
-      dispatch(fetchAllReimbursement());
+      dispatch(fetchAllReimbursement(page));
     });
 
     return () => {
@@ -32,41 +72,40 @@ export default function ListReimbursement() {
     };
   }, []);
 
-  const [Category, SetCategory] = useState("All Category");
-  const [LocalReimburse, SetLocalReimburse] = useState([]);
+  // const [Category, SetCategory] = useState("All Category");
+  // const [LocalReimburse, SetLocalReimburse] = useState([]);
 
-  useEffect(() => {
-    SetLocalReimburse(reimbursements);
-  }, [reimbursements]);
-  useEffect(() => {
-    if (Category !== "All Category") {
-      const filteredReimburse = reimbursements.filter(
-        (reimbursements) => reimbursements.category === Category
-      );
-      SetLocalReimburse(filteredReimburse);
-    } else {
-      SetLocalReimburse(reimbursements);
-    }
-  }, [Category]);
-  console.log(LocalReimburse);
+  // useEffect(() => {
+  //   SetLocalReimburse(reimbursements);
+  // }, [reimbursements]);
+  // useEffect(() => {
+  //   if (Category !== "All Category") {
+  //     const filteredReimburse = reimbursements.filter(
+  //       (reimbursements) => reimbursements.category === Category
+  //     );
+  //     SetLocalReimburse(filteredReimburse);
+  //   } else {
+  //     SetLocalReimburse(reimbursements);
+  //   }
+  // }, [Category]);
+  // console.log(LocalReimburse);
 
   const [status, SetStatus] = useState("All");
-  const [checked, setChecked] = useState();
 
-  useEffect(() => {
-    if (status !== "All") {
-      const filteredStatus = reimbursements.filter(
-        (reimbursement) => reimbursement.status === status
-      );
-      SetLocalReimburse(filteredStatus);
-    } else {
-      SetLocalReimburse(reimbursements);
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status !== "All") {
+  //     const filteredStatus = reimbursements.filter(
+  //       (reimbursement) => reimbursement.status === status
+  //     );
+  //     SetLocalReimburse(filteredStatus);
+  //   } else {
+  //     SetLocalReimburse(reimbursements);
+  //   }
+  // }, [status]);
 
   return (
     <>
-      {reimbursements.length ? (
+      {reimbursements.rows.length ? (
         <div className="main">
           <div className="nav cardHeader">
             <h2
@@ -89,7 +128,7 @@ export default function ListReimbursement() {
           </div>
           <div className="list-action">
             <form style={{ marginLeft: 20 }}>
-              <select
+              {/* <select
                 name="filterEmployees"
                 id="filterEmployeed"
                 className="filter-employees"
@@ -104,7 +143,7 @@ export default function ListReimbursement() {
                 <option value={"Accomodation"}>Accomodation</option>
                 <option value={"Entertaint"}>Entertaint</option>
                 <option value={"Others"}>Others</option>
-              </select>
+              </select> */}
               <div style={{ marginTop: "10px" }}>
                 <label style={{ margin: "10px" }}>
                   <input
@@ -161,18 +200,36 @@ export default function ListReimbursement() {
               </tr>
             </thead>
             <tbody>
-              {LocalReimburse.map((reimburse, i) => {
-                return (
-                  <ReimbursementTableRow
-                    key={(reimburse.id, i)}
-                    reimburse={reimburse}
-                    i={i}
-                  />
-                );
-              })}
+              {reimbursements.rows
+                .filter((reimbursements) =>
+                  status === "All" ? true : reimbursements.status === status
+                )
+                .map((reimburse, i) => {
+                  return (
+                    <ReimbursementTableRow
+                      key={(reimburse.id, i)}
+                      reimburse={reimburse}
+                      i={i}
+                    />
+                  );
+                })}
             </tbody>
             {/* <PaginationList /> */}
           </table>
+          <div style={{ marginTop: "25px" }}>
+            <MyPaginate
+              breakLabel="..."
+              nextLabel="next"
+              onPageChange={({ selected }) => {
+                setSearchParams(`page=${selected + 1}`);
+              }}
+              pageRangeDisplayed={5}
+              pageCount={reimbursements.totalPages}
+              previousLabel="previous"
+              initialPage={page - 1}
+              renderOnZeroPageCount={null}
+            />
+          </div>
         </div>
       ) : (
         <div className="main">
