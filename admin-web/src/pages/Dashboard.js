@@ -57,6 +57,18 @@ export default function Dashboard() {
     };
   }, []);
 
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Testing");
+    });
+    socket.on("update-list-location", () => {
+      dispatch(getLocationUser());
+    });
+    return () => {
+      socket.off("connect");
+      socket.off("update-list-location");
+    };
+  }, []);
   return (
     <>
       <div className="main">
