@@ -99,6 +99,53 @@
   background: var(--grey);
   transition: 0.5s;
 }
+.main .cardDetails {
+  margin-top: 8em;
+  margin-left: 14em;
+  /* background-color: #05a830; */
+  box-shadow: 20px 20px 25px rgba(36, 29, 29, 0.08);
+  height: fit-content;
+  width: 70em;
+  padding: 20px;
+}
+.main .cardDetails .details-email {
+  margin-left: 3.5em;
+  color: var(--black2);
+  margin-top: 0.5em;
+}
+.main .cardDetails .details-phoneNumber {
+  margin-left: 3.5em;
+  margin-top: 0.2em;
+  color: var(--black2);
+}
+.main .cardDetails .details-address {
+  margin-left: 3.5em;
+  margin-top: 0.2em;
+  color: var(--black2);
+}
+.main .cardDetails .details-position {
+  margin-left: 3.5em;
+  margin-top: 0.2em;
+  color: var(--black2);
+}
+.main .cardDetails .activity {
+  margin-left: 3.5em;
+  margin-top: 2em;
+  color: var(--green);
+}
+.main .cardDetails .table-activity {
+  margin-left: 3.5em;
+  margin-top: 0.5em;
+}
+.main .cardDetails .reimbursements {
+  margin-left: 3.5em;
+  margin-top: 2em;
+  color: var(--green);
+}
+.main .cardDetails .table-reimbursements {
+  margin-left: 3.5em;
+  margin-top: 0.5em;
+}
 .main .nav {
   background-color: var(--white);
   height: 5em;
@@ -633,6 +680,7 @@
 .details .listOfficialLetters table tr {
   color: var(--black1);
   /* padding: 40px; */
+  cursor: pointer;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 

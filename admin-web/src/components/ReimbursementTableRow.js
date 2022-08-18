@@ -43,7 +43,6 @@ export default function ReimbursementTableRow({ reimburse, i }) {
 
   const getPdf = (e, id) => {
     e.preventDefault();
-    console.log("halo");
     dispatch(getPdfReimburse(id));
   };
   useEffect(() => {

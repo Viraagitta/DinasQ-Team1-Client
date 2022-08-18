@@ -10,10 +10,12 @@ export default function EmployeesTableRow({ employee, i }) {
     dispatch(deleteEmployees(id));
     navigate("/employees");
   };
-  const getDetails = (e, id) => {
-    e.preventDefault();
+  const getDetails = (id) => {
+    // e.preventDefault();
     dispatch(detailsUser(id));
-    navigate(`/user/${id}`);
+    setTimeout(() => {
+      navigate(`/user/${id}`);
+    }, 2000);
   };
   const editUser = (e, id) => {
     e.preventDefault();
@@ -42,7 +44,7 @@ export default function EmployeesTableRow({ employee, i }) {
             DELETE
           </button>
           <button
-            onClick={(e) => getDetails(e, employee.id)}
+            onClick={() => getDetails(employee.id)}
             className="btn-details"
           >
             DETAILS

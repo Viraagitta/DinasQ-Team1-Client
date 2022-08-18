@@ -6,8 +6,9 @@ import EmployeesTableRow from "../components/EmployeesTableRow";
 import { fetchEmployees, deleteEmployees } from "../store/action";
 export default function ListEmployees() {
   const dispatch = useDispatch();
-  const employees = useSelector((state) => state.user.employees);
+  const employees = useSelector((state) => state.user.users);
 
+  console.log(employees);
   useEffect(() => {
     dispatch(fetchEmployees());
   }, []);
