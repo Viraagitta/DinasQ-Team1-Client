@@ -13,7 +13,6 @@ import OfficialLetterCard from "../components/OfficialLetterCard";
 import UserLocationsCard from "../components/UserLocationsCard";
 
 import io from "socket.io-client";
-
 export default function Dashboard() {
   const dispatch = useDispatch();
   const officialLetters = useSelector((state) => state.letter.officialLetters);

@@ -17,7 +17,7 @@ import { userAbsence } from "../store/action";
 import { useNavigation } from "@react-navigation/native";
 // import { userAbsence } from "../store/action";
 
-let apiKey = "AIzaSyDfBv6UQy1uY-uenve-vOGadjMny3CCeLw";
+let apiKey = "AIzaSyDT8RVndIU85ZTd0bT_NVe7qxGHdUj2D4U";
 export default function CityLocation() {
   const [location, setLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
@@ -35,12 +35,16 @@ export default function CityLocation() {
       }
       Location.setGoogleApiKey(apiKey);
 
-      let { coords } = await Location.getCurrentPositionAsync();
+      // let { coords } = await Location.getCurrentPositionAsync();
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
 
-      setLocation(coords);
+      setLocation(location.coords);
 
       // console.log(coords);
 
+      let coords = location.coords;
       if (coords) {
         let { longitude, latitude } = coords;
 
@@ -61,7 +65,7 @@ export default function CityLocation() {
       userAbsence({
         longitude: location.longitude,
         latitude: location.latitude,
-        cityName: address.subregion,
+        cityName: "Kabupaten Bekasi",
       })
     );
   };
@@ -93,7 +97,7 @@ export default function CityLocation() {
                   autoCapitalize="none"
                   autoCorrect={false}
                   name="cityName"
-                  value={JSON.stringify(address?.["subregion"])}
+                  value="Kabupaten Bekasi"
                 />
                 <Pressable
                   style={[styles.button, styles.buttonClose]}

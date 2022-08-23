@@ -48,13 +48,14 @@ const FormReimbursement = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
+    // navigation.navigate("Main");
     dispatch(
       createReimbursement(form, (err) => {
         console.log(err);
         ToastAndroid.show(err, ToastAndroid.SHORT);
       })
     );
-    // navigation.navigate("Main");
+    alert("success");
     setForm("");
   };
   const [officialLetterOpen, setOfficialLetterOpen] = useState(false);
@@ -89,22 +90,6 @@ const FormReimbursement = () => {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>Create New Reimbursement</Text>
-              <DropDownPicker
-                placeholder="Choose One Activity"
-                open={officialLetterOpen}
-                value={officialLetterValue}
-                items={officialLetters.map((officialLetter) => ({
-                  label: officialLetter.activityName,
-                  value: officialLetter.id,
-                }))}
-                setValue={setOfficialLetterValue}
-                setOpen={setOfficialLetterOpen}
-                onChangeValue={(id) => {
-                  if (id !== form.OfficialLetterId)
-                    handleChange(id, "OfficialLetterId");
-                }}
-                style={styles.select}
-              />
               <TextInput
                 style={styles.input}
                 type="text"
@@ -126,6 +111,22 @@ const FormReimbursement = () => {
                 value={form.cost}
               />
               <DropDownPicker
+                placeholder="Choose One Activity"
+                open={officialLetterOpen}
+                value={officialLetterValue}
+                items={officialLetters.map((officialLetter) => ({
+                  label: officialLetter.activityName,
+                  value: officialLetter.id,
+                }))}
+                setValue={setOfficialLetterValue}
+                setOpen={setOfficialLetterOpen}
+                onChangeValue={(id) => {
+                  if (id !== form.OfficialLetterId)
+                    handleChange(id, "OfficialLetterId");
+                }}
+                style={styles.select}
+              />
+              <DropDownPicker
                 placeholder="Choose a Category That Relates To Your Costs"
                 open={categoryOpen}
                 value={value}
@@ -143,7 +144,7 @@ const FormReimbursement = () => {
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPressIn={(e) => {
-                    // setModalVisible(!modalVisible);
+                    setModalVisible(!modalVisible);
                     submitForm(e);
                   }}
                 >
@@ -209,6 +210,7 @@ const styles = StyleSheet.create({
   },
   buttonClose: {
     backgroundColor: "#3CCF4E",
+    marginLeft: 20,
   },
   cancelButton: {
     backgroundColor: "#256D85",
@@ -247,12 +249,14 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     // marginBottom: 16,
     marginTop: 16,
+    marginLeft: 23,
   },
   select: {
     width: 300,
     height: 40,
     borderWidth: 0,
     marginTop: 5,
+    marginLeft: 23,
   },
   action: {
     marginTop: 13,

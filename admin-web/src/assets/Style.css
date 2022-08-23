@@ -6,7 +6,10 @@
   transition: 0.5s;
   overflow: hidden;
 }
-
+.logo-dinasq {
+  margin-left: 35;
+  margin-top: 12;
+}
 .navigation.active {
   width: 80px;
 }
@@ -180,7 +183,7 @@
   text-align: center;
   width: 10.4em;
   height: 2em;
-  background-color:white;
+  background-color: white;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
 
@@ -486,8 +489,8 @@
   padding: 8px;
   border-radius: 10px;
   border: none;
-  color: var(--black);
-  background-color: rgba(153, 223, 48, 0.747);
+  color: var(--white);
+  background-color: #4e9f3d;
   cursor: pointer;
 }
 /* register */
@@ -630,9 +633,9 @@
   margin-left: 2em;
 }
 .btn-update {
-  background-color: #dbd527;
+  background-color: #fec260;
   border: none;
-  color: var(--black);
+  color: var(--white);
   padding: 0.5em;
   border-radius: 8px;
 }
@@ -706,6 +709,6 @@ ion-icon {
   text-align: center;
   width: 7em;
   height: 2em;
-  background-color:white;
+  background-color: white;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }

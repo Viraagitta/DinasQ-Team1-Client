@@ -127,7 +127,11 @@ const FormLetters = () => {
                 value={form.to}
               />
               <View>
-                <Button title={"leave date"} onPress={openDatePicker} />
+                <Button
+                  title={"leave date"}
+                  onPress={openDatePicker}
+                  style={styles.btn}
+                />
                 <DatePicker
                   isVisible={showDatePicker}
                   mode={"single"}
@@ -276,6 +280,9 @@ const styles = StyleSheet.create({
   action: {
     marginTop: 13,
     flexDirection: "row",
+  },
+  btn: {
+    width: 400,
   },
 });
 

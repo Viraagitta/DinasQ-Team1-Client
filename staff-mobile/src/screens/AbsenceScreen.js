@@ -25,7 +25,7 @@ const AbsenceScreen = ({ navigation }) => {
       <ScrollView style={styles.scrollView}>
         <View style={styles.container} />
         <Text style={styles.title}>Absence Location</Text>
-        <Text style={styles.undertitle}>Dinas Actifity</Text>
+        <Text style={styles.undertitle}>Dinas Activity</Text>
         {/* <Text style={styles.description}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
           mollitia, molestiae quas vel sint commodi
@@ -37,8 +37,7 @@ const AbsenceScreen = ({ navigation }) => {
           }}
         />
         <Text style={styles.action}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-          mollitia, molestiae quas vel sint commodi
+          Here employees can take attendance which aims to tell their location
         </Text>
         <View style={{ marginTop: 40 }}>
           <CityLocation />

@@ -71,12 +71,13 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 15,
     marginTop: 22,
+    marginLeft: 23,
     // backgroundColor: "#fff",
     // alignItems: "center",
     // justifyContent: "center",
   },
   logo: {
-    width: 305,
+    width: 325,
     height: 159,
   },
   instructions: {

@@ -46,13 +46,13 @@ const CustomDrawer = (props) => {
           style={{ padding: 20 }}
         >
           <Image
-            source={require("../assets/D.png")}
+            source={require("../assets/logo.png")}
             style={{
               height: 80,
-              width: 80,
-              borderRadius: 40,
+              width: 145,
+              borderRadius: 5,
               marginBottom: 10,
-              marginLeft: 70,
+              marginLeft: 30,
             }}
           />
           <Text

@@ -16,13 +16,14 @@ import ReimbursementCard from "../components/ReimbursementCard";
 import FormReimbursement from "../components/FormReimburse";
 import { fetchReimbursementByLoggedIn } from "../store/action";
 import io from "socket.io-client";
-
-const ReimbursementScreen = ({ navigation, route }) => {
+import { useNavigation } from "@react-navigation/native";
+const ReimbursementScreen = ({ route }) => {
+  const navigation = useNavigation();
   const { id } = route.params;
   const dispatch = useDispatch();
   const reimbursements = useSelector((state) => state.reimburse.reimbursements);
 
-  const socket = io("http://localhost:3000", {
+  const socket = io("http://192.168.1.102:3000", {
     jsonp: false,
     extraHeaders: {
       access_token: AsyncStorage.getItem("access_token"),
@@ -54,16 +55,16 @@ const ReimbursementScreen = ({ navigation, route }) => {
     <SafeAreaView style={[styles.container]}>
       {/* <StatusBar style={"dark"} /> */}
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Main")}>
           <Text style={styles.bars}>Back</Text>
-        </TouchableOpacity>
-        <Image
+        </TouchableOpacity> */}
+        {/* <Image
           style={styles.logo}
           source={require("../assets/Logo-DinasQ2.jpeg")}
-        />
+        /> */}
       </View>
 
-      <View>
+      <View style={styles.left}>
         <FormReimbursement />
       </View>
       <View />
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    marginTop: 40,
     // flexDirection: "row",
   },
   scrollView: {
@@ -138,5 +140,9 @@ const styles = StyleSheet.create({
     height: 30,
     fontSize: 20,
     color: "blue",
+  },
+  left: {
+    marginLeft: 11,
+    marginTop: 30,
   },
 });

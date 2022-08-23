@@ -56,7 +56,10 @@ export default function OfficialLetterCard({ officialLetter, i }) {
             className="action"
             style={{ marginLeft: 30 }}
           >
-            <ion-icon name="document-attach-outline"></ion-icon>
+            <ion-icon
+              name="document-attach-outline"
+              style={{ color: "var(--green)" }}
+            ></ion-icon>
           </Link>
         </td>
       </tr>

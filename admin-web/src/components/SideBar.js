@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import "../assets/Script";
+import logo from "../assets/logo.png";
 export default function SideBar() {
   let list = document.querySelectorAll(".navigation li");
   function activeLink() {
@@ -23,9 +24,13 @@ export default function SideBar() {
             <li>
               <a href="">
                 <span className="icon">
-                  <ion-icon name="car-outline"></ion-icon>
+                  <img
+                    src={logo}
+                    alt="log"
+                    style={{ marginLeft: "20px", marginTop: "14px" }}
+                  />
                 </span>
-                <span className="title">DinasQ</span>
+                {/* <span className="title">DinasQ</span> */}
               </a>
             </li>
             <li>
