@@ -17,7 +17,7 @@ import { userAbsence } from "../store/action";
 import { useNavigation } from "@react-navigation/native";
 // import { userAbsence } from "../store/action";
 
-let apiKey = "AIzaSyDT8RVndIU85ZTd0bT_NVe7qxGHdUj2D4U";
+let apiKey = "apikeyfortestonly";
 export default function CityLocation() {
   const [location, setLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
