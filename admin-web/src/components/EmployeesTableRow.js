@@ -34,14 +34,20 @@ export default function EmployeesTableRow({ employee, i }) {
 
         <td>
           <Link to={`/user/${employee.id}`} className="action">
-            <ion-icon name="person-outline"></ion-icon>
+            <ion-icon
+              name="person-outline"
+              style={{ color: "#4E9F3D" }}
+            ></ion-icon>
           </Link>
           <Link
             to={`/updateUser/${employee.id}`}
             className="action"
             style={{ marginLeft: 30 }}
           >
-            <ion-icon name="create-outline"></ion-icon>
+            <ion-icon
+              name="create-outline"
+              style={{ color: "#4E9F3D" }}
+            ></ion-icon>
           </Link>
           <Link
             to="/employees"
@@ -49,7 +55,10 @@ export default function EmployeesTableRow({ employee, i }) {
             className="action"
             style={{ marginLeft: 30 }}
           >
-            <ion-icon name="trash-outline"></ion-icon>
+            <ion-icon
+              name="trash-outline"
+              style={{ color: "#4E9F3D" }}
+            ></ion-icon>
           </Link>
         </td>
       </tr>

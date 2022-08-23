@@ -42,8 +42,7 @@ const HomeScreen = ({ navigation }) => {
         />
         <Text style={styles.title}>Everything you {"\n"}need in one app</Text>
         <Text style={styles.text}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-          mollitia, molestiae quas vel sint commodi
+          Here employees can make official letters and apply for reimbursements
         </Text>
         <View style={styles.link}>
           <View>
