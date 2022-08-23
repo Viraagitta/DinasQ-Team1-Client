@@ -65,7 +65,7 @@ export default function CityLocation() {
       userAbsence({
         longitude: location.longitude,
         latitude: location.latitude,
-        cityName: "Kabupaten Bekasi",
+        cityName: address.subregion,
       })
     );
   };
